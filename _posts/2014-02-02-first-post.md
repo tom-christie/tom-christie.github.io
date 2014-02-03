@@ -28,14 +28,11 @@ function getProcessingSketchId () { return 'sphereofpoints'; }
 					<p>JavaScript is required to view the contents of this page.</p>
 				</noscript>
 	    	</div>
-			<h1>sphereofpoints</h1>
-   		<p id="description">Esfera
-by David Pena.  
-
-Distribucion aleatoria uniforme sobre la superficie de una esfera.</p>
+			<h1>Sphere of Points</h1>
+   		<p id="description">Esfera by David Pena.  </p>
 			<p id="sources">Source code: <a href="/processing.org/sphereofpoints.pde">sphereofpoints</a> </p>
 			<p>
 			Built with <a href="http://processing.org" title="Processing">Processing</a>
 			and <a href="http://processingjs.org" title="Processing.js">Processing.js</a>
 			</p>
-		</div>
+</div>

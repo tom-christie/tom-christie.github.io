@@ -4,13 +4,56 @@
  <title>The blog of Tom Christie</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-02T14:52:33-06:00</updated>
+ <updated>2014-02-02T19:40:23-06:00</updated>
  <id></id>
  <author>
    <name>Tom Christie</name>
    <email>tom.christie@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Rosettes</title>
+   <link href="/2014/02/02/islamic-geometric-patterns.html"/>
+   <updated>2014-02-02T00:00:00-06:00</updated>
+   <id>/2014/02/02/islamic-geometric-patterns</id>
+   <content type="html">&lt;h1 id=&quot;spacefilling_islamic_geometric_patterns&quot;&gt;Space-filling Islamic geometric patterns&lt;/h1&gt;
+
+&lt;p&gt;I visited Turkey in 2005 and became a little bit obsessed with the ubiquitous space-filling geometric pattern that filled walls and doors of older buildings. They clearly had structure, but how could a person start with a blank page and end up with one of these?&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Roof_hafez_tomb.jpg/640px-Roof_hafez_tomb.jpg&quot; alt=&quot;text&quot; title=&quot;Ceiling of Hafiz&#39;s Tomb&quot; /&gt; [en.wikipedia.org] This is the ceiling of a pavilion over Hafiz’s Tomb in Iran. Hafiz was an incredible poet, but that’s a topic for another post.&lt;/p&gt;
+
+&lt;p&gt;I looked all over to find information published on how to construct such patterns. At that time there wasn’t much to be found - some books of pictures, mostly. I found a paper or two describing their construction using a computer, but the author used constructions based on careful angle measurements. Although the high quality craftsmanship of these patterns is very apparent, the angles don’t feel arbitrary. I couldn’t place my finger on why, but I didn’t buy that the original artisans used careful angle measurements.&lt;/p&gt;
+
+&lt;p&gt;Since I couldn’t find any helpful resources on constructing these things, I spent my senior year of college attempting to draw these patterns by hand and eventually came up with something of an algorithm for constructing a certain category of patterns. I found out later that the method I developed (redeveloped?) using a ruler-and-compass construction is known as a &lt;em&gt;Euclidean&lt;/em&gt; construction. My hunch was right, or at least plausible: these patterns could be made without any angle measurements.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;/assets/docs/geometric_patterns.pdf&quot; title=&quot;senior thesis&quot;&gt;Here’s a copy of my paper.&lt;/a&gt; It’s never seen the light of day, and I’ve just sat on it for the past 8 years (ugh, it’s been 8 years…). A couple weeks ago I realized that I now having enough coding skill to automate the creation of these patterns. I’m midway through the project but I thought I’d share my progress so far. I’m using Processing.org / Processing.js.&lt;/p&gt;
+
+&lt;p&gt;The patterns I’m working with are based around “rosettes”, which are designs constructed inside a circle. You start by plotting points in regular intervals around the circumference of a circle (this can be done using Euclidean methods, but I’m taking it as a given here). You then connect those points to each other in certain ways, draw a few more circles with the same center but smaller radii, draw &lt;em&gt;more&lt;/em&gt; lines using the intersections of those lines and circles, and eventually you get something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/rosette-12-lines.png&quot; alt=&quot;img&quot; title=&quot;rosette&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Erasing the “construction lines” gives this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/rosette-12-nolines.png&quot; alt=&quot;img&quot; title=&quot;rosette&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As you can see, this is a pretty basic example. Still, you have to start somewhere. Beginning with this rosette, you can tile the plane using the circles the rosette is constructed within. You then connect the rosettes with each other, creating a space-filling pattern.&lt;/p&gt;
+
+&lt;p&gt;You can play with the applet below. You can click and drag on the circles to change their size, and drag the center to change the position of the rosette. It’s not NEAR done, so you can easily make it look screwy by dragging the circles on top of each other. Still, it gives you a decent idea of how the construction works.&lt;/p&gt;
+&lt;script src=&#39;/processing.org/processing.js&#39; type=&#39;text/javascript&#39;&gt;&lt;![CDATA[]]&gt;&lt;/script&gt;&lt;script type=&#39;text/javascript&#39;&gt;&lt;![CDATA[
+// convenience function to get the id attribute of generated sketch html element
+function getProcessingSketchId () { return &#39;rosette&#39;; }
+]]&gt;&lt;/script&gt;&lt;div&gt;
+	&lt;canvas data-processing-sources=&#39;/processing.org/rosette.pde&#39; height=&#39;600&#39; id=&#39;rosette&#39; width=&#39;600&#39;&gt;
+		&lt;p&gt;Your browser does not support the canvas tag.&lt;/p&gt;
+		&lt;!-- Note: you can put any alternative content here. --&gt;
+	&lt;/canvas&gt;
+	&lt;noscript&gt;
+		&lt;p&gt;JavaScript is required to view the contents of this page.&lt;/p&gt;
+	&lt;/noscript&gt;
+&lt;/div&gt;
+&lt;p&gt;You can also check out the code &lt;a href=&quot;https://github.com/tom-christie/patterns&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content>
+ </entry>
  
  <entry>
    <title>First Post -- Processing.js works!</title>
@@ -33,17 +76,14 @@ function getProcessingSketchId () { return &#39;sphereofpoints&#39;; }
 					&lt;p&gt;JavaScript is required to view the contents of this page.&lt;/p&gt;
 				&lt;/noscript&gt;
 	    	&lt;/div&gt;
-			&lt;h1&gt;sphereofpoints&lt;/h1&gt;
-   		&lt;p id=&#39;description&#39;&gt;Esfera
-by David Pena.  
-
-Distribucion aleatoria uniforme sobre la superficie de una esfera.&lt;/p&gt;
+			&lt;h1&gt;Sphere of Points&lt;/h1&gt;
+   		&lt;p id=&#39;description&#39;&gt;Esfera by David Pena.  &lt;/p&gt;
 			&lt;p id=&#39;sources&#39;&gt;Source code: &lt;a href=&#39;/processing.org/sphereofpoints.pde&#39;&gt;sphereofpoints&lt;/a&gt; &lt;/p&gt;
 			&lt;p&gt;
 			Built with &lt;a href=&#39;http://processing.org&#39; title=&#39;Processing&#39;&gt;Processing&lt;/a&gt;
 			and &lt;a href=&#39;http://processingjs.org&#39; title=&#39;Processing.js&#39;&gt;Processing.js&lt;/a&gt;
 			&lt;/p&gt;
-		&lt;/div&gt;</content>
+&lt;/div&gt;</content>
  </entry>
  
  
