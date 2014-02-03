@@ -1,7 +1,6 @@
 ---
 layout: default
 title: First Post -- Processing.js works!
-
 ---
 
 #Processing.org

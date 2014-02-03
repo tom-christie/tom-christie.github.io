@@ -2,6 +2,7 @@
 layout: post
 date: 2014-02-02
 title: Rosettes
+tags: [processing, patterns]
 ---
 
 # Space-filling Islamic geometric patterns
