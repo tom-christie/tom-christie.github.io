@@ -10,7 +10,7 @@ tags: [processing, patterns]
 I visited Turkey in 2005 and became a little bit obsessed with the ubiquitous space-filling geometric pattern that filled walls and doors of older buildings.  They clearly had structure, but how could a person start with a blank page and end up with one of these?  
 
 ![text](https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Roof_hafez_tomb.jpg/640px-Roof_hafez_tomb.jpg "Ceiling of Hafiz's Tomb")
-[en.wikipedia.org] 
+
 This is the ceiling of a pavilion over Hafiz's Tomb in Iran. Hafiz was an incredible poet, but that's a topic for another post.
 
 I looked all over to find information published on how to construct such patterns. At that time there wasn't much to be found - some books of pictures, mostly. I found a paper or two describing their construction using a computer, but the author used constructions based on careful angle measurements. Although the high quality craftsmanship of these patterns is very apparent, the angles don't feel arbitrary. I couldn't place my finger on why, but I didn't buy that the original artisans used careful angle measurements.

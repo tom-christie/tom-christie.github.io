@@ -1,10 +1,20 @@
 # General Jekyll Config
+markdown: maruku
 pygments: true
-#url: http://example.com
-lsi: false
-exclude: [LICENSE, CNAME, README.md, .gitignore]
+#baseurl: /  
+#destination: ./_site
+exclude: [LICENSE, CNAME, README.md, .gitignore, drafts]
 excerpt_separator: abbaab98ba8998ba898ab
+#url: http://example.com
+url: http://0.0.0.0:4000
+#lsi: false
 
+maruku:
+    use_tex: true
+    use_divs: true
+    png_engine: blahtex
+    png_dir: assets/images/latex/
+    png_url: /assets/images/latex/
 
 # Theme customization - please change from the defaults!
 theme:

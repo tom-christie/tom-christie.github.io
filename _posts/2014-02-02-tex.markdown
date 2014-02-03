@@ -1,0 +1,11 @@
+---
+layout: post
+date: 2014-02-02
+title: Tex?
+---
+
+
+TeX rendering doesn't work.  Hmm.
+
+$x^2 + 5 = 10$
+
