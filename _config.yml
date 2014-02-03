@@ -9,7 +9,8 @@ excerpt_separator: abbaab98ba8998ba898ab
 # Theme customization - please change from the defaults!
 theme:
   # Color for top bar, links, etc
-  highlight_color: '#FE2B1F'
+  highlight_color: '#D52C09'
+  #'#FE2B1F'
 
   # Profile links on the left sidebar, leave blank to ignore
   social:

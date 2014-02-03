@@ -586,7 +586,7 @@ body {
   color: #222222;
   line-height: 24px;
   margin: 0;
-  border-top: 7px solid #FE2B1F;
+  border-top: 7px solid #D52C09;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -621,17 +621,17 @@ ul {
 }
 
 a {
-  color: #FE2B1F;
+  color: #D52C09;
   text-decoration: none;
 }
 
 a:hover {
-  color: #FE2B1F;
+  color: #D52C09;
   text-decoration: underline;
 }
 
 a:visited {
-  color: #FE2B1F;
+  color: #D52C09;
 }
 
 table {
@@ -753,7 +753,7 @@ nav hr {
 }
 
 #home h2 {
-  color: #FE2B1F;
+  color: #D52C09;
 }
 
 #logo {
@@ -779,7 +779,7 @@ nav hr {
 
 #stalker a:hover {
   text-decoration: none;
-  color: #FE2B1F;
+  color: #D52C09;
 }
 
 i.fa-hn {
