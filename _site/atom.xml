@@ -4,7 +4,7 @@
  <title>The blog of Tom Christie</title>
  <link href="/atom.xml" rel="self"/>
  <link href=""/>
- <updated>2014-02-02T20:39:29-06:00</updated>
+ <updated>2014-02-02T20:42:08-06:00</updated>
  <id></id>
  <author>
    <name>Tom Christie</name>
@@ -63,7 +63,8 @@ function getProcessingSketchId () { return &#39;rosette&#39;; }
    <content type="html">&lt;p&gt;This is a test-post to see if iPython notebook will display properly. The syntax highlighting scheme is a little weird but other than that it looks decent.&lt;/p&gt;
 
 &lt;p&gt;The code below is an example of how to do Gaussian Process regression using the neato PyMC package.&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;python&#39;&gt;&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;numpy&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;*&lt;/span&gt;
+&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;python&#39;&gt;&lt;span class=&#39;o&#39;&gt;%&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;pylab&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;inline&lt;/span&gt;
+&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;numpy&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;*&lt;/span&gt;
 &lt;span class=&#39;c&#39;&gt;#function approximation using gaussian proceses&lt;/span&gt;
 &lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;pymc.gp&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Mean&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Covariance&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Realization&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;observe&lt;/span&gt;
 &lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;pymc.gp.cov_funs&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;matern&lt;/span&gt;

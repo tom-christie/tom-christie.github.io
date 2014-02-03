@@ -11,7 +11,7 @@ The code below is an example of how to do Gaussian Process regression using the 
 
 {% highlight python %}
 
-
+%pylab inline
 from numpy import *
 #function approximation using gaussian proceses
 from pymc.gp import Mean, Covariance, Realization, observe

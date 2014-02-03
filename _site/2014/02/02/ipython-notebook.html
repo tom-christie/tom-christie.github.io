@@ -84,7 +84,8 @@
   <p>This is a test-post to see if iPython notebook will display properly. The syntax highlighting scheme is a little weird but other than that it looks decent.</p>
 
 <p>The code below is an example of how to do Gaussian Process regression using the neato PyMC package.</p>
-<div class='highlight'><pre><code class='python'><span class='kn'>from</span> <span class='nn'>numpy</span> <span class='kn'>import</span> <span class='o'>*</span>
+<div class='highlight'><pre><code class='python'><span class='o'>%</span><span class='n'>pylab</span> <span class='n'>inline</span>
+<span class='kn'>from</span> <span class='nn'>numpy</span> <span class='kn'>import</span> <span class='o'>*</span>
 <span class='c'>#function approximation using gaussian proceses</span>
 <span class='kn'>from</span> <span class='nn'>pymc.gp</span> <span class='kn'>import</span> <span class='n'>Mean</span><span class='p'>,</span> <span class='n'>Covariance</span><span class='p'>,</span> <span class='n'>Realization</span><span class='p'>,</span> <span class='n'>observe</span>
 <span class='kn'>from</span> <span class='nn'>pymc.gp.cov_funs</span> <span class='kn'>import</span> <span class='n'>matern</span>
