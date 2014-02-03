@@ -1,164 +1,115 @@
-<?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
- 
- <title>The blog of Tom Christie</title>
- <link href="/atom.xml" rel="self"/>
- <link href=""/>
- <updated>2014-02-02T20:35:30-06:00</updated>
- <id></id>
- <author>
-   <name>Tom Christie</name>
-   <email>tom.christie@gmail.com</email>
- </author>
+---
+layout: post
+date: 2014-02-02
+title: iPython Notebook
+---
 
- 
- <entry>
-   <title>Rosettes</title>
-   <link href="/2014/02/02/islamic-geometric-patterns.html"/>
-   <updated>2014-02-02T00:00:00-06:00</updated>
-   <id>/2014/02/02/islamic-geometric-patterns</id>
-   <content type="html">&lt;h1 id=&quot;spacefilling_islamic_geometric_patterns&quot;&gt;Space-filling Islamic geometric patterns&lt;/h1&gt;
+This is a test-post to see if iPython notebook will display properly. The syntax highlighting scheme is a little weird but other than that it looks decent.
 
-&lt;p&gt;I visited Turkey in 2005 and became a little bit obsessed with the ubiquitous space-filling geometric pattern that filled walls and doors of older buildings. They clearly had structure, but how could a person start with a blank page and end up with one of these?&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Roof_hafez_tomb.jpg/640px-Roof_hafez_tomb.jpg&quot; alt=&quot;text&quot; title=&quot;Ceiling of Hafiz&#39;s Tomb&quot; /&gt; [en.wikipedia.org] This is the ceiling of a pavilion over Hafiz’s Tomb in Iran. Hafiz was an incredible poet, but that’s a topic for another post.&lt;/p&gt;
-
-&lt;p&gt;I looked all over to find information published on how to construct such patterns. At that time there wasn’t much to be found - some books of pictures, mostly. I found a paper or two describing their construction using a computer, but the author used constructions based on careful angle measurements. Although the high quality craftsmanship of these patterns is very apparent, the angles don’t feel arbitrary. I couldn’t place my finger on why, but I didn’t buy that the original artisans used careful angle measurements.&lt;/p&gt;
-
-&lt;p&gt;Since I couldn’t find any helpful resources on constructing these things, I spent my senior year of college attempting to draw these patterns by hand and eventually came up with something of an algorithm for constructing a certain category of patterns. I found out later that the method I developed (redeveloped?) using a ruler-and-compass construction is known as a &lt;em&gt;Euclidean&lt;/em&gt; construction. My hunch was right, or at least plausible: these patterns could be made without any angle measurements.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/assets/docs/geometric_patterns.pdf&quot; title=&quot;senior thesis&quot;&gt;Here’s a copy of my paper.&lt;/a&gt; It’s never seen the light of day, and I’ve just sat on it for the past 8 years (ugh, it’s been 8 years…). A couple weeks ago I realized that I now having enough coding skill to automate the creation of these patterns. I’m midway through the project but I thought I’d share my progress so far. I’m using Processing.org / Processing.js.&lt;/p&gt;
-
-&lt;p&gt;The patterns I’m working with are based around “rosettes”, which are designs constructed inside a circle. You start by plotting points in regular intervals around the circumference of a circle (this can be done using Euclidean methods, but I’m taking it as a given here). You then connect those points to each other in certain ways, draw a few more circles with the same center but smaller radii, draw &lt;em&gt;more&lt;/em&gt; lines using the intersections of those lines and circles, and eventually you get something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/rosette-12-lines.png&quot; alt=&quot;img&quot; title=&quot;rosette&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Erasing the “construction lines” gives this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/images/rosette-12-nolines.png&quot; alt=&quot;img&quot; title=&quot;rosette&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As you can see, this is a pretty basic example. Still, you have to start somewhere. Beginning with this rosette, you can tile the plane using the circles the rosette is constructed within. You then connect the rosettes with each other, creating a space-filling pattern.&lt;/p&gt;
-
-&lt;p&gt;You can play with the applet below. You can click and drag on the circles to change their size, and drag the center to change the position of the rosette. It’s not NEAR done, so you can easily make it look screwy by dragging the circles on top of each other. Still, it gives you a decent idea of how the construction works.&lt;/p&gt;
-&lt;script src=&#39;/processing.org/processing.js&#39; type=&#39;text/javascript&#39;&gt;&lt;![CDATA[]]&gt;&lt;/script&gt;&lt;script type=&#39;text/javascript&#39;&gt;&lt;![CDATA[
-// convenience function to get the id attribute of generated sketch html element
-function getProcessingSketchId () { return &#39;rosette&#39;; }
-]]&gt;&lt;/script&gt;&lt;div&gt;
-	&lt;canvas data-processing-sources=&#39;/processing.org/rosette.pde&#39; height=&#39;600&#39; id=&#39;rosette&#39; width=&#39;600&#39;&gt;
-		&lt;p&gt;Your browser does not support the canvas tag.&lt;/p&gt;
-		&lt;!-- Note: you can put any alternative content here. --&gt;
-	&lt;/canvas&gt;
-	&lt;noscript&gt;
-		&lt;p&gt;JavaScript is required to view the contents of this page.&lt;/p&gt;
-	&lt;/noscript&gt;
-&lt;/div&gt;
-&lt;p&gt;You can also check out the code &lt;a href=&quot;https://github.com/tom-christie/patterns&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>iPython Notebook</title>
-   <link href="/2014/02/02/ipython-notebook.html"/>
-   <updated>2014-02-02T00:00:00-06:00</updated>
-   <id>/2014/02/02/ipython-notebook</id>
-   <content type="html">&lt;p&gt;This is a test-post to see if iPython notebook will display properly. The syntax highlighting scheme is a little weird but other than that it looks decent.&lt;/p&gt;
-
-&lt;p&gt;The code below is an example of how to do Gaussian Process regression using the neato PyMC package.&lt;/p&gt;
-&lt;div class=&#39;highlight&#39;&gt;&lt;pre&gt;&lt;code class=&#39;python&#39;&gt;&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;numpy&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;*&lt;/span&gt;
-&lt;span class=&#39;c&#39;&gt;#function approximation using gaussian proceses&lt;/span&gt;
-&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;pymc.gp&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Mean&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Covariance&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Realization&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;observe&lt;/span&gt;
-&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;pymc.gp.cov_funs&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;matern&lt;/span&gt;
-&lt;span class=&#39;c&#39;&gt;#plotting stuff&lt;/span&gt;
-&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;mpl_toolkits.mplot3d&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Axes3D&lt;/span&gt;
-&lt;span class=&#39;kn&#39;&gt;from&lt;/span&gt; &lt;span class=&#39;nn&#39;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&#39;kn&#39;&gt;import&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;plot&lt;/span&gt;
-
-&lt;span class=&#39;c&#39;&gt;#function we&amp;#39;re trying to approximate&lt;/span&gt;
-&lt;span class=&#39;k&#39;&gt;def&lt;/span&gt; &lt;span class=&#39;nf&#39;&gt;sinxfun&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;x&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;y&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;):&lt;/span&gt;
-    &lt;span class=&#39;sd&#39;&gt;&amp;#39;&amp;#39;&amp;#39; for each (x,y) point, it returns d*sin(d), where d is the distance from the origin.&amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-    &lt;span class=&#39;n&#39;&gt;d&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;sqrt&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;x&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;**&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;+&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;y&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;**&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-    &lt;span class=&#39;k&#39;&gt;return&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;d&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;*&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;sin&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;d&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-
-&lt;span class=&#39;c&#39;&gt;#assumed mean of gassian process = 0&lt;/span&gt;
-&lt;span class=&#39;k&#39;&gt;def&lt;/span&gt; &lt;span class=&#39;nf&#39;&gt;meanfun&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;):&lt;/span&gt;
-    &lt;span class=&#39;k&#39;&gt;return&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;zeros&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;((&lt;/span&gt;&lt;span class=&#39;nb&#39;&gt;len&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;))&lt;/span&gt;
+The code below is an example of how to do Gaussian Process regression using the neato PyMC package.  
 
 
-&lt;span class=&#39;c&#39;&gt;#DEFINE GAUSSIAN PROCESS&lt;/span&gt;
-&lt;span class=&#39;c&#39;&gt;#mean is just 0&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Mean&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;meanfun&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;c&#39;&gt;#covariance is what was used in the example above&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Covariance&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;eval_fun&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;matern&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;euclidean&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;diff_degree&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;mf&#39;&gt;10.4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;amp&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;mf&#39;&gt;10.4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;scale&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;mf&#39;&gt;10.&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#big diff_degree&lt;/span&gt;
-
-&lt;span class=&#39;c&#39;&gt;##MAKE THE MESH&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;x_mesh&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;np&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;arange&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;mf&#39;&gt;0.1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;y_mesh&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;np&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;arange&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;mf&#39;&gt;0.1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;np&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;meshgrid&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;x_mesh&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;y_mesh&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;z_mesh&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;sinxfun&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-
-&lt;span class=&#39;c&#39;&gt;##PLOTTING &lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;figsize&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;16&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;30&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;fig&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;figure&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;clf&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()&lt;/span&gt;
-
-&lt;span class=&#39;n&#39;&gt;subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;fig&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;add_subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;511&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;projection&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;3d&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot_surface&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;z_mesh&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;cmap&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cm&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;jet&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;view_init&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;elev&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;50&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;azim&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;mi&#39;&gt;120&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#how high up you see it from, and what angle you see it from&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;title&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;what we&lt;/span&gt;&lt;span class=&#39;se&#39;&gt;\&amp;#39;&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;re trying to estimate&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+{% highlight python %}
 
 
-&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;concatenate&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;((&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;atleast_2d&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;ravel&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;()),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;atleast_2d&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;ravel&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;())))&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;T&lt;/span&gt;
+from numpy import *
+#function approximation using gaussian proceses
+from pymc.gp import Mean, Covariance, Realization, observe
+from pymc.gp.cov_funs import matern
+#plotting stuff
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib.pyplot import plot
 
-&lt;span class=&#39;c&#39;&gt;#REALIZATION WITH NO DATA&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Realization&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;fig&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;add_subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;512&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;projection&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;3d&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot_surface&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;reshape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;shape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;alpha&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=.&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;3&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cmap&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cm&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;jet&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;set_zlim&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;title&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;realization1&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+#function we're trying to approximate
+def sinxfun(x=0,y=0):
+    ''' for each (x,y) point, it returns d*sin(d), where d is the distance from the origin.'''
+    d = sqrt(x**2+y**2)
+    return d*sin(d)
 
-&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Realization&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;3&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;fig&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;add_subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;513&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;projection&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;3d&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot_surface&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;reshape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;shape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;alpha&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=.&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;3&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cmap&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cm&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;jet&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;set_zlim&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;title&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;realization 2&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+#assumed mean of gassian process = 0
+def meanfun(xy):
+    return zeros((len(xy),1))
 
-&lt;span class=&#39;c&#39;&gt;### INCLUDE SOME ACTUAL DATA POINTS&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;np&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;random&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;uniform&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;))&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#5 points&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;V&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;array&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;([&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;mo&#39;&gt;002&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;mo&#39;&gt;002&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;])&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#lower value makes the GP fit closer to the data, higher value makes it less important to do that.&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;data&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;sinxfun&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;],&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;])&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#find the x-value of the points&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;observe&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#current mean and covariance functions -&amp;gt;&amp;gt; it updates these!! (I think)&lt;/span&gt;
-        &lt;span class=&#39;n&#39;&gt;obs_mesh&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#INPUT values for datapoints&lt;/span&gt;
-        &lt;span class=&#39;n&#39;&gt;obs_V&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;V&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;  &lt;span class=&#39;c&#39;&gt;#NOISE?  Variance&lt;/span&gt;
-        &lt;span class=&#39;n&#39;&gt;obs_vals&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;data&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#actual OUTPUT values observed&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Realization&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
 
-&lt;span class=&#39;n&#39;&gt;subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;4&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;fig&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;add_subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;514&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;projection&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;3d&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot_surface&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;reshape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;shape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;alpha&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=.&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;3&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cmap&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cm&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;jet&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;set_zlim&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;],&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;],&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;data&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;.k&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;markersize&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;20&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;title&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;after data&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+#DEFINE GAUSSIAN PROCESS
+#mean is just 0
+MM = Mean(meanfun)
+#covariance is what was used in the example above
+CC = Covariance(eval_fun = matern.euclidean, diff_degree = 10.4, amp = 10.4, scale = 10.) #big diff_degree
+
+##MAKE THE MESH
+x_mesh = np.arange(-10, 10, 0.1)
+y_mesh = np.arange(-10, 10, 0.1)
+xx, yy = np.meshgrid(x_mesh, y_mesh)
+z_mesh = sinxfun(xx,yy)
+
+##PLOTTING 
+figsize(16,30)
+fig = figure()
+clf()
+
+subplot(5,1,1)
+ax = fig.add_subplot(511,projection='3d')
+ax.plot_surface(xx, yy, z_mesh, cmap=cm.jet,vmin=-15,vmax=15)
+ax.view_init(elev=50, azim = 120) #how high up you see it from, and what angle you see it from
+title('what we\'re trying to estimate')
+
+
+xy = concatenate((atleast_2d(xx.ravel()),atleast_2d(yy.ravel()))).T
+
+#REALIZATION WITH NO DATA
+r = Realization(MM,CC)
+subplot(5,1,2)
+ax = fig.add_subplot(512,projection='3d')
+ax.plot_surface(xx,yy, reshape(r(xy),xx.shape),alpha=.3,cmap=cm.jet,vmin=-15,vmax=15)
+ax.set_zlim(-15,15)
+title('realization1')
+
+r = Realization(MM,CC)
+subplot(5,1,3)
+ax = fig.add_subplot(513,projection='3d')
+ax.plot_surface(xx,yy, reshape(r(xy),xx.shape),alpha=.3,cmap=cm.jet,vmin=-15,vmax=15)
+ax.set_zlim(-15,15)
+title('realization 2')
+
+### INCLUDE SOME ACTUAL DATA POINTS
+obs = np.random.uniform(-10,10,(5,2)) #5 points
+V = array([.002,.002]) #lower value makes the GP fit closer to the data, higher value makes it less important to do that.
+data = sinxfun(obs[:,0],obs[:,1]) #find the x-value of the points
+observe(MM, CC, #current mean and covariance functions ->> it updates these!! (I think)
+        obs_mesh=obs, #INPUT values for datapoints
+        obs_V = V,  #NOISE?  Variance
+        obs_vals = data) #actual OUTPUT values observed
+r = Realization(MM,CC)
+
+subplot(5,1,4)
+ax = fig.add_subplot(514,projection='3d')
+ax.plot_surface(xx,yy, reshape(r(xy),xx.shape),alpha=.3,cmap=cm.jet,vmin=-15,vmax=15)
+ax.set_zlim(-15,15)
+ax.plot(obs[:,0],obs[:,1],data,'.k',markersize=20)
+title('after data')
 
 
 
-&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;np&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;random&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;uniform&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;10&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;500&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;2&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;))&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#500 points&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;V&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;array&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;([&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;mo&#39;&gt;0002&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;mo&#39;&gt;0002&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;])&lt;/span&gt; 
-&lt;span class=&#39;n&#39;&gt;data&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;sinxfun&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;],&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;])&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#find the x-value of the points&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;observe&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#current mean and covariance functions -&amp;gt;&amp;gt; it updates these!! (I think)&lt;/span&gt;
-        &lt;span class=&#39;n&#39;&gt;obs_mesh&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#INPUT values for datapoints&lt;/span&gt;
-        &lt;span class=&#39;n&#39;&gt;obs_V&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;V&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;  &lt;span class=&#39;c&#39;&gt;#NOISE?  Variance&lt;/span&gt;
-        &lt;span class=&#39;n&#39;&gt;obs_vals&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;data&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt; &lt;span class=&#39;c&#39;&gt;#actual OUTPUT values observed&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;Realization&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;MM&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;CC&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
+obs = np.random.uniform(-10,10,(500,2)) #500 points
+V = array([.0002,.0002]) 
+data = sinxfun(obs[:,0],obs[:,1]) #find the x-value of the points
+observe(MM, CC, #current mean and covariance functions ->> it updates these!! (I think)
+        obs_mesh=obs, #INPUT values for datapoints
+        obs_V = V,  #NOISE?  Variance
+        obs_vals = data) #actual OUTPUT values observed
+r = Realization(MM,CC)
 
-&lt;span class=&#39;n&#39;&gt;subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt; &lt;span class=&#39;o&#39;&gt;=&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;fig&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;add_subplot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;515&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;projection&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;3d&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot_surface&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;yy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt; &lt;span class=&#39;n&#39;&gt;reshape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;r&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xy&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;xx&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;shape&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;),&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;alpha&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=.&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;8&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cmap&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;cm&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;jet&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmin&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;vmax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;set_zlim&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;-&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;15&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;ax&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;.&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;plot&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;0&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;],&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;obs&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;[:,&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;1&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;],&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;data&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;.k&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;,&lt;/span&gt;&lt;span class=&#39;n&#39;&gt;markersize&lt;/span&gt;&lt;span class=&#39;o&#39;&gt;=&lt;/span&gt;&lt;span class=&#39;mi&#39;&gt;5&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;span class=&#39;n&#39;&gt;title&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;(&lt;/span&gt;&lt;span class=&#39;s&#39;&gt;&amp;#39;after data&amp;#39;&lt;/span&gt;&lt;span class=&#39;p&#39;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#39;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4sAAAaYCAYAAAAuaUnxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+subplot(5,1,5)
+ax = fig.add_subplot(515,projection='3d')
+ax.plot_surface(xx,yy, reshape(r(xy),xx.shape),alpha=.8,cmap=cm.jet,vmin=-15,vmax=15)
+ax.set_zlim(-15,15)
+ax.plot(obs[:,0],obs[:,1],data,'.k',markersize=5)
+title('after data')
+
+{% endhighlight %}
+
+<img style="max-width:100%;width:auto\9;height:auto;vertical-align:middle;border:0;-ms-interpolation-mode:bicubic;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA4sAAAaYCAYAAAAuaUnxAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4U3Xfh++MJt1lld0yZcgsu2zxAREZggNRBEVRpigo
 ioggj4qIAwV5VEQUB1NBEAfKXjJVhrJp2aO2dCbNfP/Ie2Ja0jZtkzZtv/d1cQHpGb8zmvP7nM93
 qOx2ux1BEARBEARBEARBcEFd3AMQBEEQBEEQBEEQ/A8Ri4IgCIIgCIIgCMJNiFgUBEEQBEEQBEEQ
@@ -11148,39 +11099,5 @@ cyUiAgBB9v9ojIiIiOgetbW1wWq14vr16wD+mx76ww8/wGQyweFwoKioCDdv3tS4SiIiChc7i0RE
 RDQjNm3ahJMnTwIATp48ic2bN2tcERERTQc7i0RERHTftm/fjkuXLqGnpwdGoxHvvfceysvLUVVV
 hX/++QeZmZn46quvYDAYtC6ViIjCxLBIREREREREE3AZKhEREREREU3AsEhEREREREQTMCwSERER
 ERHRBAyLRERERERENMH/AIGrjm1ghhmoAAAAAElFTkSuQmCC
-&#39; style=&#39;max-width:100%;width:auto\9;height:auto;vertical-align:middle;border:0;-ms-interpolation-mode:bicubic;&#39; /&gt;&lt;/p&gt;</content>
- </entry>
- 
- <entry>
-   <title>First Post -- Processing.js works!</title>
-   <link href="/2014/02/02/first-post.html"/>
-   <updated>2014-02-02T00:00:00-06:00</updated>
-   <id>/2014/02/02/first-post</id>
-   <content type="html">&lt;h1 id=&quot;processingorg&quot;&gt;Processing.org&lt;/h1&gt;
+">
 
-&lt;p&gt;This is mainly a test to see if I can get Processing.js to work.&lt;/p&gt;
-&lt;script src=&#39;/processing.org/processing.js&#39; type=&#39;text/javascript&#39;&gt;&lt;![CDATA[]]&gt;&lt;/script&gt;&lt;script type=&#39;text/javascript&#39;&gt;&lt;![CDATA[
-// convenience function to get the id attribute of generated sketch html element
-function getProcessingSketchId () { return &#39;sphereofpoints&#39;; }
-]]&gt;&lt;/script&gt;&lt;div id=&#39;content&#39;&gt;
-			&lt;div&gt;
-				&lt;canvas data-processing-sources=&#39;/processing.org/sphereofpoints.pde&#39; height=&#39;400&#39; id=&#39;sphereofpoints&#39; width=&#39;600&#39;&gt;
-					&lt;p&gt;Your browser does not support the canvas tag.&lt;/p&gt;
-					&lt;!-- Note: you can put any alternative content here. --&gt;
-				&lt;/canvas&gt;
-				&lt;noscript&gt;
-					&lt;p&gt;JavaScript is required to view the contents of this page.&lt;/p&gt;
-				&lt;/noscript&gt;
-	    	&lt;/div&gt;
-			&lt;h1&gt;Sphere of Points&lt;/h1&gt;
-   		&lt;p id=&#39;description&#39;&gt;Esfera by David Pena.  &lt;/p&gt;
-			&lt;p id=&#39;sources&#39;&gt;Source code: &lt;a href=&#39;/processing.org/sphereofpoints.pde&#39;&gt;sphereofpoints&lt;/a&gt; &lt;/p&gt;
-			&lt;p&gt;
-			Built with &lt;a href=&#39;http://processing.org&#39; title=&#39;Processing&#39;&gt;Processing&lt;/a&gt;
-			and &lt;a href=&#39;http://processingjs.org&#39; title=&#39;Processing.js&#39;&gt;Processing.js&lt;/a&gt;
-			&lt;/p&gt;
-&lt;/div&gt;</content>
- </entry>
- 
- 
-</feed>

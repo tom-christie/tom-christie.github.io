@@ -3,6 +3,8 @@ pygments: true
 #url: http://example.com
 lsi: false
 exclude: [LICENSE, CNAME, README.md, .gitignore]
+excerpt_separator: abbaab98ba8998ba898ab
+
 
 # Theme customization - please change from the defaults!
 theme:
