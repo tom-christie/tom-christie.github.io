@@ -58,10 +58,15 @@
             this.arrowViewArray[0] = new GLOBAL.ArrowView(0, Math.floor(Math.random() * 4));
             for (i = 1; i < this.numArrowViews; i++) {
                 if (Math.random() < this.probSame) {
+                    //same
                     this.arrowViewArray[i] = new GLOBAL.ArrowView(i, this.arrowViewArray[i - 1].direction);
                     directions[i] = this.arrowViewArray[i - 1].direction;
                 } else {
+                    //different
                     temp = Math.floor(Math.random() * 4);
+                    while (temp === directions[i - 1]) {
+                        temp = Math.floor(Math.random() * 4);
+                    }
                     this.arrowViewArray[i] = new GLOBAL.ArrowView(i, temp);
                     directions[i] = temp;
                 }
@@ -70,7 +75,7 @@
             this.targetResponses = new Array(this.numArrowViews);
             this.targetResponses[0] = 'X'; //first one doesn't matter
             for (i = 1; i < this.numArrowViews; i++) {
-                if (this.arrowViewArray[i].direction === this.arrowViewArray[i-1].direction) {
+                if (this.arrowViewArray[i].direction === this.arrowViewArray[i - 1].direction) {
                     this.targetResponses[i] = 'S';
                 }
                 else {
