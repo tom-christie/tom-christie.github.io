@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Arrow Task</title>
 
     <!-- Libraries -->
@@ -10,8 +11,7 @@
     <script type="text/javascript" src="js/libs/preloadjs-0.4.1.min.js"></script>
     <script type="text/javascript" src="js/libs/state-machine.js"></script>
     <script type="text/javascript" src="js/libs/mediator.js"></script>
-
-    <!-- Include Atari Classes Here. Ultimately it will be a minified lib -->
+    <script type="text/javascript" src="js/libs/keypress-2.0.1.min.js"></script>
     <script type="text/javascript" src="js/libs/atari/Atari.js"></script>
     <script type="text/javascript" src="js/libs/BrowserDetect.js"></script>
     <script type="text/javascript" src="js/libs/atari/GameShell.js"></script>
@@ -29,10 +29,6 @@
 
 
         function init() {
-
-            var userID = prompt("Please enter your name","");
-
-            saveData(userID);
 
             var queue, progress, game, progressBmp, stage, loading_text, currentView;
             stage = new createjs.Stage("demoCanvas");
@@ -126,7 +122,7 @@
 
             function handleComplete(evt) {
 
-                console.log('all files loaded')
+                //console.log('all files loaded')
 
                 //do stuff
                 moveOut();
@@ -140,7 +136,7 @@
             }
 
             function moveOut() {
-                console.log(progress);
+                //console.log(progress);
                 createjs.Tween.get(loading_text).to({x: -1000}, 800, createjs.Ease.backIn);
                 createjs.Tween.get(progress)
                         .to({x: 1000}, 800, createjs.Ease.backIn)
@@ -155,22 +151,9 @@
 
             function handlePreloadError(evt) {
                 //console.log(evt);
-                console.log("ERROR LOADING FILES");
+                //console.log("ERROR LOADING FILES");
 
             }
-
-        }
-
-        function saveData(userID){
-
-            $.ajax({
-                url: "https://docs.google.com/forms/d/1I0H613EHyQ0r1-y9cOY7T11OaEiUdkhnuVmboLQXL3g/formResponse",
-                type: "POST",
-                datatype: "xml",
-
-                data: { "entry_1759997082" :userID,
-                        "entry_69841564":"mydata"} //this is the question id
-            });
 
         }
 

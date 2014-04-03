@@ -24,6 +24,7 @@
     "timerWidth":"300",
     "timerHeight":"20",
 
-    "oneBackDuration": "20"
+    "oneBackDuration": "6",
+    "oneBackTrialCount":"60"
 
 }

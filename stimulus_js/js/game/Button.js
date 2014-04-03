@@ -26,6 +26,7 @@
         this.iWasClicked = null;
         this.shouldCallFn = null;
         this.isButton = true;
+        this.shouldTweenOut = true;
 
         this.finishedTweenOut = null;
 
@@ -66,11 +67,19 @@
         this.shape.on("mouseout", this.handleMouseOff.bind(this));
         this.shape.on("click", this.handleMouseClick.bind(this));
 
+        this.shape.on("change",this.redraw.bind(this));
 
         return this;
 
     };
 
+    p.redraw = function(){
+
+        this.shape.graphics.clear()
+            .beginFill(this.color)
+            .drawRoundRect(0, 0, this.width, this.height, this.radius); //with respect to the shape bounds
+
+    };
 
     p.setText = function (text) {
         this.text = text.toString();
@@ -148,6 +157,13 @@
         return this;
     };
 
+//    p.setWidth = function(width){
+//        this.shape.graphics.clear()
+//            .beginFill(this.color)
+//            .drawRoundRect(0, 0, this.width, this.height, this.radius);
+//return this;
+//
+//    };
 
     //tweening
     p.tweenIn = function (property, fromLoc, toLoc, timeTaken, easingFn) {
@@ -162,17 +178,6 @@
         return this;
     };
 
-    p.tweenOut = function (property, toLoc, timeTaken, easingFn) {
-
-        this.tweenOutArgs = {
-            property: property,
-            toLoc: toLoc,
-            timeTaken: timeTaken,
-            easingFn: easingFn
-        };
-
-        return this;
-    };
 
 
     //mouse click
@@ -184,6 +189,19 @@
         }
     };
 
+
+
+    p.tweenOut = function (property, toLoc, timeTaken, easingFn) {
+
+        this.tweenOutArgs = {
+            property: property,
+            toLoc: toLoc,
+            timeTaken: timeTaken,
+            easingFn: easingFn
+        };
+
+        return this;
+    };
     p.tweenOutSelf = function () {
 
         try {
@@ -222,16 +240,21 @@
         this.finishedTweenOut = true;
         var evt = new createjs.Event("done_tweening");
         evt.myEventData = "foo";
-        console.log(evt);
         this.parent.dispatchEvent(evt); //send event to parent
 
         if(this.iWasClicked && this.shouldCallFn){
-        console.log("trying to call...", this.functionToCall);
+        //console.log("trying to call...", this.functionToCall);
 
         this.functionToCall();
-            console.log('state is now ',GLOBAL.state.current);
-        };
 
+            //console.log('state is now ',GLOBAL.state.current);
+
+        }
+
+        if(this.triggerStateChange){
+            //console.log("trying to trigger state change");
+            this.triggerStateChange();
+        }
 
 
         //remove self!
@@ -239,6 +262,19 @@
 
     };
 
+    p.changeStateWhenFinishedTweeningOut = function(fn){
+        //change state
+        this.triggerStateChange = fn;
+        return this;
+
+    };
+
+    p.sendChangeStateEvent = function(){
+
+        var evt = new createjs.Event("done_tweening_out");
+        GLOBAL.stage.dispatchEvent(evt);
+
+    };
 
     scope.Button = Button;
 

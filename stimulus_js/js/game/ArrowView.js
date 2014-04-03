@@ -63,6 +63,8 @@
         this.outerColor = GameInfo.arrowOuterColor;//transparent if color is not set
         this.innerColor = GameInfo.arrowInnerColor;
         this.borderWidth = 4;
+        this.isArrow = true;
+        this.shouldTweenOut = true;
 
         //circle
         this.shape = new createjs.Shape();
@@ -82,7 +84,6 @@
         this.arrowBitmap.x = 0 - this.radius;//relative to
         this.arrowBitmap.y = 0 - this.radius;//GameInfo.height/2;
         this.arrowBitmap.alpha = 1;
-        this.arrowBitmap.what = "hi";
         this.addChild(this.arrowBitmap);
         this.rotate(this.direction);
 
@@ -118,11 +119,11 @@
 
         createjs.Tween.get({outerFill: this.radius}).to({outerFill: 0}, 200, createjs.Ease.quintOut)
             .on("change", function (evt) {
-            this.coverCircle.graphics.clear()
-                .beginStroke(this.outerColor) //color
-                .setStrokeStyle(evt.target.target.outerFill, "round") //stroke width
-                .drawCircle(0, 0, this.radius - evt.target.target.outerFill / 2); //radius
-        }, this);
+                this.coverCircle.graphics.clear()
+                    .beginStroke(this.outerColor) //color
+                    .setStrokeStyle(evt.target.target.outerFill, "round") //stroke width
+                    .drawCircle(0, 0, this.radius - evt.target.target.outerFill / 2); //radius
+            }, this);
         createjs.Tween.tick(1);
         return this;
     };
@@ -131,7 +132,7 @@
         createjs.Tween.get({outerFill: 0})
             .to({outerFill: this.radius}, 150, createjs.Ease.qintOut)
             .call(this.doneTweeningOut)
-            .on("change",function (evt) {
+            .on("change", function (evt) {
                 try {
                     this.coverCircle.graphics.clear()
                         .beginStroke(this.outerColor) //color
@@ -146,11 +147,56 @@
 
     };
 
-    p.doneTweeningOut = function(){
+
+    //this one happens at the very end
+    p.tweenOutSelf = function () {
+        var start_radius = this.radius;
+        //console.log("so far so b");
+        //console.log(this)
+        createjs.Tween.get(this)
+            .to({radius: 0}, 1000, createjs.Ease.backIn)
+            .call(this.doneTweeningOutLevel)
+            .on("change", function (evt) {
+                try {
+                    this.shape.graphics.clear()
+                        .beginFill(this.outerColor)
+                        .drawCircle(0, 0, this.radius) //with respect to the shape bounds
+                        .endFill();
+                    this.shape.graphics.clear()
+                        .beginFill(this.innerColor)
+                        .drawCircle(0, 0, this.radius);
+
+                    this.coverCircle.graphics.clear()
+                        .beginFill(createjs.Graphics.getRGB(0, 0, 0, 0))
+                        .drawCircle(0, 0, this.radius) //with respect to the shape bounds
+                        .endFill();
+
+                    this.arrowBitmap.scaleX = this.radius / start_radius;
+                    this.arrowBitmap.scaleY = this.radius / start_radius;
+                    this.arrowBitmap.x = -this.radius;
+                    this.arrowBitmap.y = -this.radius;
+
+
+                } catch (e) {
+
+                }
+            }, this);
+        createjs.Tween.tick(1);
+        return this;
+
+    };
+
+    p.doneTweeningOut = function () {
         var evt2 = new createjs.Event("done_tweening_out");
         GLOBAL.oneBackTask.view.dispatchEvent(evt2); //send event to parent
     };
 
+    //tell stage you're done tweening
+    p.doneTweeningOutLevel = function(){
+        var evt2 = new createjs.Event("done_tweening_out");
+        GLOBAL.stage.dispatchEvent(evt2);
+
+    };
     scope.ArrowView = ArrowView;
 
 }(window.GLOBAL));

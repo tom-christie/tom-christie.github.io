@@ -31,7 +31,7 @@
         } else if (GLOBAL.state.is("MODIFIED_ARROWS_INTRO")) {
             this.createModifierIntro();
         }
-        console.log("INTRO VIEW",this);
+        //console.log("INTRO VIEW",this);
 
     };
 
@@ -58,14 +58,14 @@
             .tweenOut('x', 800, 400, createjs.Ease.backIn);
         this.addChild(this.instructions_1back);
 
-        this.button_1back = new Button(GLOBAL.GameInfo.width / 2, 360, 300, 100)
+        this.button_1back = new Button(GLOBAL.GameInfo.width / 2, 330, 300, 100)
             .setColor(GLOBAL.GameInfo.introButtonColor)
-            .setText('Go1!')
+            .setText('Go!')
             .setTextSize(60)
             .setMouseoverColor(GLOBAL.GameInfo.introButtonColorMouseover)
             .call(GLOBAL.state.CALLselect1BackOK)
-            .tweenIn('y', -1000, 0, slide_time, createjs.Ease.backOut)
-            .tweenOut('x', 800, 400, createjs.Ease.backIn);
+            .tweenIn('y', 1000, 0, slide_time, createjs.Ease.backOut)
+            .tweenOut('x', -800, 400, createjs.Ease.backIn);
         this.addChild(this.button_1back);
 
         //console.log(this);
@@ -208,13 +208,13 @@
 
 
     p.tweenOut = function () {
-        console.log("i was called now!!!")
+        //console.log("i was called now!!!")
         var l = this.getNumChildren();
         // iterate through all the children and tween out:
         for (var i = 0; i < l; i++) {
-            console.log("trying to tween out!!!", i, l);
+            //console.log("trying to tween out!!!", i, l);
             var child = this.getChildAt(i);
-            console.log(i, child, typeof child);
+            //console.log(i, child, typeof child);
             if (child.isButton) {
 
                 child.tweenOutSelf();

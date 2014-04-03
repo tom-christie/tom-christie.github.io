@@ -27,6 +27,49 @@
         //make global variable
     window.GLOBAL = window.GLOBAL || {};
 
+    GLOBAL.recordResults = function (results) {
+        //the error you get here is just from the RESPONSE - the data seems to be posting fine.
+        try {
+            $.ajax({
+
+                url: "https://docs.google.com/forms/d/1I0H613EHyQ0r1-y9cOY7T11OaEiUdkhnuVmboLQXL3g/formResponse",
+                type: "POST",
+                dataType: "xml",
+                data: { "entry.1759997082": GLOBAL.userID,
+                    "entry.69841564": results}, //this is the question id
+
+                statusCode: {
+                    0: function () {
+                        //Success message
+                    },
+                    200: function () {
+                        //Success Message
+                    }
+                }
+
+            });
+        } catch (e) {
+            console.log('throwing an error', e)
+
+        }
+
+    };
+
+
+    // First, checks if it isn't implemented yet.
+    if (!String.prototype.format) {
+        String.prototype.format = function() {
+            var args = arguments;
+            return this.replace(/{(\d+)}/g, function(match, number) {
+                return typeof args[number] != 'undefined'
+                    ? args[number]
+                    : match
+                    ;
+            });
+        };
+    }
+
+
     function ArrowTask(stage, queue) {
         this.initialize(stage, queue);
     }
@@ -50,18 +93,47 @@
 
         initialize: function (stage, queue) {
 
+            //make keyboard listener
+            GLOBAL.keyboardListener = new window.keypress.Listener();
+            var keyCombos = [
+                {
+                    "keys": "s",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 's';
+                        GLOBAL.currentView.keyPressed();
+                    }
+                },
+                {
+                    "keys": "d",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 'd';
+                        GLOBAL.currentView.keyPressed();
+                    }
+                },
+                {
+                    "keys": "space",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 'space';
+                        GLOBAL.currentView.keyPressed();
+                    }
+                }
+            ];
+            GLOBAL.keyboardListener.register_many(keyCombos);
+
+            //get user ID
+            while (!GLOBAL.userID) {
+                GLOBAL.userID = prompt("Please enter your name or ID number. This will be used to record your results.", "");
+            }
+
             //add these to global so all classes can access it
             GLOBAL.stage = stage;
             GLOBAL.GameInfo = queue.getResult("manifest");
             GLOBAL.assets = queue;
 
-
-//            //message broadcasting...necessary?
-//            //https://github.com/ajacksified/Mediator.js
-//            this.mediator = new Mediator();
-
             this.createStateMachine();
-
 
             //set the ticker to 30fps
             createjs.Ticker.setFPS(30);
@@ -69,29 +141,29 @@
 
             //FLICKER IF THIS ISN'T CALLED
             createjs.Ticker.addEventListener('tick', this.onTick.bind(this));//callback function for what to do on each tick
-            //console.log('ticker1',createjs.Ticker.toString());
 
             GLOBAL.stage.enableMouseOver(24); // 24 updates per second
 
 
             this.createMenu();
-//            this.createLevel();
-//            GLOBAL.state.onselect1BACK_INTRO();
+
+            GLOBAL.doneTweeningListener = GLOBAL.stage.addEventListener("done_tweening_out", GLOBAL.state.handleDoneTweeningOut); //listen for finished tweening
+
 
         },
 
         createMenu: function () {
 
-
-            GLOBAL.oneBackTask = new GLOBAL.OneBackTask();
-
-            GLOBAL.oneBackTask.view = new GLOBAL.OneBackTaskView(GLOBAL.oneBackTask.options);
-            GLOBAL.currentView = GLOBAL.oneBackTask;
-            GLOBAL.stage.addChild(GLOBAL.currentView.view);
+            //start from non-normal place
+//            GLOBAL.oneBackTask = new GLOBAL.OneBackTask();
+//            GLOBAL.oneBackTask.startNewTrial();
+//            GLOBAL.state.current = "1BACK_TASK";
+//            GLOBAL.currentView = GLOBAL.oneBackTask;
+//            GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
 //
-//            GLOBAL.currentView = new GLOBAL.Menu();
-//            GLOBAL.stage.addChild(GLOBAL.currentView.view);
+            GLOBAL.currentView = new GLOBAL.Menu();
+            GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
         },
 
@@ -120,8 +192,10 @@
                     //1-back loop
                     { name: 'select1Back', from: 'MENU', to: '1BACK_INTRO' },
                     { name: 'select1BackOK', from: '1BACK_INTRO', to: '1BACK_TASK' },
-                    { name: '1BackTrialFinished', from: '1BACK_TASK', to: '1BACK_RESULTS' },
-                    { name: '1BackToComplete', from: '1BACK_TASK', to: 'COMPLETE'},
+                    { name: 'oneBackTrialFinished', from: '1BACK_TASK', to: '1BACK_RESULTS' },
+                    { name: 'oneBackNewTrial', from: '1BACK_RESULTS', to: '1BACK_TASK'},
+                    { name: 'oneBackAllTrialsFinished', from: '1BACK_RESULTS', to: '1BACK_RESULTS_FINAL'},
+                    { name: 'oneBackToComplete', from: '1BACK_RESULTS_FINAL', to: 'MENU'},
 
                     //modified arrows
                     { name: 'selectModifiedArrows', from: 'MENU', to: 'MODIFIED_ARROWS_INTRO' },
@@ -176,10 +250,72 @@
                 GLOBAL.state.select1BackOK();
                 GLOBAL.stage.removeAllChildren();
 
+                GLOBAL.oneBackTask = new GLOBAL.OneBackTask();
+                GLOBAL.oneBackTask.startNewTrial();
+                //GLOBAL.state.current = "1BACK_TASK";
+                GLOBAL.currentView = GLOBAL.oneBackTask;
+                GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
-                //add 1-back task to stage
-                GLOBAL.currentView = new GLOBAL.OneBackTask();
-                GLOBAL.oneBackTask = GLOBAL.currentView; //just for reference - this is a pointer, right?
+//
+//
+//                //add 1-back task to stage
+//                GLOBAL.currentView = new GLOBAL.OneBackTask();
+//                GLOBAL.oneBackTask = GLOBAL.currentView; //just for reference - this is a pointer, right?
+//                GLOBAL.stage.addChild(GLOBAL.currentView.view);
+
+
+            };
+
+            GLOBAL.state.CALLoneBackTrialFinished = function () {
+
+                //close out current trial
+                GLOBAL.state.oneBackTrialFinished();
+                GLOBAL.currentView.view.tweenOut();
+
+
+            };
+
+            GLOBAL.state.handleDoneTweeningOut = function () {
+                //do stuff depending on what state you're now in
+
+
+                if (GLOBAL.state.is("1BACK_RESULTS")) {
+                    //display results
+                    //console.log("here!",GLOBAL.state.current);
+                    GLOBAL.oneBackTask.view.removeChildren();
+                    GLOBAL.oneBackTask.view.showResults();
+
+                } else if (GLOBAL.state.is("1BACK_TASK")) {
+
+
+                }
+
+            };
+
+
+            GLOBAL.state.CALLoneBackNewTrial = function () {
+
+                //if not at last trial
+                if (GLOBAL.oneBackTask.currentTrialNumber < GLOBAL.oneBackTask.numTrials) {
+                    //console.log("trying to make a new trial");
+                    GLOBAL.state.oneBackNewTrial();
+                    GLOBAL.stage.removeChild(GLOBAL.oneBackTask.view);
+                    GLOBAL.oneBackTask.startNewTrial();
+                    GLOBAL.stage.addChild(GLOBAL.currentView.view);
+                } else {
+                    //finished last trial, do something different
+                    GLOBAL.state.oneBackAllTrialsFinished();
+                    GLOBAL.oneBackTask.view.removeChildren();
+                    GLOBAL.oneBackTask.view.showFinalResults();
+                }
+            };
+
+
+            GLOBAL.state.CALLoneBackToComplete = function () {
+                GLOBAL.state.oneBackToComplete();
+//                GLOBAL.stage.removeChild(GLOBAL.oneBackTask.view);
+                //console.log("CALLED");
+                GLOBAL.currentView = new GLOBAL.Menu();
                 GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
 
@@ -233,47 +369,25 @@
 
 
         keyPressed: function (event) {
-            GLOBAL.lastKeyPressed = event.keyIdentifier;
-            GLOBAL.currentView.keyPressed();
-            GLOBAL.stage.update();
-        },
+
 //
-//        HSVtoRGB: function (h, s, v) {
-//            var r, g, b, i, f, p, q, t;
-//            if (h && s === undefined && v === undefined) {
-//                s = h.s, v = h.v, h = h.h;
-//            }
-//            i = Math.floor(h * 6);
-//            f = h * 6 - i;
-//            p = v * (1 - s);
-//            q = v * (1 - f * s);
-//            t = v * (1 - (1 - f) * s);
-//            switch (i % 6) {
-//                case 0:
-//                    r = v, g = t, b = p;
-//                    break;
-//                case 1:
-//                    r = q, g = v, b = p;
-//                    break;
-//                case 2:
-//                    r = p, g = v, b = t;
-//                    break;
-//                case 3:
-//                    r = p, g = q, b = v;
-//                    break;
-//                case 4:
-//                    r = t, g = p, b = v;
-//                    break;
-//                case 5:
-//                    r = v, g = p, b = q;
-//                    break;
-//            }
-//            return {
-//                r: Math.floor(r * 255),
-//                g: Math.floor(g * 255),
-//                b: Math.floor(b * 255)
-//            }
-//        }
+//            console.log('hi',GLOBAL.keyboardListener);
+//            GLOBAL.keyboardListener.simple_combo("space", function() {
+//                GLOBAL.lastKeyPressed = 'space';
+//                GLOBAL.currentView.keyPressed();
+//                GLOBAL.stage.update();
+//            });
+////
+////
+//            GLOBAL.keyboardListener.simple_combo("s", function() {
+//                GLOBAL.lastKeyPressed = 's';
+//                GLOBAL.currentView.keyPressed();
+//                GLOBAL.stage.update();
+//            });
+
+
+        },
+
 
     };
 
