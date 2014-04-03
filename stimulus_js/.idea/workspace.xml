@@ -12,6 +12,7 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game/ArrowView.js" afterPath="$PROJECT_DIR$/js/game/ArrowView.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game/Button.js" afterPath="$PROJECT_DIR$/js/game/Button.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game/IntroView.js" afterPath="$PROJECT_DIR$/js/game/IntroView.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/game/MenuView.js" afterPath="$PROJECT_DIR$/js/game/MenuView.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/manifest.json" afterPath="$PROJECT_DIR$/assets/manifest.json" />
     </list>
@@ -36,10 +37,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="69" selection-start="644" selection-end="644" vertical-scroll-proportion="0.3" vertical-offset="210" max-vertical-offset="3495">
+            <state line="13" column="69" selection-start="644" selection-end="644" vertical-scroll-proportion="-0.025951557" vertical-offset="210" max-vertical-offset="3495">
               <folding />
             </state>
           </provider>
@@ -74,10 +75,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="IntroView.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="IntroView.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js/game/IntroView.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="68" selection-start="1795" selection-end="1795" vertical-scroll-proportion="1.4634147" vertical-offset="0" max-vertical-offset="3795">
+            <state line="74" column="0" selection-start="2283" selection-end="2283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3795">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MenuView.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/game/MenuView.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="0" selection-start="2272" selection-end="2824" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1845">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Menu.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/js/game/Menu.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
               <folding />
             </state>
           </provider>
@@ -116,7 +135,6 @@
         <option value="$PROJECT_DIR$/js/game/PreloadJSManifest.json" />
         <option value="$PROJECT_DIR$/js/game/Menu.js" />
         <option value="$PROJECT_DIR$/js/game/Intro.js" />
-        <option value="$PROJECT_DIR$/js/game/MenuView.js" />
         <option value="$PROJECT_DIR$/js/game/ModifierTaskView.js" />
         <option value="$PROJECT_DIR$/js/game/ModifierView.js" />
         <option value="$PROJECT_DIR$/js/game/ModifierTask.js" />
@@ -129,6 +147,7 @@
         <option value="$PROJECT_DIR$/js/game/IntroView.js" />
         <option value="$PROJECT_DIR$/js/game/1BackTaskView.js" />
         <option value="$PROJECT_DIR$/js/game/ArrowTask.js" />
+        <option value="$PROJECT_DIR$/js/game/MenuView.js" />
       </list>
     </option>
   </component>
@@ -618,11 +637,6 @@
         <state line="29" column="34" selection-start="0" selection-end="5034" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2730" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js/game/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/game/ModifierTaskView.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="3" column="71" selection-start="108" selection-end="108" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210" />
@@ -649,13 +663,6 @@
           <folding>
             <element signature="n#!!doc" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/js/game/MenuView.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="73" selection-start="1551" selection-end="1575" vertical-scroll-proportion="0.4814189" vertical-offset="360" max-vertical-offset="1845">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -716,13 +723,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="69" selection-start="644" selection-end="644" vertical-scroll-proportion="0.3" vertical-offset="210" max-vertical-offset="3495">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/js/game/ArrowTask.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="127" column="118" selection-start="4217" selection-end="4217" vertical-scroll-proportion="-35.27778" vertical-offset="0" max-vertical-offset="6075">
@@ -748,7 +748,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/js/game/IntroView.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="68" selection-start="1795" selection-end="1795" vertical-scroll-proportion="1.4634147" vertical-offset="0" max-vertical-offset="3795">
+        <state line="74" column="0" selection-start="2283" selection-end="2283" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3795">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/game/Menu.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js/game/MenuView.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="0" selection-start="2272" selection-end="2824" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1845">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="69" selection-start="644" selection-end="644" vertical-scroll-proportion="-0.025951557" vertical-offset="210" max-vertical-offset="3495">
           <folding />
         </state>
       </provider>
