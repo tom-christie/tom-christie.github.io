@@ -53,7 +53,13 @@
             .to({scaleY:0, y:this.playButton.image.height/2 })
             .wait(1000)
             .to({scaleY:1,  y:0}, 300);
-
+        buttonClickArea = new createjs.Shape();
+        buttonClickArea.graphics
+            .beginFill("#FFF")
+                .drawRect(this.playButton.x, this.playButton.y, this.playButton.image.width, this.playButton.image.height);
+        buttonClickArea.alpha = 0.01;
+        this.addChild(buttonClickArea);
+        buttonClickArea.on("click", this.tweenOut.bind(this));
         createjs.Tween.tick(1);
 
         this.changeMeterListener = this.on("increased_meter", this.handleMeterChange.bind(this)); //listen for finished tweening
@@ -95,6 +101,19 @@
             this.addChild(this.weaponMeters[i]);
         }
     };
+
+
+    p.tweenOut = function(){
+        createjs.Tween.get(this)
+            .to({y: GAME.GameCanvas.height / 2, scaleY: .01}, 100)
+            .wait(100)
+            .to({x: GAME.GameCanvas.width / 2, scaleX: .001}, 70);
+//            .wait(50)
+//            .to({y: 0, scaleY: 1}, 100)
+//            .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
+
+    };
+
 
     p.update = function () {
         var i;
