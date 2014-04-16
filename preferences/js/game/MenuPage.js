@@ -125,15 +125,15 @@
         fnToCall();
     };
 //
-//    p.update = function () {
-//        //nothing changes
+    p.update = function () {
+        //nothing changes
+
+    };
 //
-//    };
-//
-//    p.draw = function () {
-//        //nothing changes
-//
-//    };
+    p.render = function () {
+        //nothing changes
+
+    };
 
     scope.MenuPage = MenuPage;
 

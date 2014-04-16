@@ -121,9 +121,14 @@
 
     p.update = function () {
         var i;
+        try{
         for (i = 0; i < 7; i++) {
             this.weaponMeters[i].update();
         }
+        }catch(e){
+            //we expect this to fail before they're done being drawn, so just do nothing
+        }
+
     };
 
     p.render = function () {
