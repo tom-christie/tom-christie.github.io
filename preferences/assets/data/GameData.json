@@ -1,0 +1,43 @@
+{
+    "width": 800,
+    "height": 480,
+    "backgroundColor": "#34AADC",
+    "menuButtonColor": "#FFCC00",
+    "menuButtonColorMouseover": "#FF9500",
+    "introRegionColor": "#4CD964",
+    "introButtonColor": "#FFCC00",
+    "introButtonColorMouseover": "#FF9500",
+    "arrowInnerColor": "#ff9300",
+    "arrowOuterColor": "#2d2d2d",
+    "arrowColor": "#2d2d2d",
+    "scorecardCorrectColor": "#a3e785",
+    "scorecardIncorrectColor": "#fe3b30",
+    "scorebardBorderColor": "#333333",
+    "scorecardDigitColor": "#333333",
+
+    "scorecardWidth": 150,
+    "scorecardHeight": 150,
+    "scorecardDigitSize": 90,
+
+    "timerUnfilledColor": "#8E8E93",
+    "timerFilledColor": "#4A4A4A",
+    "timerWidth": 300,
+    "timerHeight": 20,
+
+    "oneBackDuration": 60,
+    "oneBackTrialCount": 60,
+
+
+    "TILE_INDEX_WALKABLE": 17,
+    "TILE_INDEX_BLOCKED": 18,
+    "TILE_INDEX_SPAWN": 19,
+    "TILE_INDEX_GOAL": 20,
+    "TILE_INDEX_BUILDABLE": 21,
+    "TILE_INDEX_BUILTUPON": 6,
+
+
+    "numGoons":50,
+    "numBullets":200,
+    "numTowers":20
+
+}
