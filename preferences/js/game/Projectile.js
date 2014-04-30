@@ -81,7 +81,7 @@
         if(this.x < 0 || this.x > GAME.currentPage.width || this.y < 0 || this.y > (GAME.currentPage.height-100)){
             this.removeChild(this.laser);
             GAME.currentPage.removeChild(this);
-            //this.visible = false;
+            this.visible = false;
             log("DYING - off screen")
         }
         //console.log("dist",GAME.currentPage.goons[0]);
@@ -89,7 +89,7 @@
         for (var i = 0; i < GAME.currentPage.goons.length; i++) {
             if ( this.distanceTo(GAME.currentPage.goons[i]) < this.hitThreshold) {
                 this.removeChild(this.laser);
-                //this.visible = false;
+                this.visible = false;
                 log("DYING")
             }
             //log(this.distanceTo(GAME.currentPage.goons[i]));
