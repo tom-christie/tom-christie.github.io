@@ -50,7 +50,7 @@
         if(  GAME.currentPage.goons.length > 0 && this.distToGoon > this.radius){
             //go through in order, picking the first that's within radius
             for(i=0; i<GAME.currentPage.goons.length; i++){
-                if(this.distanceTo(GAME.currentPage.goons[i]) < this.radius){
+                if(this.distanceTo(GAME.currentPage.goons[i]) < this.radius && GAME.currentPage.goons[i].visible){
                     this.goon_to_shoot_index = i;
                     //fire!
                     this.fire();
@@ -63,6 +63,8 @@
         if(GAME.currentPage.goons.length > 0 && this.distToGoon < this.radius){
             this.distToGoon = this.distanceTo(GAME.currentPage.goons[this.goon_to_shoot_index]);
         }
+
+
 
 
     };
@@ -81,8 +83,8 @@
 //                .endStroke();
 
             this.lastFiredTime = createjs.Ticker.getTime();
-
-            GAME.currentPage.projectileMagazine.fireProjectile(from_x,from_y,to_x,to_y);
+            var weapon_type = Math.floor(Math.random()*7);
+            GAME.currentPage.projectileMagazine.fireProjectile(from_x,from_y,to_x,to_y, weapon_type);
         }
     };
 

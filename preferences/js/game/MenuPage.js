@@ -6,24 +6,28 @@
 
 (function (scope) {
 
-    function MenuPage() {
-        //GAME.Page.call(this);
-        createjs.Container.call(this);
+//    function MenuPage() {
+//        //GAME.Page.call(this);
+//        createjs.Container.call(this);
+//        this.setup();
+//    }
+//
+//
+////    inheritPrototype(MenuPage, GAME.Page);
+//    inheritPrototype(MenuPage,createjs.Container);
+//
+
+    var MenuPage = function () {
         this.setup();
-    }
+    };
 
-
-//    inheritPrototype(MenuPage, GAME.Page);
-    inheritPrototype(MenuPage,createjs.Container);
-
-
-    ///////////////////////////////////////
-    // define new functions as necessary //
-    ///////////////////////////////////////
+    MenuPage.prototype = new createjs.Container();
     var p = MenuPage.prototype;
+    MenuPage.prototype.Container_initialize = p.initialize;
+
 
     p.setup = function () {
-
+        p.Container_initialize();
 
 
         if (GAME.debugmode)
@@ -31,12 +35,14 @@
 
         //background
         this.background = new createjs.Bitmap(GAME.assets.getResult("MENU_background"));
+        this.background.x = GAME.GameCanvas.width/2-this.background.image.width/2
+        this.background.y = GAME.GameCanvas.height/2-this.background.image.height/2;
         this.addChild(this.background);
 
         createjs.Tween.get(this.background)
             .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
             .wait(300)
-            .to({x: 0, scaleX: 1}, 70)
+            .to({x:this.background.x, scaleX: 1}, 70)
             .wait(50)
             .to({y: 0, scaleY: 1}, 100);
 

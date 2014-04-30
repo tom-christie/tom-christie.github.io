@@ -43,13 +43,14 @@
     };
 
     p.fire = function (from_x, from_y, to_x, to_y, color_index) {
+        this.color_index = color_index;
         this.visible = true;
         //set initial coordinates
         this.x = from_x;
         this.y = from_y;
-        console.log('fire',from_x,from_y,to_x,to_y);
+        //console.log('fire',from_x,from_y,to_x,to_y);
         //set from and to coordinates, as well as color
-        this.laser = this.white;
+        this.laser = this.laser_images[this.color_index];
         //console.log('laser',laser, this.white, GAME.assets)
         //make it so the x and y coordinates refer to the center rather than the top left edge
 
@@ -60,8 +61,6 @@
         this.rotation = this.angle * 360/(2*Math.PI);
         this.dx = this.speed * Math.cos(this.angle);
         this.dy = this.speed * Math.sin(this.angle);
-
-
 
         this.addChild(this.laser);
 
@@ -82,7 +81,7 @@
             this.removeChild(this.laser);
             GAME.currentPage.removeChild(this);
             this.visible = false;
-            log("DYING - off screen")
+            //log("DYING - off screen")
         }
         //console.log("dist",GAME.currentPage.goons[0]);
         //go through each goon, and if you're close enough, die
@@ -90,7 +89,10 @@
             if ( this.distanceTo(GAME.currentPage.goons[i]) < this.hitThreshold) {
                 this.removeChild(this.laser);
                 this.visible = false;
-                log("DYING")
+
+                //tell goon he was hit
+                GAME.currentPage.goons[i].hitBy(this.color_index);
+
             }
             //log(this.distanceTo(GAME.currentPage.goons[i]));
         }

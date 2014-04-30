@@ -35,9 +35,29 @@
 
         this.sprite = new createjs.Sprite(this.spriteSheet, "move_right");
         this.frame = 0;
-        //not adding here for some reason
         this.addChild(this.sprite);
 
+
+        this.explosionSpriteSheet = new createjs.SpriteSheet({
+            "animations": {
+                "explode": [0, 16]
+            },
+            "images": [GAME.assets.getResult("explosion")],
+            "frames": {
+                "height": 64,
+                "width": 64,
+                "regX": 0,
+                "regY": 0,
+                "count": 316
+            }
+        });
+        this.explosionSprite = new createjs.Sprite(this.explosionSpriteSheet, "explode");
+
+        this.explosionSprite.on("animationend", handleAnimationEnd.bind(this));
+        function handleAnimationEnd(event) {
+            this.removeChild(this.explosionSprite);
+            this.visible = false;
+        }
 
         //make health bar
         this.healthbar_red = new createjs.Shape();
@@ -61,12 +81,13 @@
         this.destinationX = null;
         this.destinationY = null;
         this.currentAnimation = null;
-
+        this.visible = false;
 
     };
 
 
     p.spawn = function (x, y) {
+        this.visible = true;
         this.x_original = x;
         this.y_original = y;
         this.x = x;
@@ -75,6 +96,8 @@
         this.active = true;
         this.dead = false;
         this.dying = false;
+
+        this.health = 100;
     };
 
     p.update = function () {
@@ -146,6 +169,24 @@
         return (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) <= dist);
     };
 
+    p.hitBy = function(color_index){
+        this.health -= 5;
+        if(this.health <= 0){
+            this.die();
+        }
+        this.healthbar_green.graphics.clear()
+            .beginFill("#0F0")
+            .drawRoundRect(0, 0, 32*(this.health/100), 5, 2);
+    };
+
+    p.die = function(){
+        this.removeChild(this.sprite);
+        this.removeChild(this.healthbar_green);
+        this.removeChild(this.healthbar_red);
+        this.addChild(this.explosionSprite);
+        this.explosionSprite.gotoAndPlay("explode");
+        //don't make invisible till the explosion is over!
+    };
 
     scope.Goon = Goon;
 }(window.GAME));

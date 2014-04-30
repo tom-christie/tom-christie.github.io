@@ -42,9 +42,9 @@
         createjs.Tween.get(this.background)
             .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
             .wait(300)
-            .to({x: 0, scaleX: 1}, 70)
+            .to({x: this.background.x, scaleX: 1}, 70)
             .wait(50)
-            .to({y: 0, scaleY: 1}, 100)
+            .to({y: this.background.y, scaleY: 1}, 100)
             .call(this.drawWeaponMeters, null, this);
 
 

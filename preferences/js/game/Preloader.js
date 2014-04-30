@@ -70,7 +70,8 @@
             {"id":"laser_cyan", "src": "assets/images/projectile_cyan.png"},
             {"id":"laser_blue", "src": "assets/images/projectile_blue.png"},
             {"id":"laser_purple", "src": "assets/images/projectile_purple.png"},
-            {"id":"laser_white", "src": "assets/images/projectile_white.png"}
+            {"id":"laser_white", "src": "assets/images/projectile_white.png"},
+            {"id":"explosion", "src": "assets/images/explosion.png"}
 
 
         ],
