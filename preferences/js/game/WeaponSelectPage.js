@@ -33,6 +33,10 @@
 
         //background
         this.background = new createjs.Bitmap(GAME.assets.getResult("WEAPON_SELECT_background"));
+
+        //TODO trying to center the background image - isn't working!
+        this.background.x = GAME.GameCanvas.width/2 - this.background.image.width/2;
+        this.background.y = GAME.GameCanvas.height/2 - this.background.image.height/2;
         this.addChild(this.background);
 
         createjs.Tween.get(this.background)
@@ -111,7 +115,8 @@
         createjs.Tween.get(this)
             .to({y: GAME.GameCanvas.height / 2, scaleY: .01}, 100)
             .wait(100)
-            .to({x: GAME.GameCanvas.width / 2, scaleX: .001}, 70);
+            .to({x: GAME.GameCanvas.width / 2, scaleX: .001}, 70)
+            .call(GAME.state.show_playback());
 //            .wait(50)
 //            .to({y: 0, scaleY: 1}, 100)
 //            .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
@@ -139,8 +144,6 @@
     scope.WeaponSelectPage = WeaponSelectPage;
 
 
-//
-//
     function WeaponMeter(index, totalCount) {//x,y,height,width) {
         createjs.Container.call(this);
         this.index = index;
@@ -196,7 +199,7 @@
                 this.shape.graphics.clear()
                     .setStrokeStyle(this.strokeWidth)
                     .beginStroke("#474e4f")
-                    .drawRoundRect(0, evt.target.target.y, this.width, evt.target.target.height + this.cellBuffer, this.radius); //with respect to the shape bounds
+                    .drawRect(0, evt.target.target.y, this.width, evt.target.target.height + this.cellBuffer, this.radius); //with respect to the shape bounds
 
                 this.cellHolder.graphics.clear()
                     .setStrokeStyle(0)

@@ -58,11 +58,21 @@
 
             //multimedia assets
             {"id": "background_level1", "src": "assets/images/level1.png"},
-            {"id": "MENU_background", "src": "assets/images/titlebackground.png"},
-            {"id": "MENU_select_screen", "src":"assets/images/level-select-screen.png"},
+            {"id": "MENU_background", "src": "assets/images/weapon-select-screen.png"},
+            {"id": "MENU_select_screen", "src":"assets/images/level-select-screen_modern.png"},
             {"id": "WEAPON_SELECT_background", "src":"assets/images/weapon-select-screen.png"},
             {"id": "play_button", "src":"assets/images/play.png"},
-            {"id":"goon1", "src": "assets/images/unit1.png"}
+            {"id":"goon1", "src": "assets/images/unit1.png"},
+            {"id":"tower", "src": "assets/images/tower.png"},
+            {"id":"laser_red", "src": "assets/images/projectile_red.png"},
+            {"id":"laser_yellow", "src": "assets/images/projectile_yellow.png"},
+            {"id":"laser_green", "src": "assets/images/projectile_green.png"},
+            {"id":"laser_cyan", "src": "assets/images/projectile_cyan.png"},
+            {"id":"laser_blue", "src": "assets/images/projectile_blue.png"},
+            {"id":"laser_purple", "src": "assets/images/projectile_purple.png"},
+            {"id":"laser_white", "src": "assets/images/projectile_white.png"}
+
+
         ],
 
         handleProgress: function (evt) {

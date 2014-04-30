@@ -424,6 +424,7 @@ EasyStar.js = function() {
 			callback([]);
 		}
 
+
 		//End point is not an acceptable tile.
 		var endTile = collisionGrid[endY][endX];
 		var isAcceptable = false;
@@ -438,7 +439,6 @@ EasyStar.js = function() {
 			callback(null);
 			return;
 		}
-
 		//Create the instance
 		var instance = new EasyStar.instance();
 		instance.openList = new EasyStar.PriorityQueue("bestGuessDistance",EasyStar.PriorityQueue.MIN_HEAP);
@@ -454,6 +454,7 @@ EasyStar.js = function() {
 			instance.startY, null, STRAIGHT_COST));
 		
 		instances.push(instance);
+
 	};
 
 	/**
@@ -463,9 +464,11 @@ EasyStar.js = function() {
 	* easystar.setIteratonsPerCalculation().
 	**/
 	this.calculate = function() {
+
 		if (instances.length === 0 || collisionGrid === undefined || acceptableTiles === undefined) {
 			return;
 		}
+
 		for (iterationsSoFar = 0; iterationsSoFar < iterationsPerCalculation; iterationsSoFar++) {
 			if (instances.length === 0) {
 				return;
@@ -477,7 +480,6 @@ EasyStar.js = function() {
 				instances.shift();
 				continue;
 			}
-
 			var searchNode = instances[0].openList.shiftHighestPriorityElement();
 			searchNode.list = EasyStar.Node.CLOSED_LIST;
 

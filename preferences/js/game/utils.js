@@ -9,6 +9,14 @@ function log(str) {
     console.log(str);
 }
 
+stupid = 1;
+function distanceBetween(obj1, obj2){
+    try{
+    return Math.sqrt( Math.pow(obj1.x - obj2.x ,2) + Math.pow(obj1.y - obj2.y ,2) );
+    } catch(err){
+        if(stupid){console.log('uh oh',obj1,obj2); stupid=0;}
+    }
+}
 
 /*
  * inheritance helper function

@@ -437,7 +437,7 @@ function TowerGameStarterKit() {
 	var entities; // a sprite list filled with entities
 	var teams = []; // an array of spritelists, index is team number
 	var healthbarsprites; // used and updated by entities
-	var healthbarImage = []; // an array of images shared by all healthbar sprites
+	var healthbarImage = []; // an array of images shared by all healthbar_green sprites
 	var HEALTHBAROFFSET = -28; // pixels offset in Y from parent entity
 
 	var towerImages = []; // three images used for building towers in spawnEntity()
@@ -2064,7 +2064,7 @@ function TowerGameStarterKit() {
 		updateGUIsprites(HealthGUI, player_Health);
 		startParticleSystem(nme.x, nme.y, particleGOAL);
 		nme.active = false;
-		// destroy this entity and its healthbar and team affiliation etc
+		// destroy this entity and its healthbar_green and team affiliation etc
 		removeEntity(nme);
 		// fixme: maybe the door is an entity and we need to get its hp down?
 		checkLevelComplete();
@@ -2087,7 +2087,7 @@ function TowerGameStarterKit() {
 
 		//if (debugmode) log("entityAI for an entity with speed " + nme.speed);
 
-		// move the healthbar
+		// move the healthbar_green
 		if (nme.healthbarsprite) {
 			nme.healthbarsprite.moveTo(nme.x, nme.y + HEALTHBAROFFSET);
 			//nme.healthbarsprite.setImage(healthbarImage[0]); // only change when damaged!
@@ -2143,7 +2143,7 @@ function TowerGameStarterKit() {
 							nme.alpha = 0.5; // slightly transparent
 							// stop checking collisions
 							teams[nme.team].remove(nme);
-							// stop drawing its healthbar
+							// stop drawing its healthbar_green
 							if (nme.healthbarsprite)
 								healthbarsprites.remove(nme.healthbarsprite);
 							// check if we completed the level (eg all badguys destroyed?) fixme todo: maybe just current ones: waves
@@ -2472,10 +2472,10 @@ function TowerGameStarterKit() {
 				anchor : "center_bottom"
 			});
 
-		// we can reuse some healthbar sprites
+		// we can reuse some healthbar_green sprites
 		if (!healthbarImage.length) {
 			if (debugmode)
-				log('Lazy init healthbar images');
+				log('Lazy init healthbar_green images');
 			healthbarImage[0] = chopImage(jaws.assets.get("entities.png"), 32, 0, 32, 8);
 			healthbarImage[1] = chopImage(jaws.assets.get("entities.png"), 32, 8, 32, 8);
 			healthbarImage[2] = chopImage(jaws.assets.get("entities.png"), 32, 16, 32, 8);
@@ -2597,7 +2597,7 @@ function TowerGameStarterKit() {
 		entities.remove(victim);
 		// stop checking collisions
 		teams[victim.team].remove(victim);
-		// stop drawing its healthbar
+		// stop drawing its healthbar_green
 		if (victim.healthbarsprite)
 			healthbarsprites.remove(victim.healthbarsprite);
 		// check if we completed the level (eg all badguys destroyed?) fixme todo: maybe just current ones: waves
@@ -2646,7 +2646,7 @@ function TowerGameStarterKit() {
 		victim.alpha = 0.5; // slightly transparent
 		// stop checking collisions
 		teams[victim.team].remove(victim);
-		// stop drawing its healthbar
+		// stop drawing its healthbar_green
 		if (victim.healthbarsprite) healthbarsprites.remove(victim.healthbarsprite);
 		// check if we completed the level (eg all badguys destroyed?) fixme todo: maybe just current ones: waves
 		checkLevelComplete();

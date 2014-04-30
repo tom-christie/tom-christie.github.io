@@ -77,40 +77,33 @@
                 log(asset)
                 GAME.settings[asset] = GAME.assets._loadedResults.manifest[asset];
             }
-
-            //set up state space
-            this.initStates();
+            GAME.settings.TILESIZEDIV2 = (GAME.settings.TILESIZE / 2) | 0; //0 just forces integer type?
 
             //add ticker
             createjs.Ticker.setFPS(30);
             createjs.Ticker.addEventListener('tick', this.onTick.bind(this));//callback function for what to do on each tick
 
-            log(GAME.settings)
-            //create objects - maybe do some earlier if this takes a long time?
-            GAME.goonArray = new Array();
-            for(i = 0; i<GAME.settings.numGoons; i++){
-                GAME.goonArray.push(new GAME.Goon());
-            }
+            //precreate all projectiles for speed during the game
 
-            GAME.towerArray = new Array();
-            for(i = 0; i<GAME.settings.numTowers; i++){
-                GAME.towerArray.push(new GAME.Tower());
-            }
-            GAME.projectileArray = new Array();
-            for(i = 0; i<GAME.settings.numProjectiles; i++){
-                GAME.projectileArray.push(new GAME.Projectile());
-            }
+
+
+            GAME.AI = new GAME.AI();
+
+
+            //set up state space
+            this.initStates();
 
             /////////testing
+
+
 
 
 //
 ////
 ////            // calculate pathfinding costs
-//            GAME.AI = new GAME.AI();
 //            var level = new GAME.LevelPage();
 //            level.setup();
-////            AI.newGrid(leveldata.layers[1].data, leveldata.width, leveldata.height);
+
 ////
 ////
 
@@ -129,7 +122,7 @@
                     {name: 'startup', from: 'none', to: 'MENU'},
                     {name: 'select_weapons', from: 'MENU', to: 'SELECT_WEAPONS'},
                     {name: 'select_playback', from: 'MENU', to: 'SELECT_PLAYBACK'}, //show options of which to play back
-                    {name: 'show_playback', from: 'MENU', to: 'SHOW_PLAYBACK'} //actually show an option
+                    {name: 'show_playback', from: ['SELECT_WEAPONS','MENU'], to: 'SHOW_PLAYBACK'}, //actually show an option
                 ],
 
                 callbacks: {
@@ -151,6 +144,7 @@
                     },
 
                     onSHOW_PLAYBACK: function (event, from, to, msg) {
+
                         GAME.stage.removeAllChildren();
                         GAME.currentPage = new GAME.LevelPage();
                         GAME.stage.addChild(GAME.currentPage);

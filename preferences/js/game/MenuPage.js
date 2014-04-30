@@ -43,7 +43,6 @@
 //
 //        //menu
         this.menu = new createjs.Bitmap(GAME.assets.getResult("MENU_select_screen"));
-        this.addChild(this.menu);
         this.menu.x = GAME.GameCanvas.width / 2 - this.menu.image.width / 2;
         this.menu.y = GAME.GameCanvas.height / 2 - this.menu.image.height / 2;
         createjs.Tween.get(this.menu)
@@ -54,7 +53,28 @@
             .to({y: this.menu.y, scaleY: 1}, 100);
         createjs.Tween.tick(1);
 
-        this.menu.on("click", this.handleMenuClick.bind(this));
+
+        //hitarea has to be added last so it's on top
+        var hitArea = new createjs.Shape();
+        hitArea.graphics.beginFill("#FFF")
+            .drawRoundRect(GAME.GameCanvas.width / 2 - this.menu.image.width / 2,
+                GAME.GameCanvas.height / 2 - this.menu.image.height / 2,
+                this.menu.image.width,
+                this.menu.image.height,5);// this.menu.image.width, this.menu.image.height, this.radius); //with respect to the shape bounds
+        hitArea.alpha = 0.01;
+        this.addChild(hitArea);
+        this.addChild(this.menu);
+
+        //handle click
+//        this.cellHolder.on("click",this.handleClick.bind(this));
+//        hitArea.on("mouseover", this.handleMouseOver.bind(this));
+        //hitArea.on("mouseout", this.handleMouseOut.bind(this));
+        hitArea.on("click", this.handleMenuClick.bind(this));
+        //hitArea.on("mousedown", this.handleMouseDown.bind(this));
+
+
+
+        //this.menu.on("click", this.handleMenuClick.bind(this));
 //
 //        // used only for the particle decorations
 //        var titleframecount = 0;
@@ -83,7 +103,9 @@
     };
 
     p.handleMenuClick = function (evt) {
+        console.log(evt);
 
+        //todo make this so you don't have to click on the exact letters!!!
         var pt = this.menu.globalToLocal(evt.stageX, evt.stageY);
         if (pt.x < this.menu.image.width / 2 && pt.y < this.menu.image.height / 2) {
             //1 selected
@@ -91,7 +113,7 @@
             this.tweenOutSelf(GAME.state.CALLselect_weapons);
         } else if (pt.x >= this.menu.image.width / 2 && pt.y < this.menu.image.height / 2) {
             //2 selected
-            GAME.state.select_playback();
+            //GAME.state.select_playback();
         } else if (pt.x < this.menu.image.width / 2 && pt.y >= this.menu.image.height / 2) {
             //3 selected
             GAME.state.show_playback();

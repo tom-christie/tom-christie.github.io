@@ -2,7 +2,7 @@
  "layers":[
         {
          "height":24,
-         "image":"..\/images\/background_lava.png",
+         "image":"background_lava.png",
          "name":"background",
          "opacity":1,
          "type":"imagelayer",
@@ -47,7 +47,7 @@
         }, 
         {
          "firstgid":17,
-         "image":"..\/images\/AI-DATA-100.png",
+         "image":"AI-DATA-100.png",
          "imageheight":100,
          "imagewidth":100,
          "margin":0,
