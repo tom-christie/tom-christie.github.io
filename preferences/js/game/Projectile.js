@@ -29,32 +29,32 @@
         this.cyan = new createjs.Bitmap(GAME.assets.getResult("laser_cyan"));
         this.purple = new createjs.Bitmap(GAME.assets.getResult("laser_purple"));
         this.white = new createjs.Bitmap(GAME.assets.getResult("laser_white"));
-        this.laser_images = [this.red,
-            this.yellow,
-            this.green,
-            this.blue,
-            this.cyan,
-            this.purple,
-            this.white];
+        this.lasers = {"red":this.red,
+            "yellow":this.yellow,
+            "green":this.green,
+            "blue":this.blue,
+            "cyan":this.cyan,
+            "purple":this.purple,
+            "white":this.white};
 
         //keeps track of whether it's showing or not!
         this.visible = false;
 
     };
 
-    p.fire = function (from_x, from_y, to_x, to_y, color_index) {
-        this.color_index = color_index;
+    p.fire = function (from_x, from_y, to_x, to_y, color) {
+        this.color = color;
         this.visible = true;
         //set initial coordinates
         this.x = from_x;
         this.y = from_y;
         //console.log('fire',from_x,from_y,to_x,to_y);
         //set from and to coordinates, as well as color
-        this.laser = this.laser_images[this.color_index];
+        this.laser = this.lasers[color];
         //console.log('laser',laser, this.white, GAME.assets)
         //make it so the x and y coordinates refer to the center rather than the top left edge
 
-        this.laser.x = -this.laser.image.width / 2;
+        this.laser.x = 0;//-this.laser.image.width / 2;
         this.laser.y = -this.laser.image.height / 2;
 
         this.angle = Math.atan2(to_y  - from_y,to_x - from_x);
@@ -91,7 +91,7 @@
                 this.visible = false;
 
                 //tell goon he was hit
-                GAME.currentPage.goons[i].hitBy(this.color_index);
+                GAME.currentPage.goons[i].hitBy(this.color);
 
             }
             //log(this.distanceTo(GAME.currentPage.goons[i]));
@@ -100,9 +100,12 @@
     };
 
     p.distanceTo = function (obj) {
+        if(obj.alive){
         var dist = Math.sqrt(Math.pow(this.x - (obj.x + obj.width/2), 2) + Math.pow(this.y - (obj.y + obj.height/2), 2));
         //console.log('what',this,obj, dist)
-
+        }else{
+            var dist = 1000000;
+        }
         return dist;
     };
 
@@ -128,12 +131,12 @@
             }
         },
 
-        fireProjectile: function (from_x, from_y, to_x, to_y, color_index) {
+        fireProjectile: function (from_x, from_y, to_x, to_y, color) {
             var i;
             //find first one that isn't
             for (i = 0; i < this.numProjectiles; i++) {
                 if (!this.projectileArray[i].visible) {
-                    this.projectileArray[i].fire(from_x, from_y, to_x, to_y, color_index);
+                    this.projectileArray[i].fire(from_x, from_y, to_x, to_y, color);
                     GAME.currentPage.addChild(this.projectileArray[i]); //adding to the current page...
                     break;
                 }

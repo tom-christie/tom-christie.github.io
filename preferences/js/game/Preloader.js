@@ -47,8 +47,8 @@
             {"src": "js/game/UI.js"},
             {"src": "js/game/AI.js"},
             {"src": "js/game/utils.js"},
-            {"src": "js/game/Page.js"},
             {"src": "js/game/MenuPage.js"},
+            {"src": "js/game/Crystal.js"},
             {"src": "js/game/LevelPage.js"},
             {"src": "js/game/WeaponSelectPage.js"},
             {"src": "js/game/Goon.js"},
@@ -71,7 +71,31 @@
             {"id":"laser_blue", "src": "assets/images/projectile_blue.png"},
             {"id":"laser_purple", "src": "assets/images/projectile_purple.png"},
             {"id":"laser_white", "src": "assets/images/projectile_white.png"},
-            {"id":"explosion", "src": "assets/images/explosion.png"}
+            {"id":"explosion", "src": "assets/images/explosion.png"},
+
+            {"id":"crystal_blue_16", "src": "assets/images/crystal_blue_16.png"},
+            {"id":"crystal_blue_32", "src": "assets/images/crystal_blue_32.png"},
+            {"id":"crystal_cyan_16", "src": "assets/images/crystal_cyan_16.png"},
+            {"id":"crystal_cyan_32", "src": "assets/images/crystal_cyan_32.png"},
+            {"id":"crystal_green_16", "src": "assets/images/crystal_green_16.png"},
+            {"id":"crystal_green_32", "src": "assets/images/crystal_green_32.png"},
+            {"id":"crystal_purple_16", "src": "assets/images/crystal_purple_16.png"},
+            {"id":"crystal_purple_32", "src": "assets/images/crystal_purple_32.png"},
+            {"id":"crystal_red_16", "src": "assets/images/crystal_red_16.png"},
+            {"id":"crystal_red_32", "src": "assets/images/crystal_red_32.png"},
+            {"id":"crystal_yellow_16", "src": "assets/images/crystal_yellow_16.png"},
+            {"id":"crystal_yellow_32", "src": "assets/images/crystal_yellow_32.png"},
+            {"id":"crystal_white_16", "src": "assets/images/crystal_white_16.png"},
+            {"id":"crystal_white_32", "src": "assets/images/crystal_white_32.png"},
+
+            {"id":"tower_blue", "src": "assets/images/tower_blue.png"},
+            {"id":"tower_cyan", "src": "assets/images/tower_cyan.png"},
+            {"id":"tower_green", "src": "assets/images/tower_green.png"},
+            {"id":"tower_purple", "src": "assets/images/tower_purple.png"},
+            {"id":"tower_red", "src": "assets/images/tower_red.png"},
+            {"id":"tower_white", "src": "assets/images/tower_white.png"},
+            {"id":"tower_yellow", "src": "assets/images/tower_yellow.png"}
+
 
 
         ],
@@ -169,7 +193,7 @@
         },
 
         handlePreloadError: function (evt) {
-            log('loading error',evt);
+            console.log('loading error',evt);
 
         }
 

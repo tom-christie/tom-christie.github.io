@@ -144,9 +144,8 @@
                     },
 
                     onSHOW_PLAYBACK: function (event, from, to, msg) {
-
                         GAME.stage.removeAllChildren();
-                        GAME.currentPage = new GAME.LevelPage();
+                        GAME.currentPage = new GAME.LevelPage(); //this is messing up
                         GAME.stage.addChild(GAME.currentPage);
                     },
 
@@ -156,7 +155,7 @@
 
 
                         //FOR DEBUG
-                        //GAME.state.show_playback();
+                        GAME.state.show_playback();
 
                     },
 

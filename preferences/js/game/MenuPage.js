@@ -44,7 +44,7 @@
             .wait(300)
             .to({x:this.background.x, scaleX: 1}, 70)
             .wait(50)
-            .to({y: 0, scaleY: 1}, 100);
+            .to({y: this.background.y, scaleY: 1}, 100);
 
 //
 //        //menu

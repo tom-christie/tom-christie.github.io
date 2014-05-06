@@ -6,8 +6,8 @@
 
 (function (scope) {
 
-    var Tower = function (x,y) {
-        this.setup(x,y);
+    var Tower = function (x,y,color) {
+        this.setup(x,y,color);
     };
 
     Tower.prototype = new createjs.Container();
@@ -15,15 +15,14 @@
     Tower.prototype.Container_initialize = p.initialize;
 
 
-    p.setup = function (x,y) {
+    p.setup = function (x,y,color) {
         this.Container_initialize();
         // add custom setup logic here.
         this.x = x;
         this.y = y - GAME.settings.TILESIZEDIV2; //so the base is in the center of the tile
-        this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower"));
-        this.addChild(this.tower_image);
-        this.width = this.tower_image.image.width;
-        this.height = this.tower_image.image.height;
+        this.color = color;
+
+        this.make_tower();
 
         this.line = new createjs.Shape();
         this.addChild(this.line);
@@ -32,8 +31,17 @@
         this.lastFiredTime = createjs.Ticker.getTime() - this.firePeriod;//so it can start immediately
         this.radius = GAME.settings.towerShootRadius;
         this.distToGoon = this.radius + 1;
-//        this.goons_sorted = [];
 
+        this.energyUsage = GAME.settings.projectileEnergyUsage;
+
+
+    };
+
+    p.make_tower = function(){
+        this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower_" + this.color));
+        this.addChild(this.tower_image);
+        this.width = this.tower_image.image.width;
+        this.height = this.tower_image.image.height;
     };
 
     p.update = function (){
@@ -50,7 +58,7 @@
         if(  GAME.currentPage.goons.length > 0 && this.distToGoon > this.radius){
             //go through in order, picking the first that's within radius
             for(i=0; i<GAME.currentPage.goons.length; i++){
-                if(this.distanceTo(GAME.currentPage.goons[i]) < this.radius && GAME.currentPage.goons[i].visible){
+                if(this.distanceTo(GAME.currentPage.goons[i]) < this.radius && GAME.currentPage.goons[i].alive){
                     this.goon_to_shoot_index = i;
                     //fire!
                     this.fire();
@@ -69,6 +77,13 @@
 
     };
 
+    p.changeColor = function(newColor){
+        this.removeChild(this.tower_image);
+        this.color = newColor;
+        this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower_" + this.color));
+        this.addChild(this.tower_image);
+    };
+
     p.fire = function(){
         if( (createjs.Ticker.getTime() - this.lastFiredTime)  > this.firePeriod){
             var from_x = this.x + this.width/4;
@@ -82,9 +97,9 @@
 //                .lineTo(to_x - this.x, to_y - this.y ) //center of the goon
 //                .endStroke();
 
+            GAME.currentPage.decreaseEnergy(this.energyUsage);
             this.lastFiredTime = createjs.Ticker.getTime();
-            var weapon_type = Math.floor(Math.random()*7);
-            GAME.currentPage.projectileMagazine.fireProjectile(from_x,from_y,to_x,to_y, weapon_type);
+            GAME.currentPage.projectileMagazine.fireProjectile(from_x,from_y,to_x,to_y, this.color);
         }
     };
 

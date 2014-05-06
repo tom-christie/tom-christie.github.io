@@ -16,6 +16,15 @@
     "numTowers":20,
 
     "towerShootRadius":150,
-    "towerFirePeriod":1000
+    "towerFirePeriod":1000,
+    "projectileEnergyUsage":0.05,
+
+    "red":"#FD0209",
+    "yellow":"#FFFF02",
+    "green":"#2AFF02",
+    "cyan":"#14FFFF",
+    "blue":"#0202FF",
+    "purple":"#FA02FF",
+    "white":"#FFFFFF"
 
 }
