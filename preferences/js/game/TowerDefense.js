@@ -2,6 +2,8 @@
  * Created by Tom on 4/6/14.
  */
 
+//TODO: make the "select power source" be translucent over the page
+
 (function (scope) {
 
 
@@ -34,8 +36,8 @@
             // Create a canvas
             GAME.GameCanvas = document.createElement("canvas");
             // liquid layout: stretch to fill
-            GAME.GameCanvas.width = Math.max(window.innerWidth, 800); //so the canvas doesn't get too small, and so you can resize without it being retarded
-            GAME.GameCanvas.height = Math.max(window.innerHeight, 600);
+            GAME.GameCanvas.width = Math.max(window.innerWidth, 1200); //so the canvas doesn't get too small, and so you can resize without it being retarded
+            GAME.GameCanvas.height = Math.max(window.innerHeight, 700);
             // the id the game engine looks for
             GAME.GameCanvas.id = 'gameCanvas';
             // add the canvas element to the html document

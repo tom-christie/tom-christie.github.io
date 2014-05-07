@@ -1,4 +1,4 @@
-//TODO  when one dies, make it spawn a crystal that has to be clicked
+
 
 (function (scope) {
 

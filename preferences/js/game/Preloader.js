@@ -62,6 +62,7 @@
             {"id": "MENU_select_screen", "src":"assets/images/level-select-screen_modern.png"},
             {"id": "WEAPON_SELECT_background", "src":"assets/images/weapon-select-screen.png"},
             {"id": "play_button", "src":"assets/images/play.png"},
+            {"id": "static", "src":"assets/images/static_20_opacity.png"},
             {"id":"goon1", "src": "assets/images/unit1.png"},
             {"id":"tower", "src": "assets/images/tower.png"},
             {"id":"laser_red", "src": "assets/images/projectile_red.png"},
@@ -94,8 +95,13 @@
             {"id":"tower_purple", "src": "assets/images/tower_purple.png"},
             {"id":"tower_red", "src": "assets/images/tower_red.png"},
             {"id":"tower_white", "src": "assets/images/tower_white.png"},
-            {"id":"tower_yellow", "src": "assets/images/tower_yellow.png"}
+            {"id":"tower_yellow", "src": "assets/images/tower_yellow.png"},
+            {"id":"tower_dead", "src": "assets/images/tower_dead.png"},
 
+            {"id":"play_button", "src": "assets/images/play_button.png"},
+            {"id":"stop_button", "src": "assets/images/stop_button.png"},
+            {"id":"FF_button", "src": "assets/images/FF_button.png"},
+            {"id":"payse_button", "src": "assets/images/pause_button.png"}
 
 
         ],

@@ -56,7 +56,7 @@
             if (this.tiles[i] == this.tower_tile_number) {
                 var y = this.tile_height * Math.floor(i / this.num_tiles_across);
                 var x = this.tile_width * (i % this.num_tiles_across) + this.x_offset;
-                this.towers.push(new GAME.Tower(x, y, "white"));
+                this.towers.push(new GAME.Tower(x, y, "dead"));
             }
         }
         for (i = 0; i < this.towers.length; i++) {
@@ -94,13 +94,34 @@
         this.nextCrystalCoords = {"x":10, "y":310};
 
 
-
-        this.weapon_select_sign_text = new createjs.Text("Select Energy Source!", "28px Lucida Console", "black");
-        this.weapon_select_sign_text.x = 20;
-        this.weapon_select_sign_text.y = 180;
+        //in the middle!
+        this.weapon_select_sign_text = new createjs.Text("Select Energy Source!", "50px Lucida Console", "white");
+        this.weapon_select_sign_text.x = 300;
+        this.weapon_select_sign_text.y = 500;
         //this.weapon_select_sign_text.textBaseline = "alphabetic";
-        this.weapon_select_sign_text.lineWidth = 180;
+        //this.weapon_select_sign_text.lineWidth = 180;
         this.addChild(this.weapon_select_sign_text);
+
+
+        //add static
+        this.static = new createjs.SpriteSheet({
+            "animations": {
+                "static": [0, 13, "static",.25]
+            },
+            "images": [GAME.assets.getResult("static")],
+            "frames": {
+                "height": 600,
+                "width": 800,
+                "regX": 0,
+                "regY": 0,
+                "count": 14
+            }
+        });
+
+        this.staticSprite = new createjs.Sprite(this.static, "static");
+        this.staticSprite.x = this.x_offset;
+        this.staticSprite.y = 0;
+        this.addChild(this.staticSprite);
 
 
         GAME.AI.newGrid(this.levelData.layers[1].data, this.levelData.width, this.levelData.height);
@@ -158,7 +179,7 @@
                 //so we need to use the ACTUAL goon number as the interval
                 this.goons.push(new GAME.Goon(this.num_goons, goon_type_to_spawn));
                 this.goons[this.num_goons].spawn(this.startX, this.startY);
-                this.addChild(this.goons[this.num_goons]);
+                this.addChildAt(this.goons[this.num_goons], this.getNumChildren()-1);
 
                 this.num_goons += 1;
             }
@@ -183,20 +204,23 @@
 
         //only shoot if one of the crystals is active
         if (this.crystalActive === 0) {
-            this.weapon_select_sign_text.text = "Select Energy Source!";
-
+            this.addChild(this.weapon_select_sign_text);//.text = "Select Energy Source!";
             this.weapon2.active = false;
             this.weapon2.weapon_select_crystal.crystalSprite.stop();
-
             this.weapon1.active = false;
             this.weapon1.weapon_select_crystal.crystalSprite.stop();
 
+            //make towers grey
+            //change tower colors
+            for(var i=0; i<this.towers.length; i++){
+                this.towers[i].changeColor("dead");
+            }
 
         } else {
             for (i = 0; i < this.towers.length; i++) {
                 this.towers[i].update();
             }
-            this.weapon_select_sign_text.text = "";
+            this.removeChild(this.weapon_select_sign_text)
         }
 
     };
