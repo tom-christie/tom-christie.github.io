@@ -46,29 +46,62 @@
             var i, temp;
             this.current_arrow_index = 0;
 
-            var markovSameProbs = [.9, .75, .25, .1];
-
-            this.probSame = markovSameProbs[Math.floor(Math.random() * 4)];
-            //console.log(this.probSame,'prob same');
+            var markovSameProbs = [.5,.6,.7,.8,.9];
+            this.probSame = markovSameProbs[Math.floor(Math.random() * 5)];
             //STIMULUS
             //make a list of arrowViews
             this.numArrowViews = 500;
             var directions = new Array(this.numArrowViews);
             this.arrowViewArray = new Array(this.numArrowViews);
             this.arrowViewArray[0] = new GLOBAL.ArrowView(0, Math.floor(Math.random() * 4));
-            for (i = 1; i < this.numArrowViews; i++) {
+            this.arrowViewArray[1] = new GLOBAL.ArrowView(0, Math.floor(Math.random() * 4));
+
+            //this is where the arrows are selected - at this point, the markov structure is on the arrows, not the responses.
+            //we want it to be based on the RESPONSES, i.e. probability that the target RESPONSE is the same.
+            //so...start with two arrows. That gives you a "same" or "different" target.
+            if (this.arrowViewArray[0].direction == this.arrowViewArray[0].direction) {
+                var target = "same";
+            } else {
+                var target = "different";
+            }
+
+
+            for (i = 2; i < this.numArrowViews; i++) {
                 if (Math.random() < this.probSame) {
-                    //same
-                    this.arrowViewArray[i] = new GLOBAL.ArrowView(i, this.arrowViewArray[i - 1].direction);
-                    directions[i] = this.arrowViewArray[i - 1].direction;
-                } else {
-                    //different
-                    temp = Math.floor(Math.random() * 4);
-                    while (temp === directions[i - 1]) {
+                    //response target doesn't change
+                    if (target === "same") {
+                        //still need a same here
+                        this.arrowViewArray[i] = new GLOBAL.ArrowView(i, this.arrowViewArray[i - 1].direction);
+                        directions[i] = this.arrowViewArray[i - 1].direction;
+                        target = "same";
+                    } else if (target === "different") {
+                        //still need a "different" here
                         temp = Math.floor(Math.random() * 4);
+                        while (temp === directions[i - 1]) {
+                            temp = Math.floor(Math.random() * 4);
+                        }
+                        this.arrowViewArray[i] = new GLOBAL.ArrowView(i, temp);
+                        directions[i] = temp;
+                        target = "different";
                     }
-                    this.arrowViewArray[i] = new GLOBAL.ArrowView(i, temp);
-                    directions[i] = temp;
+                } else {
+                    //response target changes
+
+                    if (target === "same") {
+                        //need a different here
+                        temp = Math.floor(Math.random() * 4);
+                        while (temp === directions[i - 1]) {
+                            temp = Math.floor(Math.random() * 4);
+                        }
+                        this.arrowViewArray[i] = new GLOBAL.ArrowView(i, temp);
+                        directions[i] = temp;
+                        target = "different";
+                    } else if (target === "different") {
+                        //need a same here
+                        this.arrowViewArray[i] = new GLOBAL.ArrowView(i, this.arrowViewArray[i - 1].direction);
+                        directions[i] = this.arrowViewArray[i - 1].direction;
+                        target = "same";
+                    }
                 }
             }
 
@@ -83,6 +116,7 @@
                 }
             }
 
+            console.log(this.probSame,this.targetResponses);
             //RESPONSES
             this.numberCorrect = 0;
             this.numberIncorrect = 0;
@@ -119,7 +153,6 @@
                 results += "\t";
             }
             GLOBAL.recordResults(results);
-            //console.log(results);
             //transition states
             GLOBAL.state.CALLoneBackTrialFinished();
 

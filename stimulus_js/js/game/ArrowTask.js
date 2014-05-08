@@ -24,7 +24,7 @@
      * @constructor
      */
 
-        //make global variable
+    //make global variable
     window.GLOBAL = window.GLOBAL || {};
 
     GLOBAL.recordResults = function (results) {

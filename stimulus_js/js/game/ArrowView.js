@@ -189,6 +189,10 @@
     p.doneTweeningOut = function () {
         var evt2 = new createjs.Event("done_tweening_out");
         GLOBAL.oneBackTask.view.dispatchEvent(evt2); //send event to parent
+
+
+//        GLOBAL.doneTweeningListener = GLOBAL.stage.addEventListener("done_tweening_out", GLOBAL.state.handleDoneTweeningOut); //listen for finished tweening
+
     };
 
     //tell stage you're done tweening
