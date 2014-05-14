@@ -42,7 +42,8 @@
 
     };
 
-    p.fire = function (from_x, from_y, to_x, to_y, color) {
+    p.fire = function (from_x, from_y, to_x, to_y, color, strength) {
+        this.strength = strength;
         this.color = color;
         this.visible = true;
         //set initial coordinates
@@ -91,7 +92,7 @@
                 this.visible = false;
 
                 //tell goon he was hit
-                GAME.currentPage.goons[i].hitBy(this.color);
+                GAME.currentPage.goons[i].hitBy(this.color,this.strength);
 
             }
             //log(this.distanceTo(GAME.currentPage.goons[i]));
@@ -131,12 +132,12 @@
             }
         },
 
-        fireProjectile: function (from_x, from_y, to_x, to_y, color) {
+        fireProjectile: function (from_x, from_y, to_x, to_y, color, strength) {
             var i;
             //find first one that isn't
             for (i = 0; i < this.numProjectiles; i++) {
                 if (!this.projectileArray[i].visible) {
-                    this.projectileArray[i].fire(from_x, from_y, to_x, to_y, color);
+                    this.projectileArray[i].fire(from_x, from_y, to_x, to_y, color, strength);
                     GAME.currentPage.addChild(this.projectileArray[i]); //adding to the current page...
                     break;
                 }

@@ -21,14 +21,13 @@
         this.x = x;
         this.y = y - GAME.settings.TILESIZEDIV2; //so the base is in the center of the tile
         this.color = color;
-
         this.make_tower();
 
         this.line = new createjs.Shape();
         this.addChild(this.line);
 
         this.firePeriod = GAME.settings.towerFirePeriod;
-        this.lastFiredTime = createjs.Ticker.getTime() - this.firePeriod;//so it can start immediately
+        this.lastFiredTime = createjs.Ticker.getTicks() - this.firePeriod;//so it can start immediately
         this.radius = GAME.settings.towerShootRadius;
         this.distToGoon = this.radius + 1;
 
@@ -77,7 +76,8 @@
 
     };
 
-    p.changeColor = function(newColor){
+    p.changeColor = function(newColor, strength){
+        this.strength = strength;
         this.removeChild(this.tower_image);
         this.color = newColor;
         this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower_" + this.color));
@@ -85,7 +85,7 @@
     };
 
     p.fire = function(){
-        if( (createjs.Ticker.getTime() - this.lastFiredTime)  > this.firePeriod){
+        if( (createjs.Ticker.getTicks() - this.lastFiredTime)  > this.firePeriod){
             var from_x = this.x + this.width/4;
             var from_y = this.y + this.height/4;
             var to_x = GAME.currentPage.goons[this.goon_to_shoot_index].x + GAME.currentPage.goons[this.goon_to_shoot_index].width/2;
@@ -98,8 +98,8 @@
 //                .endStroke();
 
             GAME.currentPage.decreaseEnergy(this.energyUsage);
-            this.lastFiredTime = createjs.Ticker.getTime();
-            GAME.currentPage.projectileMagazine.fireProjectile(from_x,from_y,to_x,to_y, this.color);
+            this.lastFiredTime = createjs.Ticker.getTicks();
+            GAME.currentPage.projectileMagazine.fireProjectile(from_x,from_y,to_x,to_y, this.color, this.strength);
         }
     };
 

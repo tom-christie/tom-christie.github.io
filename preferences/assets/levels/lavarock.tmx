@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="32" height="24" tilewidth="25" tileheight="25">
+ <tileset firstgid="1" source="../../../../../../../Dropbox/Preferences_Tower Defense_Paul-Thomas-Windy/tilesets/automapping-terrain.tsx"/>
+ <layer name="Lava" width="32" height="24">
+  <data encoding="base64" compression="zlib">
+   eJyNVtFuhDAMo9K+jLE7jZWx3729t2h/NdBqzedz6D1EqARiN3HSbmkYtmavu72JTeR330zGN53EczHx7ftu37u9DP+WzTfsXygufIus1XKADf8t/Rlige/VxGO+yj0y8OO4GofXup+v/bmS/1h/NsP7m3DRNefhauK675nPwQW4M+XyQlzUlPMs+Fn+X084uDr2jGMzZ+BzrbXenGOOEWmc61s6vBjH6Rl7HTv/qgZzwI/3WFtekGvVMNd4lHiTwdf6OH8W/E04sP6y4HJOlhT3OPtVy5FuHNfeLGGuyNWZbln3Tp+r4RuZm5XF7IN5sb7cHNb+Ywzm5WYO8C/yPsrhItiVrDdLkEPGm9t6bKaacnkrKe7P3vlV0uOZp+dgxAH5Q5xq8KPeQp5R62M/mfg8cw66HqzCI+LO+Mj9xwlWb3ZXqoFy4BygbpjTJd3nwfVkD78IPji4eeM49Grlaq76Vd27e060B+UZ3UEwd9AbUd89i83zNfL/pHuuDhs5UO1GMyaafXx3cTmI8Ln/tYasUZ5p0Nbx5PPR3Rd4No7pcdbw+gw/ul9Fd69Z3qH2Gu8Xs2j+wQ==
+  </data>
+ </layer>
+</map>

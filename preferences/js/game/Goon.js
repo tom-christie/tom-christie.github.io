@@ -176,13 +176,14 @@
             }
         } // movement
     };
+
     p.closeEnough = function (x1, y1, x2, y2, dist) {
         return (Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2)) <= dist);
     };
 
-    p.hitBy = function(color){
+    p.hitBy = function(color, strength){
         this.lastHitByColor = color;
-        this.health -= 5;
+        this.health -= strength;
         if(this.health <= 0){
             this.die();
         }
@@ -209,7 +210,10 @@
         //make crystal
         this.droppedCrystal = new GAME.Crystal(0, 0, this.lastHitByColor, "weapon_select", true);
         this.addChild(this.droppedCrystal);
-
+        //auto-pickup crystal if state is playack
+        if(GAME.state.is("PLAYBACK")){
+            this.handleCrystalClick();
+        }
         //pick a random angle, and send it to that location
         var random_angle = 2*Math.PI*Math.random();
         var distance = 50;

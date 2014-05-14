@@ -101,7 +101,11 @@
             {"id":"play_button", "src": "assets/images/play_button.png"},
             {"id":"stop_button", "src": "assets/images/stop_button.png"},
             {"id":"FF_button", "src": "assets/images/FF_button.png"},
-            {"id":"payse_button", "src": "assets/images/pause_button.png"}
+            {"id":"pause_button", "src": "assets/images/pause_button.png"},
+            {"id":"play_button_active", "src": "assets/images/play_button_active.png"},
+            {"id":"stop_button_active", "src": "assets/images/stop_button_active.png"},
+            {"id":"FF_button_active", "src": "assets/images/FF_button_active.png"},
+            {"id":"pause_button_active", "src": "assets/images/pause_button_active.png"}
 
 
         ],

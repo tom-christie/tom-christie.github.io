@@ -9,14 +9,14 @@
     "TILESIZE": 25,
 
     "level01_goons":[1, 1, 0, 1, 1, 1, 1, 1, 1],
-    "goon_spawn_time":3,
+    "goon_spawn_ticks":90,
 
     "numGoons":50,
     "numProjectiles":200,
     "numTowers":20,
 
     "towerShootRadius":150,
-    "towerFirePeriod":1000,
+    "towerFirePeriod":30,
     "projectileEnergyUsage":0.05,
 
     "red":"#FD0209",
