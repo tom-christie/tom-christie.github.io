@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>//0.0.0.0:4000/</loc>
+        <loc>//tom-christie.github.io</loc>
     </url>
     
     
     <url>
-        <loc>//0.0.0.0:4000//404.html</loc>
+        <loc>//tom-christie.github.io/404.html</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//about/</loc>
+        <loc>//tom-christie.github.io/about/</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//articles/</loc>
+        <loc>//tom-christie.github.io/articles/</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//feed.xml</loc>
+        <loc>//tom-christie.github.io/feed.xml</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//index.html</loc>
+        <loc>//tom-christie.github.io/index.html</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//search.json</loc>
+        <loc>//tom-christie.github.io/search.json</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//sitemap.xml</loc>
+        <loc>//tom-christie.github.io/sitemap.xml</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//tags/</loc>
+        <loc>//tom-christie.github.io/tags/</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//theme-setup/</loc>
+        <loc>//tom-christie.github.io/theme-setup/</loc>
     </url>
     
 
     
     <url>
-        <loc>//0.0.0.0:4000//articles/correlation/</loc>
+        <loc>//tom-christie.github.io/articles/correlation/</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//islamic-geometric-patterns/</loc>
+        <loc>//tom-christie.github.io/islamic-geometric-patterns/</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//ipython-notebook/</loc>
+        <loc>//tom-christie.github.io/ipython-notebook/</loc>
     </url>
     
     <url>
-        <loc>//0.0.0.0:4000//first-post/</loc>
+        <loc>//tom-christie.github.io/first-post/</loc>
     </url>
     
 </urlset>
