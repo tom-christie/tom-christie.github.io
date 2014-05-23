@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>//tom-christie.github.io</loc>
+        <loc>http://tom-christie.github.io</loc>
     </url>
     
     
     <url>
-        <loc>//tom-christie.github.io/404.html</loc>
+        <loc>http://tom-christie.github.io/404.html</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/about/</loc>
+        <loc>http://tom-christie.github.io/about/</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/articles/</loc>
+        <loc>http://tom-christie.github.io/articles/</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/feed.xml</loc>
+        <loc>http://tom-christie.github.io/feed.xml</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/index.html</loc>
+        <loc>http://tom-christie.github.io/index.html</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/search.json</loc>
+        <loc>http://tom-christie.github.io/search.json</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/sitemap.xml</loc>
+        <loc>http://tom-christie.github.io/sitemap.xml</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/tags/</loc>
+        <loc>http://tom-christie.github.io/tags/</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/theme-setup/</loc>
+        <loc>http://tom-christie.github.io/theme-setup/</loc>
     </url>
     
 
     
     <url>
-        <loc>//tom-christie.github.io/articles/correlation/</loc>
+        <loc>http://tom-christie.github.io/articles/correlation/</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/islamic-geometric-patterns/</loc>
+        <loc>http://tom-christie.github.io/islamic-geometric-patterns/</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/ipython-notebook/</loc>
+        <loc>http://tom-christie.github.io/ipython-notebook/</loc>
     </url>
     
     <url>
-        <loc>//tom-christie.github.io/first-post/</loc>
+        <loc>http://tom-christie.github.io/first-post/</loc>
     </url>
     
 </urlset>

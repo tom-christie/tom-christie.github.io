@@ -3,7 +3,7 @@
 		{
 		  "title"      : "Spurious correlations: I&#39;m looking at you, internet.",
 		  "category"   : "articles",
-		  "url"        : "//tom-christie.github.io/articles/correlation/",
+		  "url"        : "http://tom-christie.github.io/articles/correlation/",
 		  "date"       : "2014-05-20 00:00:00 -0500",
 		  "shortdate"  : "May 20, 2014"
 		} ,
@@ -11,7 +11,7 @@
 		{
 		  "title"      : "Rosettes",
 		  "category"   : "",
-		  "url"        : "//tom-christie.github.io/islamic-geometric-patterns/",
+		  "url"        : "http://tom-christie.github.io/islamic-geometric-patterns/",
 		  "date"       : "2014-02-02 00:00:00 -0600",
 		  "shortdate"  : "February 02, 2014"
 		} ,
@@ -19,7 +19,7 @@
 		{
 		  "title"      : "iPython Notebook",
 		  "category"   : "",
-		  "url"        : "//tom-christie.github.io/ipython-notebook/",
+		  "url"        : "http://tom-christie.github.io/ipython-notebook/",
 		  "date"       : "2014-02-02 00:00:00 -0600",
 		  "shortdate"  : "February 02, 2014"
 		} ,
@@ -27,7 +27,7 @@
 		{
 		  "title"      : "First Post -- Processing.js works!",
 		  "category"   : "",
-		  "url"        : "//tom-christie.github.io/first-post/",
+		  "url"        : "http://tom-christie.github.io/first-post/",
 		  "date"       : "2014-02-02 00:00:00 -0600",
 		  "shortdate"  : "February 02, 2014"
 		} 
