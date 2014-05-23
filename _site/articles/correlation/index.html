@@ -1,0 +1,394 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<head>
+<meta charset="utf-8">
+<title>Spurious correlations: I'm looking at you, internet. &#8211; Tom Christie</title>
+<meta name="description" content="A description goes here.">
+<meta name="keywords" content="statistics">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="//0.0.0.0:4000//images/site-logo.png">
+<meta name="twitter:title" content="Spurious correlations: I'm looking at you, internet.">
+<meta name="twitter:description" content="A description goes here.">
+<meta name="twitter:creator" content="@tom_cogsci">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spurious correlations: I'm looking at you, internet.">
+<meta property="og:description" content="A description goes here.">
+<meta property="og:url" content="//0.0.0.0:4000//articles/correlation/">
+<meta property="og:site_name" content="Tom Christie">
+
+
+
+
+
+<link rel="canonical" href="//0.0.0.0:4000//articles/correlation/">
+<link href="//0.0.0.0:4000//feed.xml" type="application/atom+xml" rel="alternate" title="Tom Christie Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="//0.0.0.0:4000//assets/css/main.min.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="//0.0.0.0:4000//assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="//0.0.0.0:4000//favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="//0.0.0.0:4000//favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="//0.0.0.0:4000//images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="//0.0.0.0:4000//images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="//0.0.0.0:4000//images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="//0.0.0.0:4000//images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+	        
+	        <li><a href="//0.0.0.0:4000//feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+	        <li class="dosearch"><i class="icon-search"></i> Search</li>
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+	<div class="search-form">
+		<input type="text" class="search-field" placeholder="Search...">
+		<i class="icon-remove-sign icon-2x"></i>
+		<ul class="search-results post-list"></ul><!-- /.search-results -->
+	</div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+        
+    		<a href="//0.0.0.0:4000//" class="site-logo" rel="home" title="Tom Christie"><img src="//0.0.0.0:4000//images/site-logo.png" width="200" height="200" alt="Tom Christie logo" class="animated fadeInUp"></a>
+        
+        <h1 class="site-title animated fadeIn"><a href="//0.0.0.0:4000//">Tom Christie</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Cognitive scientist in training.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="//0.0.0.0:4000//tags/#statistics" title="Pages tagged statistics">statistics</a></span>
+        
+          <h1 class="entry-title">Spurious correlations: I'm looking at you, internet.</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        <img src="//0.0.0.0:4000//images/bio-photo.jpg" alt="Tom Christie photo" class="author-photo">
+        <span class="author vcard">By <span class="fn"><a href="//0.0.0.0:4000//about/" title="About Tom Christie">Tom Christie</a></span></span>
+        <span class="entry-date date published"><time datetime="2014-05-20T00:00:00-05:00"><i class="icon-calendar-empty"></i> May 20, 2014</time></span>
+        
+        
+        <span><a href="//0.0.0.0:4000//articles/correlation/" rel="bookmark" title="Spurious correlations: I'm looking at you, internet."><i class="icon-link"></i> Permalink</a></span>
+        
+        <span class="social-share-facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=//0.0.0.0:4000//articles/correlation/" title="Share on Facebook" itemprop="Facebook"><i class="icon-facebook-sign"></i> Like</a></span>
+        <span class="social-share-twitter">
+            <a href="https://twitter.com/intent/tweet?hashtags=articles&text=Spurious correlations: I'm looking at you, internet.&url=//0.0.0.0:4000//articles/correlation/&via=tom_cogsci" title="Share on Twitter" itemprop="Twitter"><i class="icon-twitter-sign"></i> Tweet</a></span>
+        <span class="social-share-googleplus">
+            <a href="https://plus.google.com/share?url=//0.0.0.0:4000//articles/correlation/" title="Share on Google Plus" itemprop="GooglePlus"><i class="icon-google-plus-sign"></i> +1</a></span>
+            <!-- /.social-share -->
+      </footer>
+      <div class="entry-content">
+        <p>Recently there have been <a href="http://www.tylervigen.com/">several</a> <a href="http://www.reddit.com/r/dataisbeautiful/comments/25txtc/violence_in_the_us_its_all_because_of_hockey_well/">posts</a> on the interwebs supposedly demonstrating spurious correlations between different things.  A typical image looks like this:</p>
+
+<p><img src="/assets/images/correlation/spurious.png" alt="img" title="Spurious correlations" /></p>
+
+<p>taken from <a href="http://www.tylervigen.com/">here</a>.</p>
+
+<p>The problem I have with images like this is not the message that one needs to be careful when using statistics (which is true), or that lots of seemingly unrelated things are somewhat correlated with each other (also true).  It’s that including the correlation coefficient <script type="math/tex">r</script> on the plot is misleading and disingenuous, intentionally or not.</p>
+
+<!-- COMMENT
+Statistical tests and metrics require certain assumptions about the data they summarize.  For example, consider the $$ t $$-test everyone learns in high school, used for determining whether the mean of a sample is different from a given number. It works like this:
+
+1. Find a variable of interest $$ x $$.
+
+2. **Assume that $$x$$ is *normally distributed* in the population in question**
+
+3. Take samples from the population (so that we don't have to find and record *every* $$x$$ value).
+
+4. Try to conclude something about the population from the samples. In the case of the $$t$$-test, we're trying to decide whether there's enough evidence to conclude that the population mean is different from some value.
+
+5. Use a statistic derived from the samples to calculate the probability that your conclusion is incorrect.  For the $$t$$-test, we calculate the $$t$$ statistic, consult a table, and find a probability value $$p$$ associated with the statistic. The lower the value, the more confident you can be of your conclusion.  If $$p<0.05$$ you can publish.
+
+The table that takes us from $$t$$ statistic to $$p$$-value in step 5 was created using the assumption (step 2) that the data the $$t$$ statistic summarizes is normally distributed.  If it's not, the $$p$$ value isn't correct, and more importantly, it's misleading.  If this is the case, shouldn't we first [test to see whether $$x$$ is normally distributed](https://en.wikipedia.org/wiki/Normality_test)?  It seems obvious, but in practice most people just eyeball a histogram, shrug (because real data is rarely normally distributed) and use the $$t$$-test anyway. But you can still calculate the $$t$$ value, you can still look up a $$p$$-value in a table, it just doesn't mean what you think it means. Specifically, if $$x$$ isn't normally distributed, $$p$$ doesn't represent a probability of an incorrect conclusion anymore - it's just a meaningless number.
+END COMMENT -->
+
+<p>When we calculate statistics that summarize values of a variable (like the mean or standard deviation) or the relationship between two variables (correlation), we’re using a <em>sample</em> of the data to draw conclusions about the <em>population</em>.  In the case of time series, we’re using data from a short interval of time to infer what would happen if the time series went on forever.  To be able to do this, your sample must be a good representative of the population, otherwise your sample statistic will not be a good approximation of the population statistic.  For example, if you wanted to know the average height of people in Michigan, but you only collected data from people 10 and younger, the average height of your sample would not be a good estimate of the height of the overall population.  This seems painfully obvious. But this is exactly analogous to what the author of the image above is doing by including the correlation coefficient $r$.  The absurdity of doing this is a little less transparent when we’re dealing with time series (values collected over time). This post is an attempt to explain the reasoning using plots rather than math, in the hopes of reaching the widest audience.</p>
+
+<h2 id="correlation-between-two-variables">Correlation between two variables</h2>
+
+<p>Say we have two variables, <script type="math/tex">x</script> and <script type="math/tex">y</script>, and we want to know if they’re related. The first thing we might try is plotting one against the other:</p>
+
+<p><img src="/assets/images/correlation/correlated_scatter.png" alt="img" title="Scatter of correlated data" /></p>
+
+<p>They look correlated! Computing the correlation coefficient <script type="math/tex">r</script> value gives a moderately high value of 0.78.  So far so good.  Now imagine we collected the values of each of <script type="math/tex">x</script> and <script type="math/tex">y</script> over time, or wrote the values in a table and numbered each row.  If we wanted to, we could tag each value with the order in which it was collected.  I’ll call this label “time”, not because the data is really a time series, but just so it will be clear how <em>different</em> the situation is when the data does represent time series.  Let’s look at the same scatter plot with the data color-coded by whether it was collected in the first 20%, second 20%, etc.  This breaks the data into 5 categories:</p>
+
+<p><img src="/assets/images/correlation/correlated_scatter_color.png" alt="img" title="Scatter of correlated data, separated by time" /></p>
+
+<p>The time a datapoint was collected, or the order in which it was collected, doesn’t really seem to tell us much about its value.  We can also look at a histogram of each of the variables:</p>
+
+<p><img src="/assets/images/correlation/correlated_histogram.png" alt="img" title="Histogram of correlated data" /></p>
+
+<p>The height of each bar indicates the number of points in a particular bin of the histogram. If we separate out each bin column by the proportion of data in it from each time category, we get roughly the same number from each:</p>
+
+<p><img src="/assets/images/correlation/correlated_histogram_color.png" alt="img" title="Histogram of correlated data, colored by time" /></p>
+
+<p>If plot the histograms of each 20% separately on the same axes, we get histograms that look pretty similar.  Here are the histograms overlapped:</p>
+
+<p><img src="/assets/images/correlation/correlated_histogram_color_overlapping.png" alt="img" title="Histogram of correlated data, colored by time, overlapping" /></p>
+
+<p>Alright, now let’s see what happens is we finally plot the data as time series.</p>
+
+<p><img src="/assets/images/correlation/correlated_time_series.png" alt="img" title="Time series of correlated data" /></p>
+
+<p>There might be some structure there, but it looks pretty messy. It should look messy, because the original data really had nothing to do with time.  Notice that the data is centered around a given value and has a similar variance at any time point.  If you take any 100-point chunk, you probably couldn’t tell me what time it came from.  This, illustrated by the histograms above, means that the data is <em>independent and identically distributed</em> (i.i.d. or IID).  That is, at any time point, the data looks like it’s coming from the <em>same</em> distribution.  That’s why the histograms in the plot above almost exactly overlap.  Here’s the takeaway:  <strong>correlation is only meaningful when data is i.i.d.</strong>.  I’ll explain why below, but keep that in mind for this next section.</p>
+
+<h2 id="correlation-between-two-time-series">Correlation between two time series</h2>
+
+<p>Now let’s look at an example of two time series that seem correlated. This is meant to be a direct parallel to the ‘suspicious correlation’ plots floating around the internet.</p>
+
+<p>I generated some data <em>randomly</em>.  <script type="math/tex">x</script> and <script type="math/tex">y</script> are both a ‘normal random walk’.  That is, at each time point, a value is drawn from a normal distribution.  For example, say we draw the value of 1.2.  Then we use that as a starting point, and draw another value from a normal distribution, say 0.3.  Then the starting point for the third value is now 1.5.  If we do this several times, we end up with a time series in which each value is close-ish to the value that came before it.  The important point here is that <script type="math/tex">x</script> and <script type="math/tex">y</script> were generated by random processes, completely independently from each other.  I just generated a bunch of series until I found some that seemed correlated.</p>
+
+<p>Here’s a plot showing the time series of <script type="math/tex">x</script> and <script type="math/tex">y</script>:</p>
+
+<p><img src="/assets/images/correlation/fake_data_time_series.png" alt="img" title="Time series of random data" /></p>
+
+<p>Hmm!  Looks pretty correlated!  Before we get carried away, we should really make sure that the correlation measure is even relevant for this data.  To do that, make some of the plots we made above with our new data.  With a scatter plot, the data still seems pretty strongly correlated:</p>
+
+<p><img src="/assets/images/correlation/fake_data_scatter.png" alt="img" title="Scatter of random data" /></p>
+
+<p>Notice something very different in this plot.  Unlike the scatter plot of the data that was <em>actually</em> correlated, this data’s values are dependent on time. In other words, if you tell me the time a particular data point was collected, I can tell you approximately what its value is. That means that the data is <em>not</em> identically distributed (the time series lingo is that these time series are not “stationary”).</p>
+
+<p>To make the point a little clearer, let’s make a histogram of the data.</p>
+
+<p><img src="/assets/images/correlation/fake_data_histogram.png" alt="img" title="Histogram of random data" /></p>
+
+<p>Looks pretty good. But now let’s again color each bin according to the proportion of data from a particular time interval.</p>
+
+<p><img src="/assets/images/correlation/fake_data_histogram_color.png" alt="img" title="Histogram of random data, colored by time." /></p>
+
+<p>Each bin in this histogram does <em>not</em> have an equal proportion of data from each time interval.  Plotting the histograms separately reinforces this observation:</p>
+
+<p><img src="/assets/images/correlation/fake_data_histogram_stacked.png" alt="img" title="Histograms of random data, colored by time." /></p>
+
+<p>If you take data at different time points, the data is <em>not</em> identically distributed.  This means the correlation coefficient <script type="math/tex">r</script> is misleading, as it’s value is interpreted under the assumption that data is i.i.d.</p>
+
+<h2 id="autocorrelation">Autocorrelation</h2>
+
+<p>We’ve talked about being identically distributed, but what about independent?  Independence of data means that the value of a particular point does not depend on the values recorded before it. Looking at the histograms above, it’s clear that this is not the case for the randomly generated time series. If I tell you the value of <script type="math/tex">y</script> at a given time is 30, for example, you can be pretty sure that the next value is going to be closer to 30 than 0.</p>
+
+<p>One way to formalize this relationship is by looking at a time series’ <em>autocorrelation</em>. As the name suggests, it’s a way to measure how much a series is correlated with itself.  This is done at different <em>lags</em>.  For example, each point in a series can be plotted against each point two points behind it.  For the first (actually correlated) dataset, this gives a plot like the following:</p>
+
+<p><img src="/assets/images/correlation/correlated_lag_2.png" alt="img" title="Lag 2 correlation for correlated data" /></p>
+
+<p>This means the data is not correlated with itself (that’s the “independent” part of i.i.d.).  If we do the same thing with the time series data, we get:</p>
+
+<p><img src="/assets/images/correlation/fake_data_lag_2.png" alt="img" title="Lag 2 correlation for random data" /></p>
+
+<p>Wow! That’s pretty correlated! That means that the time associated with each datapoint tells us a <em>lot</em> about the value of that datapoint.  In other words, the data points are <em>not</em> independent of each other.</p>
+
+<p>If we plot the autocorrelation function at all lags from the first dataset, we get the following:</p>
+
+<p><img src="/assets/images/correlation/acf_correlated.png" alt="img" title="ACF for correlated data" /></p>
+
+<p>The value is 1 at lag=0, because each data is obviously correlated with itself.  All the other values are pretty close to 0.  If we look at the autocorrelation of the time series data, we get something very different:</p>
+
+<p><img src="/assets/images/correlation/acf_time_series.png" alt="img" title="ACF for time series data" /></p>
+
+<p>Again, the height of each bar tells how correlated each time point is, on average, with other points <em>lag</em> away.</p>
+
+<p>But why does this matter? Because the <script type="math/tex">r</script> value we use to measure correlation is interpretable only when the autocorrelation of each variable is 0 at all lags.</p>
+
+<p>If we want to find the correlation between two time series, we can use some tricks to make the autocorrelation 0.  If we do this, the <script type="math/tex">r</script> will be interpretable as the correlation between the time series (explained in the next section).  The easiest method is to just “difference” the data - that is, convert the time series into a new series, where each value is the difference between adjacent values in the nearby series.  If we do this to our time series, the autocorrelation function becomes:</p>
+
+<p><img src="/assets/images/correlation/acf_differenced_time_series.png" alt="img" title="ACF for differenced_time series data" /></p>
+
+<p>What happens if we plot the <em>differenced</em> data against time?  We get:</p>
+
+<p><img src="/assets/images/correlation/differenced_time_series.png" alt="img" title="Differenced time series data" /></p>
+
+<p>They don’t look correlated anymore! How disappointing.  But the data was <em>not</em> correlated correlated in the first place: each variable was generated independently of the other. They just looked correlated.  That’s the problem.  The apparent correlation was entirely a mirage.  The two variables only looked correlated because they were actually <em>autocorrelated</em> in a similar way.  That’s exactly what’s going on with the spurious correlation plots on the website I mentioned at the beginning.  If we plot the non-autocorrelated versions of these data against each other, we get:</p>
+
+<p><img src="/assets/images/correlation/differenced_scatter.png" alt="img" title="Scatter of differenced time series data" /></p>
+
+<p>The time no longer tells us about the value of the data.  As a consequence, the data no longer appear correlated. This reveals that the data is actually unrelated.  It’s not as fun, but it’s the truth.</p>
+
+<p>A criticism of this approach that seems legitimate (but isn’t) is that since we’re screwing with the data first to make it look random, of  course the result won’t be correlated.  However, if you take successive differences between the original non-time-series data, you get a correlation coefficient of <script type="math/tex">r=0.78</script>, same as we had above!  Differencing destroyed the apparent correlation in the time series data, but not in the data that was actually correlated.</p>
+
+<h2 id="samples-and-populations">Samples and populations</h2>
+
+<p>The remaining question is why the correlation coefficient <script type="math/tex">r</script> requires the data to be i.i.d.  The answer lies in how <script type="math/tex">r</script> is calculated.  The mathy answer is a little complicated (see <a href="https://stats.stackexchange.com/questions/7376/does-correlation-assume-stationarity-of-data">here</a> for a good explanation). In the interests of keeping this post simple and graphical, I’ll show some more plots instead of delving into the math.</p>
+
+<p>The context in which <script type="math/tex">r</script> is used is that of fitting a linear model to “explain” or predict <script type="math/tex">y</script> as a function of <script type="math/tex">x</script>.  This is just the <script type="math/tex">y = mx + b</script> from middle school math class.  The more highly correlated <script type="math/tex">x</script> is with <script type="math/tex">y</script> (the <script type="math/tex">x</script> vs <script type="math/tex">y</script> scatter looks more like a line and less like a cloud), the more information the value of <script type="math/tex">x</script> gives us about the value of <script type="math/tex">y</script>.  To get this measure of “cloudiness”, we can first fit a line:</p>
+
+<p><img src="/assets/images/correlation/correlated_regression.png" alt="img" title="Linear regression on correlated data" /></p>
+
+<p>The line represents the value we would predict for <script type="math/tex">y</script> given a certain value of <script type="math/tex">x</script>. We can then measure how far each <script type="math/tex">y</script> value is from the predicted value. If we plot those differences, called <script type="math/tex">residuals</script>, we get:</p>
+
+<p><img src="/assets/images/correlation/correlated_residuals.png" alt="img" title="Linear regression on correlated data" /></p>
+
+<p>The wider the cloud the more uncertainty we still have about <script type="math/tex">y</script>.  In more technical words, it’s the amount of variance that’s still ‘unexplained’, despite knowing a given <script type="math/tex">x</script> value.  The compliment of this, the proportion of variance ‘explained’ in <script type="math/tex">y</script> by <script type="math/tex">x</script>, is the <script type="math/tex">r^2</script> value.  If knowing <script type="math/tex">x</script> tells us nothing about <script type="math/tex">y</script>, then <script type="math/tex">r^2</script> = 0.  If knowing <script type="math/tex">x</script> tells us <script type="math/tex">y</script> exactly, then there is nothing left ‘unexplained’ about the values of <script type="math/tex">y</script>, and <script type="math/tex">r^2</script> = 1.</p>
+
+<p><script type="math/tex">r</script> is calculated using your sample data.  The assumption and hope is that as you get more data, <script type="math/tex">r</script> will get closer and closer to the “true” value, <a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">called Pearson’s product-moment correlation coefficient <script type="math/tex">\rho</script></a>.  If you take chunks of data from different time points like we did above, your <script type="math/tex">r</script> should be similar in each case, since you’re just taking smaller samples. In fact, if the data is i.i.d., <script type="math/tex">r</script> itself can be treated as a variable that’s randomly distributed around a “true” value.  If you take chunks of our correlated non-time-series data and calculate their sample correlation coefficients, you get the following:</p>
+
+<p><img src="/assets/images/correlation/correlated_subgroup_correlations.png" alt="img" title="Correlation coefficients for smaller chunks of the correlated data" /></p>
+
+<p>where the line represents the sample correlation coefficient <script type="math/tex">r</script> for the entire sample.  The important thing is that <script type="math/tex">r</script> gives you a reasonable idea of what the population <script type="math/tex">r</script> is, and becomes a better estimator the more data you get.  If you do the same thing for our time series data, you get something very different:</p>
+
+<p><img src="/assets/images/correlation/fake_subgroup_correlations.png" alt="img" title="Correlation coefficients for smaller chunks of the time series data" /></p>
+
+<p>As you can see, the sample correlation coefficient varies a LOT depending on what data subset you’re using. Why, then, should we assume that the particular sample <script type="math/tex">r</script> value we’ve estimated for our time series is a good estimation of the “true” population correlation coefficient <script type="math/tex">\rho</script>?  That’s right, we shouldn’t.</p>
+
+<p>The main takeaway here is that the correlation coefficient <script type="math/tex">r</script> is NOT an estimator of the population correlation coefficient <script type="math/tex">\rho</script> <em>when the time series are autocorrelated</em>.  You can find correlations between time series, but first you have to use some method to “de-trend” the data and take out any autocorrelation. If you do that, the sample <script type="math/tex">r</script> value can then be interpreted as an estimator of the true population value.</p>
+
+<p>Since the true value for unrelated variables like the ones in our time series is 0, looking at subpopulations of the differenced, de-trended data should give us correlations of 0.  Critically, each sub-group of the data should have a correlation coefficient that’s near the value of the correlation coefficient of the entire sample.</p>
+
+<p><img src="/assets/images/correlation/differenced_subgroup_correlations.png" alt="img" title="Correlation coefficients for smaller chunks of the differenced time series data" /></p>
+
+<p>I hope this helps clear up the confusion a little.</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="//0.0.0.0:4000//islamic-geometric-patterns/" class="btn" title="Rosettes">Previous article</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Tom Christie. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/tom_cogsci" title="Tom Christie on Twitter" target="_blank"><i class="icon-twitter icon-2x"></i></a>
+    <a href="mailto:tom.christie@gmail.com" title="Email me"><i class="icon-envelope icon-2x"></i></a>
+    
+	
+	
+	
+	
+	
+	<a href="http://github.com/tom-christie" title="Tom Christie on Github" target="_blank"><i class="icon-github icon-2x"></i></a>
+	
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="//0.0.0.0:4000//assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="//0.0.0.0:4000//assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').simpleJekyllSearch({
+          jsonFile : '//0.0.0.0:4000//search.json',
+          searchResults : '.search-results',
+          template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+    
+     var bs = {
+          close: $(".icon-remove-sign"),
+          searchform: $(".search-form"),
+          canvas: $("body"),
+          dothis: $('.dosearch')
+      };
+    
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('search-overlay');
+    });
+    
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('search-overlay');
+    });
+  })( jQuery, window );
+</script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-51289709-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = ''; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>	        
+
+</body>
+</html>

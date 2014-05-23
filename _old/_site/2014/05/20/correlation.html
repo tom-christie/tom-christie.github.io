@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tom Christie - Correlation between time series</title>
+  <meta name="author" content="Tom Christie" />
+  <meta name="description" content="The blog of Tom Christie" />
+  <link rel="canonical" href="http://0.0.0.0:4000/2014/05/20/correlation.html" />
+
+  <link href="//fonts.googleapis.com/css?family=Open+Sans:600,800" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.png">
+  <link rel="alternate" type="application/rss+xml" title="Tom Christie" href="http://0.0.0.0:4000/atom.xml" />
+
+  <link rel="stylesheet" href="/assets/css/all.css">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css">
+
+    <!-- mathjax config similar to math.stackexchange -->
+    <script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": {
+      preferredFont: "TeX",
+      availableFonts: ["STIX","TeX"],
+      styles: {".MathJax": {mathcolor: "#000 ! important"}}
+      }
+});
+</script>
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+</head>
+<body>
+  <div class="container">
+    <div class="four columns sidebar">
+      <nav>
+  <h1><a href="/">Tom Christie</a></h1>
+  <a href="/">
+    <img src="/logo.png" id="logo" alt="Blog logo"/>
+  </a>
+  <h2>Cognitive Scientist</h2>
+  <hr/>
+  <ul>
+  <p align="center">...in training.</p>
+  <hr/>
+  <div>
+    <div id="social">
+      Follow me:
+<div id="stalker">
+  
+  <a title="tom-christie on Github" href="https://github.com/tom-christie">
+    <i class="fa fa-github-square"></i>
+  </a>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <a title="RSS feed" id="rss" href="/atom.xml">
+    <i class="fa fa-rss-square"></i>
+  </a>
+</div>
+
+    </div>
+  </div>
+  </ul>
+</nav>
+    </div>
+
+    <div class="eleven columns content">
+      <h1 id="spurious-correlations-im-looking-at-you-internet">Spurious correlations: I’m looking at you, internet</h1>
+
+<p>Recently there have been <a href="http://www.tylervigen.com/">several</a> <a href="http://www.reddit.com/r/dataisbeautiful/comments/25txtc/violence_in_the_us_its_all_because_of_hockey_well/">posts</a> on the interwebs supposedly demonstrating spurious correlations between different things.  A typical image looks like this:</p>
+
+<p><img src="/assets/images/correlation/spurious.jpg" alt="text" title="Spurious correlation" /></p>
+
+<p>taken from <a href="http://www.buzzfeed.com/kjh2110/the-10-most-bizarre-correlations">here</a>.</p>
+
+<p>The problem I have with images like this is not the message that one needs to be careful when using statistics (which is true), or that lots of seemingly unrelated things are somewhat correlated with each other (also true).  It’s that including the correlation coefficient <script type="math/tex">r</script> on the plot is misleading and disingenuous, intentionally or not.  </p>
+
+<p>Statistical tests and metrics require certain assumptions about the data they summarize.  For example, consider the <script type="math/tex"> t </script>-test everyone learns in high school, used for determining whether the mean of a sample is different from a given number. It works like this:</p>
+
+<ol>
+  <li>
+    <p>Find a variable of interest <script type="math/tex"> x </script>.</p>
+  </li>
+  <li>
+    <p><strong>Assume that <script type="math/tex">x</script> is <em>normally distributed</em> in the population in question</strong></p>
+  </li>
+  <li>
+    <p>Take samples from the population (so that we don’t have to find and record <em>every</em> <script type="math/tex">x</script> value).</p>
+  </li>
+  <li>
+    <p>Try to conclude something about the population from the samples. In the case of the <script type="math/tex">t</script>-test, we’re trying to decide whether there’s enough evidence to conclude that the population mean is different from some value.</p>
+  </li>
+  <li>
+    <p>Use a statistic derived from the samples to calculate the probability that your conclusion is incorrect.  For the <script type="math/tex">t</script>-test, we calculate the <script type="math/tex">t</script> statistic, consult a table, and find a probability value <script type="math/tex">p</script> associated with the statistic. The lower the value, the more confident you can be of your conclusion.  If <script type="math/tex">% <![CDATA[
+p<0.05 %]]></script> you can publish.</p>
+  </li>
+</ol>
+
+<p>The table that takes us from <script type="math/tex">t</script> statistic to <script type="math/tex">p</script>-value in step 5 was created using the assumption (step 2) that the data the <script type="math/tex">t</script> statistic summarizes is normally distributed.  If it’s not, the <script type="math/tex">p</script> value isn’t correct, and more importantly, it’s misleading.  If this is the case, shouldn’t we first <a href="https://en.wikipedia.org/wiki/Normality_test">test to see whether <script type="math/tex">x</script> is normally distributed</a>?  It seems obvious, but in practice most people just eyeball a histogram, shrug (because real data is rarely normally distributed) and use the <script type="math/tex">t</script>-test anyway. But you can still calculate the <script type="math/tex">t</script> value, you can still look up a <script type="math/tex">p</script>-value in a table, it just doesn’t mean what you think it means. Specifically, if <script type="math/tex">x</script> isn’t normally distributed, <script type="math/tex">p</script> doesn’t represent a probability of an incorrect conclusion anymore - it’s just a meaningless number.</p>
+
+<p>The point I’m trying to make is that the statistics we use to summarize data are derived using certain assumptions, and those statistics are only meaningful to the extent that the assumptions are true.  This is <em>not the case</em> with the <script type="math/tex">r</script>-value on the plot above.  To see why, hold that thought while we talk about correlations</p>
+
+<h2 id="correlation-between-two-variables">Correlation between two variables</h2>
+
+<p>Say we have two variables, <script type="math/tex">x</script> and <script type="math/tex">y</script>, and we want to know if they’re related. The first thing we might try is plotting one against the other:</p>
+
+<p><img src="/assets/images/correlation/correlated_scatter.png" alt="img" title="Scatter of correlated data" /></p>
+
+<p>They look correlated! Computing the <script type="math/tex">r^2</script> value gives a moderately high value of 0.78.  So far so good.  Now imagine we collected the values of each of <script type="math/tex">x</script> and <script type="math/tex">y</script> over time.  If we wanted to, we could tag each value with the date at which it was collected and thereby order all the values.  Let’s look at the same scatter plot with the data color-coded by whether it was collected in the first 20\%, second 20\%, etc.  This breaks the data into 5 categories:</p>
+
+<p><img src="/assets/images/correlation/correlated_scatter_color.png" alt="img" title="Scatter of correlated data, separated by time" /></p>
+
+<p>The time a datapoint was collected, or the order in which it was collected, doesn’t really seem to tell us much about its value.  We can also look at a histogram of each of the variables:</p>
+
+<p><img src="/assets/images/correlation/correlated_histogram.png" alt="img" title="Histogram of correlated data" /></p>
+
+<p>The height of each bar indicates the number of points in a particular bin of the histogram. If we separate out each bin by the proportion of data in it from each time category, we get roughly the same number from each:</p>
+
+<p><img src="/assets/images/correlation/correlated_histogram_color.png" alt="img" title="Histogram of correlated data, colored by time" /></p>
+
+<p>If we instead separate the data by the time in which it was collected, we get histograms that look pretty similar.  Here are the histograms overlapped:</p>
+
+<p><img src="/assets/images/correlation/correlated_histogram_color_overlapping.png" alt="img" title="Histogram of correlated data, colored by time, overlapping" /></p>
+
+<p>Alright, now let’s see what happens is we finally plot the data as time series.</p>
+
+<p><img src="/assets/images/correlation/correlated_time_series.png" alt="img" title="Time series of correlated data" /></p>
+
+<p>There might be some structure there, but it looks pretty messy.  Notice that the data is centered around a given value and has a similar variance at any time point.  If you take any 100 point chunk, you probably couldn’t tell me what time it came from.  This, illustrated by the histograms above, means that the data is <em>independent and identically distributed</em> (i.i.d. or IID).  That is, at any time point, the data looks like it’s coming from the <em>same</em> distribution.  That’s why the histograms in the plot above almost exactly overlap.  Here’s the takeaway:  <strong>correlation is only meaningful when data is i.i.d.</strong>.  I’ll explain why below, but keep that in mind for this next section.</p>
+
+<h2 id="correlation-between-two-time-series">Correlation between two time series</h2>
+
+<p>Alright, now let’s look at an example of two time series that seem correlated. This is meant to be a direct parallel to the ‘suspicious correlation’ plots floating around the internet. </p>
+
+<p>I generated some data randomly.  <script type="math/tex">x</script> and <script type="math/tex">y</script> were both by a ‘normal random walk’.  That is, at each time point, a value is drawn from a normal distribution.  For example, say we draw the value of 1.2.  Then we use that as a starting point, and draw another value from a normal distribution, say 0.3.  Then the starting point for the next value is 1.5.  The important point here is that <script type="math/tex">x</script> and <script type="math/tex">y</script> were generated by random processes, completely independently from each other.  I just generated a bunch of series until I found some that seemed correlated.  </p>
+
+<p>Here’s a plot showing the time series of <script type="math/tex">x</script> and <script type="math/tex">y</script>:</p>
+
+<p><img src="/assets/images/correlation/fake_data_time_series.png" alt="img" title="Time series of random data" /></p>
+
+<p>Hmm!  Looks pretty correlated!  Before we get carried away, we should really make sure that the correlation measure is even relevant for this data.  To do that, make some of the plots we made above with our new data.  With a scatter plot, the data still seems pretty strongly correlated:</p>
+
+<p><img src="/assets/images/correlation/fake_data_scatter.png" alt="img" title="Scatter of random data" /></p>
+
+<p>Notice something very different in this plot.  Unlike the scatter plot of the data that was <em>actually</em> correlated, this data’s values are dependent on time. In other words, if you tell me the time a data point was collected, I can tell you approximately what its value is. That means that the data is <em>not</em> identically distributed.  </p>
+
+<p>To make the point a little clearer, let’s make a histogram of the data.</p>
+
+<p><img src="/assets/images/correlation/fake_data_histogram.png" alt="img" title="Histogram of random data" /></p>
+
+<p>Looks pretty good. But now let’s again color each bin according to the proportion of data from a particular time interval.</p>
+
+<p><img src="/assets/images/correlation/fake_data_histogram_color.png" alt="img" title="Histogram of random data, colored by time." /></p>
+
+<p>Each bin in this histogram does <em>not</em> have an equal proportion of data from each time interval.  Plotting the histograms separately reinforces this observation:</p>
+
+<p><img src="/assets/images/correlation/fake_data_histogram_stacked.png" alt="img" title="Histograms of random data, colored by time." /></p>
+
+<p>If you take data at different time points, the data is <em>not</em> identically distributed.  This means <script type="math/tex">r^2</script> is misleading, as it’s value is interpreted under the assumption that data is i.i.d.</p>
+
+<h2 id="autocorrelation">Autocorrelation</h2>
+
+<p>We’ve talked about being identically distributed, but what about independent?  Independence of data means that the value of a particular datapoint does not depend on the values recorded before it. Looking at the histograms above, it’s clear that this is not the case for the randomly generated time series. If I tell you the value of <script type="math/tex">y</script> at a given time is 30, for example, you can be pretty sure that the next value is going to be closer to 30 than 0.</p>
+
+<p>One way to formalize this relationship is by looking at a time series’ <em>autocorrelation</em>. As the name suggests, it’s a way to measure how much a series is correlated with itself.  This is done at different <em>lags</em>.  For example, each point in a series can be plotted against each point two points behind it.  For the first (actually correlated) dataset, this gives a plot like the following:</p>
+
+<p><img src="/assets/images/correlation/correlated_lag_2.png" alt="img" title="Lag 2 correlation for correlated data" /></p>
+
+<p>If we do the same thing with the time series data, we get:</p>
+
+<p><img src="/assets/images/correlation/fake_data_lag_2.png" alt="img" title="Lag 2 correlation for random data" /></p>
+
+<p>Wow! That’s pretty correlated! That means that the time associated with each datapoint tells us a <em>lot</em> about the value of that datapoint.  In other words, the data points are <em>not</em> independent of each other.</p>
+
+<p>If we plot the autocorrelation function at all lags from the first dataset, we get the following:</p>
+
+<p><img src="/assets/images/correlation/acf_correlated.png" alt="img" title="ACF for correlated data" /></p>
+
+<p>The value is 1 at lag=0, because each data is obviously correlated with itself.  All the other values are pretty close to 0.  If we look at the autocorrelation of the time series data, we get something very different:</p>
+
+<p><img src="/assets/images/correlation/acf_time_series.png" alt="img" title="ACF for time series data" /></p>
+
+<p>Again, the height of each bar tells how correlated each time point is, on average, with other points <em>lag</em> away.</p>
+
+<p>But why does this matter? Because the <script type="math/tex">r^2</script> value we use to measure correlation is interpretable only when the autocorrelation of each variable is 0 at all lags. </p>
+
+<p>If we want to find the correlation between two time series, we can use some tricks to make the ACF 0.  If we do this, the <script type="math/tex">r^2</script> will be interpretable as the correlation between the time series (explained in the next section).  The easiest method is to just “difference” the data - that is, convert the time series into a new series, where each value is the difference between adjacent values in the nearby series.  If we do this to our time series, the autocorrelation function becomes:</p>
+
+<p><img src="/assets/images/correlation/acf_differenced_time_series.png" alt="img" title="ACF for differenced_time series data" /></p>
+
+<p>What happens if we plot the <em>differenced</em> data against time?  We get:</p>
+
+<p><img src="/assets/images/correlation/differenced_time_series.png" alt="img" title="Differenced time series data" /></p>
+
+<p>They don’t look correlated anymore! How disappointing.  But the data was <em>not</em> correlated. Each variable was generated independently of the other. They just looked correlated.  That’s the problem.  But it was entirely a figment. The two variables only looked correlated because they were actually <em>autocorrelated</em> in a similar way.  That’s exactly what’s going on with the spurious correlation plots on the website I mentioned at the beginning.  If we plot the non-autocorrelated versions of these data against each other, we get:</p>
+
+<p><img src="/assets/images/correlation/differenced_scatter.png" alt="img" title="Scatter of differenced time series data" /></p>
+
+<p>The time no longer tells us about the value of the data.  As a consequence, the data no longer appear correlated. This reveals that the data is actually unrelated.  It’s not as fun, but it’s the truth.</p>
+
+<h2 id="r2"><script type="math/tex">r^2</script></h2>
+
+<p>The remaining question is why <script type="math/tex">r^2</script> requires the data to be i.i.d.  The answer lies in how <script type="math/tex">r^2</script> is calculated.  The mathy answer is a little complicated (see <a href="https://stats.stackexchange.com/questions/7376/does-correlation-assume-stationarity-of-data">here</a> for a good explanation). In the interests of keeping this post simple and graphical, I’ll show some more plots instead of delving into the math.</p>
+
+<p>The context in which <script type="math/tex">r^2</script> is used is that of fitting a linear model to “explain” or predict <script type="math/tex">y</script> as a function of <script type="math/tex">x</script>.  This is just the <script type="math/tex">y = mx + b</script> from middle school math class.  The more highly correlated <script type="math/tex">x</script> is with <script type="math/tex">y</script> (the <script type="math/tex">x</script> vs <script type="math/tex">y</script> scatter looks more like a line and less like a cloud), the more information the value of <script type="math/tex">x</script> gives us about the value of <script type="math/tex">y</script>.  To get this measure of “cloudiness”, we can first fit a line:</p>
+
+<p><img src="/assets/images/correlation/correlated_regression.png" alt="img" title="Linear regression on correlated data" /></p>
+
+<p>The line represents the value we would predict for <script type="math/tex">y</script> given a certain value of <script type="math/tex">x</script>. We can then measure how far each <script type="math/tex">y</script> value is from the predicted value. If we plot those differences, called <script type="math/tex">residuals</script>, we get:</p>
+
+<p><img src="/assets/images/correlation/correlated_regression.png" alt="img" title="Linear regression on correlated data" /></p>
+
+<p>The wider the cloud the more uncertainty we still have about <script type="math/tex">y</script>.  In more technical words, it’s the amount of variance that’s still ‘unexplained’, despite knowing a given <script type="math/tex">x</script> value.  The compliment of this, the proportion of variance ‘explained’ in <script type="math/tex">y</script> by <script type="math/tex">x</script>, is the <script type="math/tex">r^2</script> value.  If knowing <script type="math/tex">x</script> tells us nothing about <script type="math/tex">y</script>, then <script type="math/tex">r^2</script> = 0.  If knowing <script type="math/tex">x</script> tells us <script type="math/tex">y</script> exactly, then there is nothing left ‘unexplained’ about the values of <script type="math/tex">y</script>, and <script type="math/tex">r^2</script> = 1.</p>
+
+<p><script type="math/tex">r</script> is calculated using your sample data.  The assumption and hope is that as you get more data, <script type="math/tex">r</script> will get closer and closer to the “true” value, <a href="https://en.wikipedia.org/wiki/Pearson_product-moment_correlation_coefficient">called <script type="math/tex">\rho</script></a>.  If you take chunks of data from different time points, your <script type="math/tex">r</script> should be similar, since you’re just taking smaller samples. In fact, <script type="math/tex">r</script> itself can be treated as a variable that’s randomly distributed around a “true” value.  If you take chunks of our correlated non-time-series data and calculate their sample correlation coefficients, you get the following:</p>
+
+<p><img src="/assets/images/correlation/correlated_subgroup_correlations.png" alt="img" title="Correlation coefficients for smaller chunks of the correlated data" /></p>
+
+<p>where the line represents the sample correlation coefficient <script type="math/tex">r</script> for the entire sample.  The important thing is that <script type="math/tex">r</script> gives you a reasonable idea of what the population <script type="math/tex">r</script> is, and becomes a better estimator the more data you get.  If you do the same thing for our time series data, you get:</p>
+
+<p><img src="/assets/images/correlation/fake_subgroup_correlations.png" alt="img" title="Correlation coefficients for smaller chunks of the time series data" /></p>
+
+<p>As you can see, the sample correlation coefficient varies a LOT depending on what data subset you’re using. Why, then, should we assume that the particular sample <script type="math/tex">r</script> value we’ve estimated for our time series is a good estimation of the “true” population correlation coefficient <script type="math/tex">\rho</script>?  That’s right, we shouldn’t.</p>
+
+<p>The main takeaway here is that the correlation coefficient <script type="math/tex">r</script> is NOT an estimator of the population correlation coefficient <script type="math/tex">\rho</script> <em>when the time series are autocorrelated</em>.  You can find correlations between time series, but first you have to use some method to “detrend” the data and take out any autocorrelation. If you do that, the sample <script type="math/tex">r</script> value can then be interpreted as an estimator of the true population value.</p>
+
+<p>Since the true value for unrelated variables like the ones in our time series is 0, looking at subpopulations of the differenced data should give us correlations of 0.</p>
+
+
+
+      <div class="footer">
+        <div class="disclaimer">
+  
+  <p>
+    The postings on this site are my own.
+  </p>
+  
+
+  <p>
+    © Tom Christie, 2014 &mdash; built with Jekyll using Lagom theme
+  </p>
+</div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>
