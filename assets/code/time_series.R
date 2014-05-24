@@ -33,8 +33,12 @@ ggplot(data, aes(order)) +
 
 
 #scatter plot
+model <- lm(y~x,data)
+coef <- coef(model)
 qplot(x,y,data=data)
-qplot(x,y,data=data,color=factor(time)) + labs(color="Time")
+qplot(x,y,data=data,color=factor(time)) + labs(color="Time") + 
+    geom_abline(intercept=coef[1],
+                slope=coef[2])
 
 data_discretized <- discretize(data,disc="equalwidth",nbins=30)
 
