@@ -5,21 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="$PROJECT_DIR$/_site/404.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_includes/head.html" afterPath="$PROJECT_DIR$/_includes/head.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/index.html" afterPath="$PROJECT_DIR$/_site/articles/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/correlation/index.html" afterPath="$PROJECT_DIR$/_site/articles/correlation/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/ipython-notebook/index.html" afterPath="$PROJECT_DIR$/_site/ipython-notebook/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/islamic-geometric-patterns/index.html" afterPath="$PROJECT_DIR$/_site/islamic-geometric-patterns/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/tags/index.html" afterPath="$PROJECT_DIR$/_site/tags/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/theme-setup/index.html" afterPath="$PROJECT_DIR$/_site/theme-setup/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/page.html" afterPath="$PROJECT_DIR$/_layouts/page.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_layouts/post.html" afterPath="$PROJECT_DIR$/_layouts/post.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/assets/code/time_series.R" afterPath="$PROJECT_DIR$/_site/assets/code/time_series.R" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/code/time_series.R" afterPath="$PROJECT_DIR$/assets/code/time_series.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tom-christie.github.io.iws" />
@@ -67,7 +54,7 @@
       <file leaf-file-name="head.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_includes/head.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="2951" selection-end="2951" vertical-scroll-proportion="0.5036765" vertical-offset="416" max-vertical-offset="1005">
+            <state line="45" column="41" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.47610295" vertical-offset="416" max-vertical-offset="1005">
               <folding />
             </state>
           </provider>
@@ -577,7 +564,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_includes/head.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="2951" selection-end="2951" vertical-scroll-proportion="0.5036765" vertical-offset="416" max-vertical-offset="1005">
+        <state line="45" column="41" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.47610295" vertical-offset="416" max-vertical-offset="1005">
           <folding />
         </state>
       </provider>
