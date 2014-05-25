@@ -127,7 +127,7 @@ What happens if we plot the *differenced* data against time?  We get:
 
 ![img](/assets/images/correlation/differenced_time_series.png "Differenced time series data")
 
-They don't look correlated anymore! How disappointing.  But the data was *not* correlated correlated in the first place: each variable was generated independently of the other. They just looked correlated.  That's the problem.  The apparent correlation was entirely a mirage.  The two variables only looked correlated because they were actually *autocorrelated* in a similar way.  That's exactly what's going on with the spurious correlation plots on the website I mentioned at the beginning.  If we plot the non-autocorrelated versions of these data against each other, we get:
+They don't look correlated anymore! How disappointing.  But the data was *not* correlated in the first place: each variable was generated independently of the other. They just looked correlated.  That's the problem.  The apparent correlation was entirely a mirage.  The two variables only looked correlated because they were actually *autocorrelated* in a similar way.  That's exactly what's going on with the spurious correlation plots on the website I mentioned at the beginning.  If we plot the non-autocorrelated versions of these data against each other, we get:
 
 ![img](/assets/images/correlation/differenced_scatter.png "Scatter of differenced time series data")
 
