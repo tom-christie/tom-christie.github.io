@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/404.html" afterPath="$PROJECT_DIR$/_site/404.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_config.yml" afterPath="$PROJECT_DIR$/_config.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/about.md" afterPath="$PROJECT_DIR$/about.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" afterPath="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/about/index.html" afterPath="$PROJECT_DIR$/_site/about/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/index.html" afterPath="$PROJECT_DIR$/_site/articles/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/correlation/index.html" afterPath="$PROJECT_DIR$/_site/articles/correlation/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/ipython-notebook/index.html" afterPath="$PROJECT_DIR$/_site/ipython-notebook/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/islamic-geometric-patterns/index.html" afterPath="$PROJECT_DIR$/_site/islamic-geometric-patterns/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/tags/index.html" afterPath="$PROJECT_DIR$/_site/tags/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/theme-setup/index.html" afterPath="$PROJECT_DIR$/_site/theme-setup/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tom-christie.github.io.iws" />
@@ -40,22 +30,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_config.yml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="_config.yml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/_config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="16" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.479798" vertical-offset="270" max-vertical-offset="1050">
-              <folding />
+            <state line="37" column="16" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1050">
+              <folding>
+                <marker date="1400964829000" expanded="true" signature="1117:1159" placeholder="links:" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2014-05-20-correlation.md" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="2014-05-20-correlation.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2014-05-20-correlation.md">
           <provider editor-type-id="MarkdownPreviewEditor">
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="59" selection-start="4364" selection-end="4364" vertical-scroll-proportion="-4.811321" vertical-offset="360" max-vertical-offset="2610">
+            <state line="63" column="848" selection-start="7105" selection-end="7105" vertical-scroll-proportion="0.2495379" vertical-offset="810" max-vertical-offset="2610">
               <folding />
             </state>
           </provider>
@@ -156,9 +148,9 @@
         <option value="$PROJECT_DIR$/_layouts/page.html" />
         <option value="$PROJECT_DIR$/_layouts/post.html" />
         <option value="$PROJECT_DIR$/_includes/head.html" />
-        <option value="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" />
         <option value="$PROJECT_DIR$/about.md" />
         <option value="$PROJECT_DIR$/_config.yml" />
+        <option value="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" />
       </list>
     </option>
   </component>
@@ -399,7 +391,9 @@
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="41" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1050">
-          <folding />
+          <folding>
+            <marker date="1400964829000" expanded="true" signature="1117:1159" placeholder="links:" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -420,7 +414,9 @@
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="41" selection-start="72" selection-end="72" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1050">
-          <folding />
+          <folding>
+            <marker date="1400964829000" expanded="true" signature="1117:1159" placeholder="links:" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -580,16 +576,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/_posts/2014-05-20-correlation.md">
-      <provider editor-type-id="MarkdownPreviewEditor">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="59" selection-start="4364" selection-end="4364" vertical-scroll-proportion="-4.811321" vertical-offset="360" max-vertical-offset="2610">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/about.md">
       <provider editor-type-id="MarkdownPreviewEditor">
         <state />
@@ -602,7 +588,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_config.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="16" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.479798" vertical-offset="270" max-vertical-offset="1050">
+        <state line="37" column="16" selection-start="1157" selection-end="1157" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1050">
+          <folding>
+            <marker date="1400964829000" expanded="true" signature="1117:1159" placeholder="links:" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/_posts/2014-05-20-correlation.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="63" column="848" selection-start="7105" selection-end="7105" vertical-scroll-proportion="0.2495379" vertical-offset="810" max-vertical-offset="2610">
           <folding />
         </state>
       </provider>
