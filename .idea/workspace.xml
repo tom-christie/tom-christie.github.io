@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" afterPath="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tom-christie.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,7 +45,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="848" selection-start="7105" selection-end="7105" vertical-scroll-proportion="0.2495379" vertical-offset="810" max-vertical-offset="2610">
+            <state line="63" column="847" selection-start="7104" selection-end="7104" vertical-scroll-proportion="0.36044362" vertical-offset="750" max-vertical-offset="2610">
               <folding />
             </state>
           </provider>
@@ -600,7 +598,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="63" column="848" selection-start="7105" selection-end="7105" vertical-scroll-proportion="0.2495379" vertical-offset="810" max-vertical-offset="2610">
+        <state line="63" column="847" selection-start="7104" selection-end="7104" vertical-scroll-proportion="0.36044362" vertical-offset="750" max-vertical-offset="2610">
           <folding />
         </state>
       </provider>
