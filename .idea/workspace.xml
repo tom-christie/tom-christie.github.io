@@ -4,9 +4,7 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" afterPath="$PROJECT_DIR$/_posts/2014-05-20-correlation.md" />
-    </list>
+    <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="" />
     <ignored path="tom-christie.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -45,7 +43,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="79" selection-start="12941" selection-end="12941" vertical-scroll-proportion="0.33271718" vertical-offset="1755" max-vertical-offset="2610">
+            <state line="129" column="79" selection-start="12941" selection-end="12941" vertical-scroll-proportion="0.33395177" vertical-offset="1755" max-vertical-offset="2610">
               <folding />
             </state>
           </provider>
@@ -598,7 +596,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="79" selection-start="12941" selection-end="12941" vertical-scroll-proportion="0.33271718" vertical-offset="1755" max-vertical-offset="2610">
+        <state line="129" column="79" selection-start="12941" selection-end="12941" vertical-scroll-proportion="0.33395177" vertical-offset="1755" max-vertical-offset="2610">
           <folding />
         </state>
       </provider>
