@@ -28,7 +28,7 @@
 
         if (GLOBAL.state.is("1BACK_INTRO")) {
             this.create1BackIntro();
-        } else if (GLOBAL.state.is("MODIFIED_ARROWS_INTRO")) {
+        } else if (GLOBAL.state.is("MODIFIED_INTRO")) {
             this.createModifierIntro();
         }
         //console.log("INTRO VIEW",this);
@@ -115,7 +115,7 @@
         this.addChild(this.button_modifier_2);
         //todo check to see whether test is available
 
-        this.doneTweeningListener = this.on("done_tweening", this.handleTestTrainSelection); //listen for finished tweening
+        this.doneShrinkingListener = this.on("done_tweening", this.handleTestTrainSelection); //listen for finished tweening
                 //this always goes to train now - how to differentiate btw train and test? Make a new state?
 
     };
@@ -130,7 +130,7 @@
 
     p.createModifierTrainIntro = function () {
 
-        this.off("done_tweening",this.doneTweeningListener);//remove listener
+        this.off("done_tweening",this.doneShrinkingListener);//remove listener
         var slide_time = 600;
 
         this.instructions_modifier_train = new Button(GLOBAL.GameInfo.width / 2, GLOBAL.GameInfo.height / 2, 600, 380)
@@ -148,7 +148,7 @@
             .setText('Go!')
             .setTextSize(48)
             //.setMouseoverColor(GLOBAL.GameInfo.introButtonColorMouseover)
-            .call(this.CALLselectModifiedTrainOK)
+            .call(GLOBAL.state.CALLselectModifiedTrainOK)
             .tweenIn('x', 1000, 0, slide_time, createjs.Ease.backOut)
             .tweenOut('y', 800, 400, createjs.Ease.backIn);
         this.addChild(this.button_modifier_train);
@@ -158,9 +158,11 @@
 
     };
 
+
+
     p.createModifierTestIntro = function () {
 
-        this.off("done_tweening",this.doneTweeningListener);//remove listener
+        this.off("done_tweening",this.doneShrinkingListener);//remove listener
         var slide_time = 600;
 
         this.instructions_modifier_test = new Button(GLOBAL.GameInfo.width / 2, GLOBAL.GameInfo.height / 2, 600, 380)
@@ -178,7 +180,7 @@
             .setText('1')
             .setTextSize(48)
             //.setMouseoverColor(GLOBAL.GameInfo.introButtonColorMouseover)
-            .call(this.CALLselectModifiedTestOK)
+            .call(GLOBAL.state.CALLselectModifiedTestOK)
             .tweenIn('x', 1000, 0, slide_time, createjs.Ease.backOut)
             .tweenOut('y', 800, 400, createjs.Ease.backIn);
         this.addChild(this.button_modifier_test_1);
@@ -189,7 +191,7 @@
             .setText('3')
             .setTextSize(48)
             //.setMouseoverColor(GLOBAL.GameInfo.introButtonColorMouseover)
-            .call(this.CALLselectModifiedTestOK)
+            .call(GLOBAL.state.CALLselectModifiedTestOK)
             .tweenIn('x', 1000, 0, slide_time, createjs.Ease.backOut)
             .tweenOut('y', 800, 400, createjs.Ease.backIn);
         this.addChild(this.button_modifier_test_2);
@@ -197,18 +199,15 @@
 
     };
 
-
-
-
-
     p.callTweenOut = function(){
         //exists solely to transfer scope
         this.tweenOut();
     };
 
 
+    //todo the problem is here - since the former buttons aren't removed, they're called again!!!
     p.tweenOut = function () {
-        //console.log("i was called now!!!")
+        console.log("i was called now!!!")
         var l = this.getNumChildren();
         // iterate through all the children and tween out:
         for (var i = 0; i < l; i++) {

@@ -54,7 +54,7 @@
             var directions = new Array(this.numArrowViews);
             this.arrowViewArray = new Array(this.numArrowViews);
             this.arrowViewArray[0] = new GLOBAL.ArrowView(0, Math.floor(Math.random() * 4));
-            this.arrowViewArray[1] = new GLOBAL.ArrowView(0, Math.floor(Math.random() * 4));
+            this.arrowViewArray[1] = new GLOBAL.ArrowView(1, Math.floor(Math.random() * 4));
 
             //this is where the arrows are selected - at this point, the markov structure is on the arrows, not the responses.
             //we want it to be based on the RESPONSES, i.e. probability that the target RESPONSE is the same.
@@ -169,7 +169,7 @@
 
         },
 
-        startNewTrial: function () {
+        startTimer: function () {
             this.view = null;
             this.initTrial();
             this.view = new GLOBAL.OneBackTaskView(this.options);

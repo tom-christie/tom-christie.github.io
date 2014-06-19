@@ -119,15 +119,46 @@
                         GLOBAL.lastKeyPressed = 'space';
                         GLOBAL.currentView.keyPressed();
                     }
+                },
+                {
+                    "keys": "up",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 'up';
+                        GLOBAL.currentView.keyPressed();
+                    }
+                },
+                {
+                    "keys": "down",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 'down';
+                        GLOBAL.currentView.keyPressed();
+                    }
+                },
+                {
+                    "keys": "left",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 'left';
+                        GLOBAL.currentView.keyPressed();
+                    }
+                },
+                {
+                    "keys": "right",
+                    "prevent_repeat": true,
+                    "on_keydown": function (e) {
+                        GLOBAL.lastKeyPressed = 'right';
+                        GLOBAL.currentView.keyPressed();
+                    }
                 }
             ];
             GLOBAL.keyboardListener.register_many(keyCombos);
 
-            //get user ID
-            while (!GLOBAL.userID) {
-                GLOBAL.userID = prompt("Please enter your name or ID number. This will be used to record your results.", "");
-            }
-
+//            while (!GLOBAL.userID) {
+//                GLOBAL.userID = prompt("Please enter your name or ID number. This will be used to record your results.", "");
+//            }
+            GLOBAL.userID = 'test';
             //add these to global so all classes can access it
             GLOBAL.stage = stage;
             GLOBAL.GameInfo = queue.getResult("manifest");
@@ -147,7 +178,7 @@
 
             this.createMenu();
 
-            GLOBAL.doneTweeningListener = GLOBAL.stage.addEventListener("done_tweening_out", GLOBAL.state.handleDoneTweeningOut); //listen for finished tweening
+            GLOBAL.doneShrinkingListener = GLOBAL.stage.addEventListener("done_tweening_out", GLOBAL.state.handleDoneTweeningOut); //listen for finished tweening
 
 
         },
@@ -155,15 +186,26 @@
         createMenu: function () {
 
             //start from non-normal place
+
 //            GLOBAL.oneBackTask = new GLOBAL.OneBackTask();
-//            GLOBAL.oneBackTask.startNewTrial();
+//            GLOBAL.oneBackTask.startTimer();
 //            GLOBAL.state.current = "1BACK_TASK";
 //            GLOBAL.currentView = GLOBAL.oneBackTask;
 //            GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
-//
-            GLOBAL.currentView = new GLOBAL.Menu();
+            GLOBAL.modifierTask = new GLOBAL.ModifierTask();
+            console.log(GLOBAL.modifierTask);
+            GLOBAL.modifierTask.startTimer();
+            console.log(GLOBAL.modifierTask);
+            GLOBAL.state.current = "MODIFIED_TRAIN";
+            GLOBAL.currentView = GLOBAL.modifierTask;
             GLOBAL.stage.addChild(GLOBAL.currentView.view);
+
+
+
+
+//            GLOBAL.currentView = new GLOBAL.Menu();
+//            GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
         },
 
@@ -189,25 +231,35 @@
                 initial: 'MENU',
                 events: [
 
-                    //1-back loop
+                    //1-back loop - intro
                     { name: 'select1Back', from: 'MENU', to: '1BACK_INTRO' },
                     { name: 'select1BackOK', from: '1BACK_INTRO', to: '1BACK_TASK' },
+
                     { name: 'oneBackTrialFinished', from: '1BACK_TASK', to: '1BACK_RESULTS' },
                     { name: 'oneBackNewTrial', from: '1BACK_RESULTS', to: '1BACK_TASK'},
                     { name: 'oneBackAllTrialsFinished', from: '1BACK_RESULTS', to: '1BACK_RESULTS_FINAL'},
                     { name: 'oneBackToComplete', from: '1BACK_RESULTS_FINAL', to: 'MENU'},
 
-                    //modified arrows
-                    { name: 'selectModifiedArrows', from: 'MENU', to: 'MODIFIED_ARROWS_INTRO' },
-                    //training loop - train -> count display -> task -> count display -> task -> etc
-                    { name: 'selectModifiedTrain', from: 'MODIFIED_ARROWS_INTRO', to: 'MODIFIED_INTRO_TRAIN'},
-                    { name: 'selectModifiedTrainOK', from: 'MODIFIED_INTRO_TRAIN', to: 'MODIFIED_ARROWS_TASK_TRAIN'},
-                    { name: 'finishedModifiedArrowsTrain', from: 'MODIFIED_ARROWS_TASK_TRAIN', to: 'MODIFIED_INTRO_TRAIN'},
+                    //modified arrows - intro
+                    { name: 'selectModified', from: 'MENU', to: 'MODIFIED_INTRO' },
+                    { name: 'selectModifiedTrain', from: 'MODIFIED_INTRO', to: 'MODIFIED_INTRO_TRAIN'},
+                    { name: 'selectModifiedTrainOK', from: 'MODIFIED_INTRO_TRAIN', to: 'MODIFIED_TRAIN'},
+
+                    { name: 'modifiedTrainTrialFinished', from: 'MODIFIED_TRAIN', to: 'MODIFIED_TRAIN_RESULTS' },
+                    { name: 'modifiedTrainNewTrial', from: 'MODIFIED_TRAIN_RESULTS', to: 'MODIFIED_TRAIN'},
+                    { name: 'modifiedTrainAllTrialsFinished', from: '1BACK_RESULTS', to: 'MODIFIED_TRAIN_RESULTS_FINAL'},
+                    { name: 'modifiedTrainToComplete', from: '1BACK_RESULTS_FINAL', to: 'MENU'},
 
 
-                    { name: 'selectModifiedTest', from: 'MODIFIED_ARROWS_INTRO', to: 'MODIFIED_INTRO_TEST'},
-                    { name: 'selectModifiedTestOK', from: 'MODIFIED_INTRO_TEST', to: 'MODIFIED_ARROWS_TASK_TEST'},
-                    { name: 'finishedModifiedArrowsTest', from: 'MODIFIED_ARROWS_TASK_TEST', to: 'MODIFIED_INTRO_TEST'},
+                    { name: 'finishedModifiedTrain', from: 'MODIFIED_ARROWS_TASK_TRAIN', to: 'MODIFIED_INTRO_TRAIN'},
+
+
+//                    { name: 'selectModifiedTest', from: 'MODIFIED_ARROWS_INTRO', to: 'MODIFIED_INTRO_TEST'},
+//                    { name: 'selectModifiedTestOK', from: 'MODIFIED_INTRO_TEST', to: 'MODIFIED_ARROWS_TASK_TEST'},
+//                    { name: 'modifiedArrowsTrialFinished', from: 'MODIFIED_INTRO_TEST', to: 'MODIFIED_ARROWS_TASK_TEST_RESULTS'},
+//                    { name: 'modifiedArrowsNewTrial', from: 'MODIFIED_INTRO_TEST', to: 'MODIFIED_ARROWS_TASK_TEST'},
+//                    { name: 'selectModifiedTestOK', from: 'MODIFIED_INTRO_TEST', to: 'MODIFIED_ARROWS_TASK_TEST'},
+//                    { name: 'finishedModifiedArrowsTest', from: 'MODIFIED_ARROWS_TASK_TEST', to: 'MODIFIED_INTRO_TEST'},
 
 
                     { name: 'modifiedArrowsToComplete', from: ['MODIFIED_ARROWS_TASK_TRAIN', 'MODIFIED_ARROWS_TASK_TEST'], to: 'COMPLETE'  }
@@ -228,17 +280,15 @@
             GLOBAL.state.CALLselect1Back = function () {
                 GLOBAL.state.select1Back(); //why can't you just call this instead???
                 GLOBAL.stage.removeAllChildren();
-
                 //add intro to stage
                 GLOBAL.currentView = new GLOBAL.Intro();
                 GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
             };
 
-            GLOBAL.state.CALLselectModifiedArrows = function () {
-                GLOBAL.state.selectModifiedArrows();//
+            GLOBAL.state.CALLselectModified = function () {
+                GLOBAL.state.selectModifiedArrows();
                 GLOBAL.stage.removeAllChildren();
-
                 //add intro to stage
                 GLOBAL.currentView = new GLOBAL.Intro();
                 GLOBAL.stage.addChild(GLOBAL.currentView.view);
@@ -251,18 +301,14 @@
                 GLOBAL.stage.removeAllChildren();
 
                 GLOBAL.oneBackTask = new GLOBAL.OneBackTask();
-                GLOBAL.oneBackTask.startNewTrial();
+                GLOBAL.oneBackTask.startTimer();
                 //GLOBAL.state.current = "1BACK_TASK";
                 GLOBAL.currentView = GLOBAL.oneBackTask;
                 GLOBAL.stage.addChild(GLOBAL.currentView.view);
-
-//
-//
 //                //add 1-back task to stage
 //                GLOBAL.currentView = new GLOBAL.OneBackTask();
 //                GLOBAL.oneBackTask = GLOBAL.currentView; //just for reference - this is a pointer, right?
 //                GLOBAL.stage.addChild(GLOBAL.currentView.view);
-
 
             };
 
@@ -279,17 +325,12 @@
                 //do stuff depending on what state you're now in
 
 
-                if (GLOBAL.state.is("1BACK_RESULTS")) {
+                if (GLOBAL.state.is("1BACK_RESULTS") || GLOBAL.state.is("MODIFIED_TRAIN_RESULTS")) {
                     //display results
-                    //console.log("here!",GLOBAL.state.current);
-                    GLOBAL.oneBackTask.view.removeChildren();
-                    GLOBAL.oneBackTask.view.showResults();
-
-                } else if (GLOBAL.state.is("1BACK_TASK")) {
-
+                    GLOBAL.currentView.view.removeChildren();
+                    GLOBAL.currentView.view.showResults();
 
                 }
-
             };
 
 
@@ -300,7 +341,7 @@
                     //console.log("trying to make a new trial");
                     GLOBAL.state.oneBackNewTrial();
                     GLOBAL.stage.removeChild(GLOBAL.oneBackTask.view);
-                    GLOBAL.oneBackTask.startNewTrial();
+                    GLOBAL.oneBackTask.startTimer();
                     GLOBAL.stage.addChild(GLOBAL.currentView.view);
                 } else {
                     //finished last trial, do something different
@@ -324,6 +365,7 @@
 
             GLOBAL.state.CALLselectModifiedTrain = function () {
                 GLOBAL.state.selectModifiedTrain();
+
             };
 
             GLOBAL.state.CALLselectModifiedTest = function () {
@@ -332,15 +374,45 @@
 
             GLOBAL.state.CALLselectModifiedTrainOK = function () {
                 GLOBAL.state.selectModifiedTrainOK();
+                GLOBAL.stage.removeAllChildren();
+                GLOBAL.modifierTask = new GLOBAL.ModifierTask();
+                GLOBAL.modifierTask.startTimer();
+                GLOBAL.currentView = GLOBAL.modifierTask;
+                GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
-                //add Modifier training task to stage
-//                GLOBAL.currentView = new GLOBAL.Intro();
-//                GLOBAL.stage.addChild(GLOBAL.currentView.view);
 
             };
 
+            GLOBAL.state.CALLmodifierTrialFinished = function () {
+                GLOBAL.state.modifiedTrainTrialFinished();
+                GLOBAL.currentView.view.tweenOut();
+
+            };
+
+
+
+            GLOBAL.state.CALLmodifiedTrainNewTrial = function () {
+                console.log("NEW TRIAL BIATCH")
+                //if not at last trial
+                if (GLOBAL.modifierTask.currentTrialNumber < GLOBAL.modifierTask.numTrials) {
+                    //console.log("trying to make a new trial");
+                    GLOBAL.state.modifiedTrainNewTrial();
+                    GLOBAL.stage.removeChild(GLOBAL.modifierTask.view);
+                    GLOBAL.modifierTask.startTimer();
+                    GLOBAL.stage.addChild(GLOBAL.currentView.view);
+                } else {
+                    //finished last trial, do something different
+                    GLOBAL.state.modifiedTrainAllTrialsFinished();
+                    GLOBAL.modifierTask.view.removeChildren();
+                    GLOBAL.modifierTask.view.showFinalResults();
+                }
+            };
+
+
+
+
             GLOBAL.state.CALLselectModifiedTestOK = function () {
-                GLOBAL.state.selectModifiedTrainOK();
+                GLOBAL.state.selectModifiedTestOK();
 
 
                 //add modifier testing task to stage
@@ -369,22 +441,6 @@
 
 
         keyPressed: function (event) {
-
-//
-//            console.log('hi',GLOBAL.keyboardListener);
-//            GLOBAL.keyboardListener.simple_combo("space", function() {
-//                GLOBAL.lastKeyPressed = 'space';
-//                GLOBAL.currentView.keyPressed();
-//                GLOBAL.stage.update();
-//            });
-////
-////
-//            GLOBAL.keyboardListener.simple_combo("s", function() {
-//                GLOBAL.lastKeyPressed = 's';
-//                GLOBAL.currentView.keyPressed();
-//                GLOBAL.stage.update();
-//            });
-
 
         },
 

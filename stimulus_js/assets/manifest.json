@@ -10,6 +10,9 @@
     "arrowInnerColor": "#ff9300",
     "arrowOuterColor": "#2d2d2d",
     "arrowColor": "#2d2d2d",
+    "modifierInnerColor": "#FDDA52",
+    "modifierOuterColor": "#2d2d2d",
+    "modifierColor": "#2d2d2d",
     "scorecardCorrectColor": "#a3e785",
     "scorecardIncorrectColor": "#fe3b30",
     "scorebardBorderColor": "#333333",
@@ -25,6 +28,12 @@
     "timerHeight":"20",
 
     "oneBackDuration": "60",
-    "oneBackTrialCount":"60"
+    "oneBackTrialCount":"60",
+
+    "modifierDuration": "60",
+    "modifierTrialCount":"60",
+    "arrowAlpha":0.75,
+    "modifierAlpha":0.88
+
 
 }

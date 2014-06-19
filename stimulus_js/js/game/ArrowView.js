@@ -37,31 +37,17 @@
 
         this.Container_initialize();
 
-        GameInfo = {
-            "width": "800",
-            "height": "480",
-            "backgroundColor": "#34AADC",
-            "menuButtonColor": "#FFCC00",
-            "menuButtonColorMouseover": "#FF9500",
-            "introRegionColor": "#4CD964",
-            "introButtonColor": "#FFCC00",
-            "introButtonColorMouseover": "#FF9500",
-            "arrowInnerColor": "#ff9300",
-            "arrowOuterColor": "#2d2d2d",
-            "arrowColor": "#2d2d2d"
-
-        };
 
 
         this.index = index;
         this.direction = direction;
 
         this.radius = 80; //default
-        this.x = GameInfo.width / 2;// - this.radius; //describes center
-        this.y = GameInfo.height / 2;// - this.radius; //center
+        this.x = GLOBAL.GameInfo.width / 2;// - this.radius; //describes center
+        this.y = GLOBAL.GameInfo.height / 2;// - this.radius; //center
 
-        this.outerColor = GameInfo.arrowOuterColor;//transparent if color is not set
-        this.innerColor = GameInfo.arrowInnerColor;
+        this.outerColor = GLOBAL.GameInfo.arrowOuterColor;//transparent if color is not set
+        this.innerColor = GLOBAL.GameInfo.arrowInnerColor;
         this.borderWidth = 4;
         this.isArrow = true;
         this.shouldTweenOut = true;
@@ -187,12 +173,9 @@
     };
 
     p.doneTweeningOut = function () {
+        console.log('arrow done tweening out')
         var evt2 = new createjs.Event("done_tweening_out");
-        GLOBAL.oneBackTask.view.dispatchEvent(evt2); //send event to parent
-
-
-//        GLOBAL.doneTweeningListener = GLOBAL.stage.addEventListener("done_tweening_out", GLOBAL.state.handleDoneTweeningOut); //listen for finished tweening
-
+        GLOBAL.currentView.view.dispatchEvent(evt2); //send event to parent
     };
 
     //tell stage you're done tweening

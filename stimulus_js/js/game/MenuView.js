@@ -56,15 +56,15 @@
         this.addChild(this.button_1back);
         //this.button_1back.on("click",this.tweenOut.bind(this));
 
-//        this.button_modifier = new Button(GLOBAL.GameInfo.width / 2, 360 + this.offset, 400, 100)
-//            .setColor(GLOBAL.GameInfo.menuButtonColor)
-//            .setText('Modifiers Task')
-//            .setMouseoverColor(GLOBAL.GameInfo.menuButtonColorMouseover)
-//            .call(GLOBAL.state.CALLselectModifiedArrows)
-//            .tweenIn('x',1000,0,slide_time,createjs.Ease.backOut)
-//            .tweenOut('x',-800, 400, createjs.Ease.backIn);
-//        this.addChild(this.button_modifier);
-//        //console.log('menu',GLOBAL.stage);
+        this.button_modifier = new Button(GLOBAL.GameInfo.width / 2, 360 + this.offset, 400, 100)
+            .setColor(GLOBAL.GameInfo.menuButtonColor)
+            .setText('Modifiers Task')
+            .setMouseoverColor(GLOBAL.GameInfo.menuButtonColorMouseover)
+            .call(GLOBAL.state.CALLselectModifiedArrows)
+            .tweenIn('x',1000,0,slide_time,createjs.Ease.backOut)
+            .tweenOut('x',-800, 400, createjs.Ease.backIn);
+        this.addChild(this.button_modifier);
+        //console.log('menu',GLOBAL.stage);
     };
 
     p.onTick = function () {
@@ -95,7 +95,7 @@
             var child = this.getChildAt(i);
             //console.log(i, child, typeof child);
             if(child.isButton) child.tweenOutSelf();
-        };
+        }
 
     };
 

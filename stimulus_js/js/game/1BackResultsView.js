@@ -121,9 +121,9 @@
         this.currentArrow.tweenIn();
 
 
-        this.doneTweeningListener = this.on("done_tweening_out", this.arrowTweenOutFinished); //listen for finished tweening
+        this.doneShrinkingListener = this.on("done_tweening_out", this.arrowTweenOutFinished); //listen for finished tweening
 
-        this.instructionsDoneTweening = this.on("done_tweening_out", this.instructionsTweenOutFinished);
+        this.instructionsDoneTweening = this.on("done_tweening_out", this.startTimer);
 
         //start timer
 
@@ -196,7 +196,7 @@
         //console.log(this.currentArrow.direction);
     };
 
-    p.instructionsTweenOutFinished = function () {
+    p.startTimer = function () {
 
         var slide_time = 600;
 

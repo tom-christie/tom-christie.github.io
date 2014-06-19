@@ -243,22 +243,20 @@
         this.parent.dispatchEvent(evt); //send event to parent
 
         if(this.iWasClicked && this.shouldCallFn){
-        //console.log("trying to call...", this.functionToCall);
+        console.log("trying to call...", this.functionToCall, this.text);
 
+            if(this.shouldCallFn){
         this.functionToCall();
-
+        this.shouldCallFn = false;
+            }
             //console.log('state is now ',GLOBAL.state.current);
 
         }
 
         if(this.triggerStateChange){
-            //console.log("trying to trigger state change");
+            console.log("trying to trigger state change");
             this.triggerStateChange();
         }
-
-
-        //remove self!
-//        this.parent.removeChild.bind(this);
 
     };
 
@@ -270,7 +268,7 @@
     };
 
     p.sendChangeStateEvent = function(){
-
+        console.log('button sending done_tweening_out');
         var evt = new createjs.Event("done_tweening_out");
         GLOBAL.stage.dispatchEvent(evt);
 
