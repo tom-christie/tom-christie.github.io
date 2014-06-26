@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/notes.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/index.html" afterPath="$PROJECT_DIR$/_site/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/index.html" afterPath="$PROJECT_DIR$/_site/articles/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/correlation/index.html" afterPath="$PROJECT_DIR$/_site/articles/correlation/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/ipython-notebook/index.html" afterPath="$PROJECT_DIR$/_site/ipython-notebook/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/tags/index.html" afterPath="$PROJECT_DIR$/_site/tags/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/theme-setup/index.html" afterPath="$PROJECT_DIR$/_site/theme-setup/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/search.json" afterPath="$PROJECT_DIR$/_site/search.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/sitemap.xml" afterPath="$PROJECT_DIR$/_site/sitemap.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" afterPath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" />
     </list>
     <ignored path="tom-christie.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -42,7 +31,7 @@
       <file leaf-file-name="2014-06-26-pypi.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2014-06-26-pypi.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="811" column="33" selection-start="34824" selection-end="34824" vertical-scroll-proportion="0.7289157" vertical-offset="14113" max-vertical-offset="14445">
+            <state line="10" column="41" selection-start="181" selection-end="181" vertical-scroll-proportion="0.45180723" vertical-offset="0" max-vertical-offset="14445">
               <folding />
             </state>
           </provider>
@@ -306,10 +295,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1280" height="774" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35980937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -720,7 +709,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2014-06-26-pypi.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="811" column="33" selection-start="34824" selection-end="34824" vertical-scroll-proportion="0.7289157" vertical-offset="14113" max-vertical-offset="14445">
+        <state line="10" column="41" selection-start="181" selection-end="181" vertical-scroll-proportion="0.45180723" vertical-offset="0" max-vertical-offset="14445">
           <folding />
         </state>
       </provider>
