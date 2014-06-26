@@ -1,0 +1,39 @@
+{
+    "width": "800",
+    "height": "480",
+    "backgroundColor": "#34AADC",
+    "menuButtonColor": "#FFCC00",
+    "menuButtonColorMouseover": "#FF9500",
+    "introRegionColor": "#4CD964",
+    "introButtonColor": "#FFCC00",
+    "introButtonColorMouseover": "#FF9500",
+    "arrowInnerColor": "#ff9300",
+    "arrowOuterColor": "#2d2d2d",
+    "arrowColor": "#2d2d2d",
+    "modifierInnerColor": "#FDDA52",
+    "modifierOuterColor": "#2d2d2d",
+    "modifierColor": "#2d2d2d",
+    "scorecardCorrectColor": "#a3e785",
+    "scorecardIncorrectColor": "#fe3b30",
+    "scorebardBorderColor": "#333333",
+    "scorecardDigitColor": "#333333",
+
+    "scorecardWidth": "150",
+    "scorecardHeight": "150",
+    "scorecardDigitSize":"90",
+
+    "timerUnfilledColor":"#8E8E93",
+    "timerFilledColor":"#4A4A4A",
+    "timerWidth":"300",
+    "timerHeight":"20",
+
+    "oneBackDuration": "60",
+    "oneBackTrialCount":"60",
+
+    "modifierDuration": "60",
+    "modifierTrialCount":"60",
+    "arrowAlpha":0.75,
+    "modifierAlpha":0.88
+
+
+}

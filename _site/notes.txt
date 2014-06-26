@@ -1,0 +1,3 @@
+# serving locally
+sudo gem install jekyll  #update jekyll
+jekyll serve #run at localhost

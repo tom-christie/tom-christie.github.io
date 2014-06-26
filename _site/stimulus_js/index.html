@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Arrow Task</title>
+
+    <!-- Libraries -->
+    <script type="text/javascript" src="js/libs/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="js/libs/easeljs-0.7.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/tweenjs-0.5.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/preloadjs-0.4.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/state-machine.js"></script>
+    <script type="text/javascript" src="js/libs/mediator.js"></script>
+    <script type="text/javascript" src="js/libs/keypress-2.0.1.min.js"></script>
+    <script type="text/javascript" src="js/libs/atari/Atari.js"></script>
+    <script type="text/javascript" src="js/libs/BrowserDetect.js"></script>
+    <script type="text/javascript" src="js/libs/atari/GameShell.js"></script>
+    <script type="text/javascript" src="js/libs/atari/GameMediator.js"></script>
+    <script type="text/javascript" src="js/libs/gamelibs/GameLibs.js"></script>
+    <script type="text/javascript" src="js/libs/gamelibs/GameUI.js"></script>
+    <script type="text/javascript" src="js/libs/gamelibs/StringUtils.js"></script>
+    <script type="text/javascript" src="js/libs/gamelibs/GameDetails.js"></script>
+
+    <!--Game code-->
+    <script type="text/javascript" src="js/game/ArrowTask.js"></script>
+
+
+    <script>
+
+
+        function init() {
+
+            var queue, progress, game, progressBmp, stage, loading_text, currentView;
+            stage = new createjs.Stage("demoCanvas");
+
+            //background
+            bg = new createjs.Shape(); //have to set color manually here
+            bg.graphics.clear().beginFill("#34AADC").drawRect(0, 0, stage.canvas.width, stage.canvas.height);
+            stage.addChild(bg);
+
+            //progress bar
+            progress = currentView = stage.addChild(new createjs.Shape());
+            progress.x = stage.canvas.width / 2;
+            progress.y = stage.canvas.height / 2;
+            initProgressBmp();
+            //"loading..." text
+            loading_text = new createjs.Text("Loading...", "40px Arial", "#FFF");
+            loading_text.textAlign = "center"; //sets the center of the TEXT to be the thing that's recorded by x-value
+            loading_text.x = stage.canvas.width / 2;
+            loading_text.y = stage.canvas.height / 2 + 30;
+            loading_text.shadowOffsetX = 20;
+            stage.addChild(loading_text);
+
+
+            createjs.Ticker.setFPS(30);
+            createjs.Ticker.addEventListener('tick', onTick.bind(this));//callback function for what to do on each tick
+
+
+            //actual queue loading
+            queue = new createjs.LoadQueue(true);
+            queue.on("complete", handleComplete, this);
+            queue.on("error", handlePreloadError, this);
+            queue.addEventListener("fileload", handleFileLoad.bind(this));
+            queue.addEventListener("progress", handleProgress.bind(this));
+            //finicky reading from a different file for some reason, so put the manifest here
+            queue.loadManifest([
+
+                //game parameters
+                {"id": "manifest", "src": "assets/manifest.json", "type": "manifest" },
+
+                //source code
+                {"src": "js/game/Menu.js"},
+                {"src": "js/game/MenuView.js"},
+                {"src": "js/game/Intro.js"},
+                {"src": "js/game/IntroView.js"},
+                {"src": "js/game/Button.js"},
+                {"src": "js/game/1BackTask.js"},
+                {"src": "js/game/1BackTaskView.js"},
+                {"src": "js/game/ArrowView.js"},
+                {"src": "js/game/ModifierView.js"},
+                {"src": "js/game/ModifierTask.js"},
+                {"src": "js/game/ModifierTaskView.js"},
+
+                //multimedia assets
+                {"id": "background_image", "src": "assets/images/background.png"},
+                {"id": "background_menu", "src": "assets/images/background_menu.png"},
+                {"id": "menu_buttons", "src": "assets/images/menu_buttons.png"},
+                {"id": "arrow_png", "src": "assets/images/arrow.png"},
+                {"id": "modifier_clockwise", "src": "assets/images/clockwise.png"},
+                {"id": "modifier_counterclockwise", "src": "assets/images/counterclockwise.png"},
+                {"id": "modifier_reflectupdown", "src": "assets/images/reflect_up_down.png"},
+                {"id": "modifier_reflectleftright", "src": "assets/images/reflect_left_right.png"}
+                //{"id": "arrow_png", "src": "assets/images/arrow.png"},
+            ], true);
+
+            function handleProgress(evt) {
+                drawProgress(evt.loaded / evt.total);
+                //stage.update();
+            }
+
+            function handleFileLoad(evt) {
+                //if you've loaded javascript, add it to the document
+                var o = evt.item;
+                //console.log(evt);
+                if (o.type == createjs.LoadQueue.JAVASCRIPT) {
+                    // add JS to the document as it loads:
+                    document.body.appendChild(evt.result);
+                }
+            }
+
+            function drawProgress(value) {
+                progress.graphics.clear()
+                        .beginFill("#EB2").drawRoundRect(-103, -13, 206, 26, 13)
+                        .beginBitmapFill(progressBmp).drawRoundRect(-100, -10, value * 200 | 0, 20, 10);
+            }
+
+            function initProgressBmp() {
+                // generate the barber pole pattern that we will fill our progress bar with:
+                shape = new createjs.Shape();
+                shape.graphics.beginFill("#333").drawRect(0, 0, 20, 20).beginFill("#EB2")
+                        .moveTo(0, 0).lineTo(10, 0).lineTo(0, 10).closePath()
+                        .moveTo(0, 20).lineTo(20, 0).lineTo(20, 10).lineTo(10, 20).closePath();
+                shape.cache(0, 0, 20, 20);
+                progressBmp = shape.cacheCanvas;
+            }
+
+            function handleComplete(evt) {
+
+                //console.log('all files loaded')
+
+                //do stuff
+                moveOut();
+                //
+
+            }
+
+            function onTick() {
+
+                stage.update();
+            }
+
+            function moveOut() {
+                //console.log(progress);
+                createjs.Tween.get(loading_text).to({x: -1000}, 800, createjs.Ease.backIn);
+                createjs.Tween.get(progress)
+                        .to({x: 1000}, 800, createjs.Ease.backIn)
+                        .wait(400)
+                        .call(startGame);
+
+            }
+
+            function startGame() {
+                window.GAME = new ArrowTask(stage, queue);
+            }
+
+            function handlePreloadError(evt) {
+                //console.log(evt);
+                //console.log("ERROR LOADING FILES");
+
+            }
+
+        }
+
+        function getName(){
+
+
+        }
+    </script>
+
+    <style type="text/css">
+
+        body {
+            background-color: #333;
+            color: #bbb;
+            line-height: normal;
+            font-family: Lucida Grande, Lucida Sans, Arial, Helvetica Neue, Verdana, Geneva, sans-serif;
+            font-size: 11px;
+            font-weight: normal;
+            text-decoration: none;
+            line-height: 1.5em;
+        }
+
+        a img {
+            border: 0px solid transparent;
+        }
+
+        a, a:link, a:visited, a:active, a:hover {
+            color: #cdcdcd;
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-family: Arial, Helvetica Neue, Verdana, Geneva, sans-serif;
+            width: 100%;
+            letter-spacing: 0.1em;
+            margin-bottom: 1em;
+            font-size: 1.65em;
+        }
+
+        canvas {
+            display: block;
+            outline: 0px;
+            margin-bottom: 1.5em;
+        }
+
+        #canvas-container {
+            margin: 50px auto 0px auto;
+            padding: 25px 25px 15px 25px;
+            width: 800px;
+            min-width: 300px;
+            overflow: auto;
+            border-left: 1px solid #444;
+            border-top: 1px solid #444;
+            border-right: 1px solid #333;
+            border-bottom: 1px solid #333;
+            background-color: #3d3d3d;
+        }
+    </style>
+
+</head>
+
+<body onLoad="init();">
+<div id="canvas-container">
+
+    <canvas id="demoCanvas" width="800" height="480">
+        alternate content
+    </canvas>
+</div>
+
+
+</body>
+</html>

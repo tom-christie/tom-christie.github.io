@@ -1,0 +1,30 @@
+{
+
+    "TILE_INDEX_WALKABLE": 17,
+    "TILE_INDEX_BLOCKED": 18,
+    "TILE_INDEX_SPAWN": 19,
+    "TILE_INDEX_GOAL": 20,
+    "TILE_INDEX_BUILDABLE": 21,
+    "TILE_INDEX_BUILTUPON": 6,
+    "TILESIZE": 25,
+
+    "level01_goons":[1, 1, 0, 1, 1, 1, 1, 1, 1],
+    "goon_spawn_ticks":90,
+
+    "numGoons":50,
+    "numProjectiles":200,
+    "numTowers":20,
+
+    "towerShootRadius":150,
+    "towerFirePeriod":30,
+    "projectileEnergyUsage":0.05,
+
+    "red":"#FD0209",
+    "yellow":"#FFFF02",
+    "green":"#2AFF02",
+    "cyan":"#14FFFF",
+    "blue":"#0202FF",
+    "purple":"#FA02FF",
+    "white":"#FFFFFF"
+
+}

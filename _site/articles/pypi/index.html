@@ -1,0 +1,981 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Uploading to PyPI &#8211; Tom Christie</title>
+<meta name="description" content="">
+<meta name="keywords" content="python, programming">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="//tom-christie.github.io/images/site-logo.png">
+<meta name="twitter:title" content="Uploading to PyPI">
+<meta name="twitter:description" content="">
+<meta name="twitter:creator" content="@tom_cogsci">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Uploading to PyPI">
+<meta property="og:description" content="">
+<meta property="og:url" content="//tom-christie.github.io/articles/pypi/">
+<meta property="og:site_name" content="Tom Christie">
+
+
+
+
+
+<link rel="canonical" href="//tom-christie.github.io/articles/pypi/">
+<link href="//tom-christie.github.io/feed.xml" type="application/atom+xml" rel="alternate" title="Tom Christie Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="//tom-christie.github.io/assets/css/main.min.css">
+<!-- Webfonts -->
+<script src="//use.edgefonts.net/source-sans-pro:n2,i2,n3,i3,n4,i4,n6,i6,n7,i7,n9,i9;source-code-pro:n4,n7;volkhov.js"></script>
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="//tom-christie.github.io/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>-->
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="//tom-christie.github.io/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="//tom-christie.github.io/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="//tom-christie.github.io/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="//tom-christie.github.io/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="//tom-christie.github.io/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="//tom-christie.github.io/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body id="post">
+
+<div class="navigation-wrapper">
+	<nav role="navigation" id="site-nav" class="animated drop">
+	    <ul>
+	        
+			<li>
+				
+					<a href="//tom-christie.github.io/about/">About</a>
+				 
+			</li>
+	        
+	        <li><a href="//tom-christie.github.io/feed.xml" title="Atom/RSS feed"><i class="icon-rss"></i> Feed</a></li>
+	        <li class="dosearch"><i class="icon-search"></i> Search</li>
+	    </ul>
+	</nav>
+</div><!-- /.navigation-wrapper -->
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+
+<div class="search-wrapper">
+	<div class="search-form">
+		<input type="text" class="search-field" placeholder="Search...">
+		<i class="icon-remove-sign icon-2x"></i>
+		<ul class="search-results post-list"></ul><!-- /.search-results -->
+	</div><!-- /.search-form -->
+</div><!-- ./search-wrapper -->
+
+<header class="masthead">
+	<div class="wrap">
+        
+    		<a href="//tom-christie.github.io/" class="site-logo" rel="home" title="Tom Christie"><img src="//tom-christie.github.io/images/site-logo.png" width="200" height="200" alt="Tom Christie logo" class="animated fadeInUp"></a>
+        
+        <h1 class="site-title animated fadeIn"><a href="//tom-christie.github.io/">Tom Christie</a></h1>
+		<h2 class="site-description animated fadeIn" itemprop="description">Learning, computation, visualization.</h2>
+	</div>
+</header><!-- /.masthead -->
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    
+    <div class="entry-wrapper">
+      <header class="entry-header">
+        <span class="entry-tags"><a href="//tom-christie.github.io/tags/#python" title="Pages tagged python">python</a>&nbsp;&bull;&nbsp;<a href="//tom-christie.github.io/tags/#programming" title="Pages tagged programming">programming</a></span>
+        
+          <h1 class="entry-title">Uploading to PyPI</h1>
+        
+      </header>
+      <footer class="entry-meta">
+        <img src="//tom-christie.github.io/assets/images/bio-photo.jpg" alt="Tom Christie photo" class="author-photo">
+        <span class="author vcard">By <span class="fn"><a href="//tom-christie.github.io/about/" title="About Tom Christie">Tom Christie</a></span></span>
+        <span class="entry-date date published"><time datetime="2014-06-26T00:00:00-05:00"><i class="icon-calendar-empty"></i> June 26, 2014</time></span>
+        
+        
+        <span><a href="//tom-christie.github.io/articles/pypi/" rel="bookmark" title="Uploading to PyPI"><i class="icon-link"></i> Permalink</a></span>
+        
+        <span class="social-share-facebook">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=//tom-christie.github.io/articles/pypi/" title="Share on Facebook" itemprop="Facebook"><i class="icon-facebook-sign"></i> Like</a></span>
+        <span class="social-share-twitter">
+            <a href="https://twitter.com/intent/tweet?hashtags=articles&text=Uploading to PyPI&url=//tom-christie.github.io/articles/pypi/&via=tom_cogsci" title="Share on Twitter" itemprop="Twitter"><i class="icon-twitter-sign"></i> Tweet</a></span>
+        <span class="social-share-googleplus">
+            <a href="https://plus.google.com/share?url=//tom-christie.github.io/articles/pypi/" title="Share on Google Plus" itemprop="GooglePlus"><i class="icon-google-plus-sign"></i> +1</a></span>
+            <!-- /.social-share -->
+      </footer>
+      <div class="entry-content">
+        <blockquote>
+  <p>I found myself within a forest dark,
+ For the straightforward pathway had been lost…</p>
+</blockquote>
+
+<p>I’m a research assistant in a Speech Informatics lab at the University of Minnesota. One of my tasks recently has been to take a Python script written by a former student, make it more flexible and turn it into a legit Python package.  I spent a few weeks working on the code, making sure it worked as we needed it to, de-duplicating code, validating it, etc.  It installed fine locally.  Then two days ago I tried to register the package at <a href="https://pypi.python.org">pypi.python.org</a> so we could install the package using pip, along with the rest of our analysis code.</p>
+
+<p>I think I have it working now, but honestly, it’s been a terrible experience.  I’ve had to pull resources from documentation, message boards (both stackexchange and google groups), blogs, and other assorted places on the internet.  Why isn’t this all in one place somewhere?  In the end, many of the things that worked ended up being the results of trial-and-error.  Part of the problem is that my package is a little complicated: it requires including some datasets that should be installed in the same directory. It also requires compiling a stand-alone C file.  But really, that shouldn’t be a big deal.</p>
+
+<p>In order to document the process in case I have to repeat it in the future, and to help guide any poor soul who is embarking on this perilous journey with no prior experience, I’m writing up my notes in detail and sharing them with the world.</p>
+
+<p>I’ve been using Python for various projects for a few years now. Still, I’m a scientist, not a software engineer, so many of the following specifics were not obvious to me. Apologies if something that follows is not the most efficient way to do something - I’m simply writing the documentation I wish I’d had two days ago in hopes that it might be useful to others.</p>
+
+<h1 id="package-structure">Package structure</h1>
+
+<p>This has always been a little confusing to me, but this project has cleared it up a little bit.  Your package should be structured something like this:</p>
+
+<div class="highlight"><pre><code class="bash">YOUR-PROJECT-FOLDER
+├── CHANGES.txt <span class="o">(</span>OPTIONAL<span class="o">)</span>
+├── LICENSE.txt
+├── MANIFEST.in
+├── README
+├── docs <span class="o">(</span>FOLDER<span class="o">)</span>
+├── setup.py
+└── PACKAGENAME <span class="o">(</span>FOLDER<span class="o">)</span>
+    ├── __init__.py
+    ├── Makefile <span class="o">(</span>OPTIONAL<span class="o">)</span>
+    ├── FILE1.py
+    ├── FILE2.py
+    ├── data <span class="o">(</span>FOLDER, OPTIONAL<span class="o">)</span>
+    │   ├── included_data.dat
+    └── example <span class="o">(</span>FOLDER<span class="o">)</span>
+        └── EXAMPLE.txt</code></pre></div>
+
+<p>A few important things here are:</p>
+
+<ul>
+  <li>
+    <p>the name of the project folder on your computer doesn’t really matter. It doesn’t have to be the same as the package name. To me, it’s less confusing if the two names are different.</p>
+  </li>
+  <li>
+    <p>the PACKAGENAME folder is the name that you’ll use to import your package into Python.  So if your package is <code>my_awesome_package</code>, the folder with your code needs to be <code>my_awesome_package</code> too.  Note that Pythonistas recommend having one-name package names with no capital letters.</p>
+  </li>
+</ul>
+
+<p>Now for the key files:</p>
+
+<ul>
+  <li>
+    <p><em>CHANGES.txt</em>: (optional) keep notes on package versions, etc.</p>
+  </li>
+  <li>
+    <p><em>LICENSE.txt</em>: The license that you’re using for releasing your package. If you want to share it and want people to use it, you should include a license. As far as I understand, not including one is the same thing as claiming “All Rights Reserved”, meaning people can’t legally re-share your code.  Disclaimer: I am not a lawyer, and I don’t know a ton about the available licenses.</p>
+  </li>
+  <li>
+    <p><em>MANIFEST.in</em>: When <code>setup.py</code> builds your package, it includes <code>*.py</code> files in your package folder by default.  If you want any other files included in the <code>.tar.gz</code> file that gets created and uploaded to PyPI (more on this later), you need to include those filenames in <code>MANIFEST.in</code>.  Here’s what the contents of mine looks like:</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="text">#documentation
+recursive-include docs/_build/html *
+
+#data used for clustering
+recursive-include vfclust/data *
+
+#phonetic representation
+include vfclust/t2p/t2p.c
+include vfclust/t2p/t2pin.tmp
+include vfclust/Makefile
+
+#example files
+include vfclust/example/EXAMPLE.*
+include vfclust/example/EXAMPLE_sem.*
+
+#Misc
+include CHANGES.txt
+include LICENSE.txt</code></pre></div>
+
+<p>My package name is <code>vfclust</code>, so I’m including the contents of certain folders within the package folder that my package requires in order to run (data files, etc).  I also include CHANGES.txt and LICENSE.txt, since I don’t think those are included by default (?).  Finally, notice the recursive-include syntax.  The way I wrote it, everything in the specified folders is included as well.</p>
+
+<ul>
+  <li>
+    <p><em>README</em>: can also be README.md or README.rst.  The format needs to be <em>rst</em> (reStructured Text) for it to display appropriately on PyPI.  I go into this further down.</p>
+  </li>
+  <li>
+    <p><em>docs</em>: (optional) this is where I put the formatted documentation. More on this later.</p>
+  </li>
+  <li>
+    <p><em>setup.py</em>: This is where the magic happens - where your package is defined, how it’s setup, etc.  Much more on this later.</p>
+  </li>
+  <li>
+    <p><em>PACKAGENAME</em>: This is where your actual package code goes. The FILE1.py, FILE2.py, etc. are the package files that do the work of your package.</p>
+  </li>
+  <li>
+    <p>the <code>__init__.py</code> file tells the world that <code>PACKAGENAME</code> is a Python package that is importable using <code>&gt;&gt; import PACKAGENAME</code>.  This is important: <em><code>__init__.py</code> turns a folder full of Python scripts into a package that can be imported.</em>  It can be an empty file, or not, but whatever is inside will get executed when you import the package. If you want to use the other modules (files) in the folder from within Python, and you probably do, put <code>from PACKAGENAME import *</code> inside the <code>__init__.py</code> file.</p>
+  </li>
+  <li>
+    <p><em>data</em> and <em>example</em>: These folders could be named anything, or could be omitted.  Any data files you want to distribute along with your package should be in a folder like this WITHIN the package folder.</p>
+  </li>
+</ul>
+
+<h2 id="targz-vs-site-packages">.tar.gz vs site-packages</h2>
+
+<p>This was a serious source of confusion for me. When you build your package (more on this below), <code>setup.py</code> creates a <code>dist/</code> directory in your project directory and puts everything on the specified packages (more on this below also) along with everything in the <code>MANIFEST.in</code> file in a single <code>.tar.gz</code> file in that directory.  You can then upload the <code>.tar.gz</code> file to PyPI and make it available there. However, when you use <code>pip install PACKAGENAME</code>, only <code>*.py</code> files will be installed into site-packages (where pip puts packages you download).  This means that any data files, C files, or anything else you want available when using your package must be explicitly included in BOTH <code>MANIFESET.in</code> AND <code>setup.py</code>.  As far as I understand, there are things (like formatted documentation) that you may want to include with the full <code>*.tar.gz</code> package but might not want to bury within <code>site-packages</code>.  This makes some sense, but it’s still somewhat obnoxious to have to specify included files in two places. The <code>setuptools</code> documentation says that you only have to specify files in <code>setup.py</code>, but that didn’t work for me.</p>
+
+<h2 id="setuppy">setup.py</h2>
+
+<p>This file is like magic, and is key to creating and installing your package, as well as keeping track of the version and formatting for PyPI.  There are two commonly-used tools for creating your <code>setup.py</code> file: <code>distutils</code> and <code>setuptools</code>.  The internet tells me that <code>setuptools</code> is more modern and fixes some fo the problems with <code>distutils</code>, but I don’t really understand what. The syntax for both is nearly identical, so it’s easy to switch back and forth.</p>
+
+<p>The <code>setup.py</code> file must, at a minimum, include something like the following. This is modified from <a href="https://github.com/pypa/sampleproject/blob/master/setup.py">this project</a>, which I found to be a helpful resource.</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>  <span class="c"># Always prefer setuptools over distutils</span>
+<span class="kn">from</span> <span class="nn">codecs</span> <span class="kn">import</span> <span class="nb">open</span>  <span class="c"># To use a consistent encoding</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+
+<span class="n">here</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+
+<span class="c"># Get the long description from the relevant file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">here</span><span class="p">,</span> <span class="s">&#39;README&#39;</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">long_description</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;sample&#39;</span><span class="p">,</span>
+
+    <span class="c"># Versions should comply with PEP440.  For a discussion on single-sourcing</span>
+    <span class="c"># the version across setup.py and the project code, see</span>
+    <span class="c"># http://packaging.python.org/en/latest/tutorial.html#version</span>
+    <span class="n">version</span><span class="o">=</span><span class="s">&#39;1.2.0&#39;</span><span class="p">,</span>
+
+    <span class="n">description</span><span class="o">=</span><span class="s">&#39;A sample Python project&#39;</span><span class="p">,</span>
+    <span class="n">long_description</span><span class="o">=</span><span class="n">long_description</span><span class="p">,</span>  <span class="c">#this is the</span>
+
+    <span class="c"># The project&#39;s main homepage.</span>
+    <span class="n">url</span><span class="o">=</span><span class="s">&#39;https://github.com/whatever/whatever&#39;</span><span class="p">,</span>
+
+    <span class="c"># Author details</span>
+    <span class="n">author</span><span class="o">=</span><span class="s">&#39;yourname&#39;</span><span class="p">,</span>
+    <span class="n">author_email</span><span class="o">=</span><span class="s">&#39;your@address.com&#39;</span><span class="p">,</span>
+
+    <span class="c"># Choose your license</span>
+    <span class="n">license</span><span class="o">=</span><span class="s">&#39;MIT&#39;</span><span class="p">,</span>
+
+    <span class="c"># See https://PyPI.python.org/PyPI?%3Aaction=list_classifiers</span>
+    <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
+        <span class="c"># How mature is this project? Common values are</span>
+        <span class="c">#   3 - Alpha</span>
+        <span class="c">#   4 - Beta</span>
+        <span class="c">#   5 - Production/Stable</span>
+        <span class="s">&#39;Development Status :: 3 - Alpha&#39;</span><span class="p">,</span>
+
+        <span class="c"># Indicate who your project is intended for</span>
+        <span class="s">&#39;Intended Audience :: Developers&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Topic :: Software Development :: Build Tools&#39;</span><span class="p">,</span>
+
+        <span class="c"># Pick your license as you wish (should match &quot;license&quot; above)</span>
+        <span class="s">&#39;License :: OSI Approved :: MIT License&#39;</span><span class="p">,</span>
+
+        <span class="c"># Specify the Python versions you support here. In particular, ensure</span>
+        <span class="c"># that you indicate whether you support Python 2, Python 3 or both.</span>
+        <span class="s">&#39;Programming Language :: Python :: 2.7&#39;</span><span class="p">,</span>
+    <span class="p">],</span>
+
+    <span class="c"># What does your project relate to?</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="s">&#39;sample setuptools development&#39;</span><span class="p">,</span>
+
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;MY-PACKAGE&quot;</span><span class="p">],</span>
+
+<span class="p">)</span></code></pre></div>
+
+<p><code>setup()</code> is just a function called when you run <code>python setup.py install</code> within the project directory.  Install is only one of the things it can do - you can also <code>python setup.py sdist</code> to build your package into a <code>.tar.gz</code> file, <code>python setup.py develop</code> to tell Python to look in the project directory rather than <code>site-packages</code> when doing <code>import</code>, etc.</p>
+
+<p>I’ll go through these <code>setup()</code> arguments and some others in turn.</p>
+
+<ul>
+  <li>
+    <p><em>name</em>: This is what your package will be called, in big bold letters, on the new PyPI page for your package.  Pick something you like. This will also be the root name for the <code>.tar.gz</code> files created.  Those are formatted like <code>PACKAGENAME-VERSION.tar.gz</code>.  Which brings us to…</p>
+  </li>
+  <li>
+    <p><em>version</em>: This is the version number, obviously. Note that PyPI forces you to make a new version for each new upload. So you MUST change this for any new upload to PyPI (unlike git or other version control systems, where you can make a new commit without worrying about version numbers).  I ended up with version numbers that look like 0.1.0.12 until I got finished debugging my package on PyPI. Luckily you can go on PyPI and remove unwanted versions.</p>
+  </li>
+  <li>
+    <p><em>description</em>: Short description used on PyPI.</p>
+  </li>
+  <li>
+    <p><em>long_description</em>: Written on main page of your PyPI package, meaning it should be formatted as reStructured text. I just used my README file.</p>
+  </li>
+  <li>
+    <p><em>author</em> etc.: Used to list authors, contact information, etc on PyPI.</p>
+  </li>
+  <li>
+    <p><em>classifiers</em>: Used to categorize your package on PyPI, so people can find it while browsing or searching.</p>
+  </li>
+  <li>
+    <p><em>packages</em>:  Your distribution may have more than one package.  That is, when you install this package, you may want to be able to do <code>import package1</code> and <code>import package2</code>. You can also packages and sub-packages. All of these should be listed here. You can also do something like:</p>
+  </li>
+</ul>
+
+<div class="highlight"><pre><code class="python"><span class="n">packages</span> <span class="o">=</span> <span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;build&#39;</span><span class="p">,</span> <span class="s">&#39;docs&#39;</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span><span class="p">])</span></code></pre></div>
+
+<p>Those are the basics. The next few sections detail other arguments I ended up using.</p>
+
+<h2 id="include-data-files">Include data files</h2>
+
+<ul>
+  <li><em>package_data</em>: As mentioned earlier, if you want any non <code>*.py</code> files to be installed by pip and available to your package, specify them here.  Messing around with this led me to the conclusion that all included data must in <em>subfolders</em> of the package folder (NOT the higher-level project folder). For example, if I had “data” and “my-package” as subfolders in “my-project-folder”, and then include “data” in <code>package_data</code>, then pip installs “data” and “my-package” both as separate folders in “site-packages”. Not really want I want. After much fiddling, my directory structure looks like this:</li>
+</ul>
+
+<div class="highlight"><pre><code class="bash">.
+├── CHANGES.txt
+├── LICENSE.txt
+├── MANIFEST.in
+├── README
+├── docs <span class="o">(</span>COLLAPSED<span class="o">)</span>
+├── setup.py
+└── vfclust
+    ├── Makefile
+    ├── TextGridParser.py
+    ├── __init__.py
+    ├── data
+    │   ├── EOWL
+    │   │   ├── EOWL Version Notes.txt
+    │   │   ├── The English Open Word List.pdf
+    │   │   └── english_words.txt
+    │   ├── animals_lemmas.dat
+    │   ├── animals_names.dat
+    │   ├── animals_names_raw.dat
+    │   ├── animals_term_vector_dictionaries
+    │   │   ├── term_vectors_dict91.dat
+    │   │   └── term_vectors_dict91_cpickle.dat
+    │   ├── cmudict.0.7a.tree
+    │   ├── modified_cmudict.dat
+    │   └── t2pin.tmp
+    ├── example
+    │   ├── EXAMPLE.TextGrid
+    │   ├── EXAMPLE.csv
+    │   ├── EXAMPLE_sem.TextGrid
+    │   └── EXAMPLE_sem.csv
+    ├── t2p
+    │   ├── t2p.c
+    │   └── t2pin.tmp
+    └── vfclust.py</code></pre></div>
+
+<p>Here’s what I ended up with:</p>
+
+<div class="highlight"><pre><code class="python"><span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="c"># relative to the vfclust directory</span>
+    <span class="n">package_data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">&#39;vfclust&#39;</span><span class="p">:[</span>
+             <span class="s">&#39;Makefile&#39;</span><span class="p">],</span>
+        <span class="s">&#39;data&#39;</span><span class="p">:</span>
+             <span class="p">[</span><span class="s">&#39;data/animals_lemmas.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/animals_names.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/animals_names_raw.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/cmudict.0.7a.tree&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/modified_cmudict.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/animals_term_vector_dictionaries/term_vectors_dict91_cpickle.dat&#39;</span><span class="p">,</span>
+             <span class="p">],</span>
+        <span class="s">&#39;data/EOWL&#39;</span><span class="p">:</span>
+            <span class="p">[</span><span class="s">&#39;data/EOWL/english_words.txt&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/EOWL/EOWL Version Notes.txt&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/EOWL/The English Open Word List.pdf&#39;</span>
+            <span class="p">],</span>
+        <span class="s">&#39;example&#39;</span><span class="p">:</span>
+            <span class="p">[</span><span class="s">&#39;example/EXAMPLE.csv&#39;</span><span class="p">,</span>
+             <span class="s">&#39;example/EXAMPLE.TextGrid&#39;</span><span class="p">,</span>
+             <span class="s">&#39;example/EXAMPLE_sem.csv&#39;</span><span class="p">,</span>
+             <span class="s">&#39;example/EXAMPLE_sem.TextGrid&#39;</span><span class="p">],</span>
+        <span class="s">&#39;t2p&#39;</span><span class="p">:</span>
+            <span class="p">[</span><span class="s">&#39;t2p/t2p.c&#39;</span><span class="p">,</span>
+             <span class="s">&#39;t2p/t2pin.tmp&#39;</span>
+             <span class="p">],</span>
+    <span class="p">},</span></code></pre></div>
+
+<p>As far as I can tell, <code>package_data</code> is a dictionary where each key corresponds to a subfolder of the installed package, and each value is supposed to be a list of the files you want to go into that subfolder. In practice, however, I couldn’t get everything situated properly in the final installation until I made all my data files subfolders of the package folder. If you know a better and more flexible way to do this, please enlighten me.  With this setup, the following gets installed in <code>site-packages</code> when I do <code>pip install vfclust</code>:</p>
+
+<div class="highlight"><pre><code class="bash">vfclust
+├── Makefile
+├── TextGridParser.py
+├── __init__.py
+├── data
+│   ├── EOWL
+│   │   ├── EOWL Version Notes.txt
+│   │   ├── The English Open Word List.pdf
+│   │   └── english_words.txt
+│   ├── animals_lemmas.dat
+│   ├── animals_names.dat
+│   ├── animals_names_raw.dat
+│   ├── animals_term_vector_dictionaries
+│   │   ├── term_vectors_dict91.dat
+│   │   └── term_vectors_dict91_cpickle.dat
+│   ├── cmudict.0.7a.tree
+│   ├── modified_cmudict.dat
+│   └── t2pin.tmp
+├── example
+│   ├── EXAMPLE.TextGrid
+│   ├── EXAMPLE.csv
+│   ├── EXAMPLE_sem.TextGrid
+│   └── EXAMPLE_sem.csv
+└── t2p
+    ├── t2p
+    ├── t2p.c
+    └── t2pin.tmp</code></pre></div>
+
+<p>which is what I wanted. <code>data_files</code> is another argument used to include data, but this puts your data files in <code>/Library/Frameworks/Python.framework/Versions/2.7/my-subfolder</code>, at least on my system. I don’t know why you’d want to put data there. At any rate I didn’t.</p>
+
+<h2 id="run-your-package-as-a-script">Run your package as a script</h2>
+
+<p>If it makes sense for your package to run as a command-line script instead of (or as well as) an importable Python package, you can ask <code>setup.py</code> to add your script to the system path during installation.  To do this, include an <code>entry_points</code> argument, similar to this:</p>
+
+<div class="highlight"><pre><code class="python"><span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+       <span class="s">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+           <span class="s">&#39;vfclust = vfclust.vfclust:main&#39;</span><span class="p">,</span>
+       <span class="p">],</span>
+    <span class="p">}</span></code></pre></div>
+
+<p>If I understand correctly, the thing on the left of the equals sign is what you call from the command line,</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>vfclust args-go-here</code></pre></div>
+
+<p>and the thing on the right is the corresponding python script that runs.  In my case, I have a <code>main()</code> function in the <code>vfclust.py</code> file in the <code>vfclust</code> package folder (the one with the <code>__init__.py</code> in it as well).</p>
+
+<h2 id="makefile">Makefile</h2>
+
+<p>One of my package’s functions relies on a compiled C file to convert words from a textual to a phonetic representation.  This isn’t a Python extension, but rather a completely separate C file that I want to be able to call from the command line. I wanted it to compile when the package was being installed by pip, so it would be compiled appropriately on the host system. There are ways for doing this for Python extensions, but as this file technically isn’t an extension, getting this to work was slightly complicated.</p>
+
+<p>Essentially, I took the advice from <a href="http://www.niteoweb.com/blog/setuptools-run-custom-code-during-install">this site</a> (thanks!) and made a new class, that then asked subprocess to call <code>make</code>. When I ended up with was the following:</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">setuptools.command.install</span> <span class="kn">import</span> <span class="n">install</span>
+<span class="n">here</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+
+<span class="k">class</span> <span class="nc">MyInstall</span><span class="p">(</span><span class="n">install</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c"># note cwd - this makes the current directory</span>
+            <span class="c"># the one with the Makefile.</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s">&#39;make&#39;</span><span class="p">],</span><span class="n">cwd</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">here</span><span class="p">,</span><span class="s">&#39;vfclust&#39;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">print</span> <span class="s">&quot;Error compiling t2p.c.   Try running &#39;make&#39;.&quot;</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">install</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code></pre></div>
+
+<p>along with a corresponding entry in the <code>setup()</code> function:</p>
+
+<div class="highlight"><pre><code class="python"><span class="n">cmdclass</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;install&#39;</span><span class="p">:</span> <span class="n">MyInstall</span><span class="p">},</span></code></pre></div>
+
+<p>A few things to note. First, <code>cmdclass={'install': MyInstall}</code> tells <code>setup()</code> to run the code. Not quite sure how it works. Second, <code>subprocess.call(['make'],cwd=path.join(here,'vfclust'))</code> is tricky: to run <code>make</code> properly, I had to have subprocess run it from the folder it’s in. It resides in a different folder from <code>setup.py</code> (I wanted to include it was a ‘data’ file in the pip installation), so I had to specify the subfolder (named <code>vfclust</code>). <code>here = path.abspath(path.dirname(__file__))</code> gives the path of the <code>setup.py</code> folder on the system, and <code>path.join(here,'vfclust')</code> creates an absolute path to the subfolder.</p>
+
+<h2 id="complete-setuppy">Complete setup.py</h2>
+
+<p>My final, really long <code>setup.py</code> file looks like this, again using a file modified from the one <a href="https://github.com/pypa/sampleproject/blob/master/setup.py">here</a>:</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>  <span class="c"># Always prefer setuptools over distutils</span>
+<span class="kn">from</span> <span class="nn">codecs</span> <span class="kn">import</span> <span class="nb">open</span>  <span class="c"># To use a consistent encoding</span>
+<span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">path</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">from</span> <span class="nn">setuptools.command.install</span> <span class="kn">import</span> <span class="n">install</span>
+
+<span class="n">here</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">__file__</span><span class="p">))</span>
+
+<span class="c"># Get the long description from the relevant file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">here</span><span class="p">,</span> <span class="s">&#39;README&#39;</span><span class="p">),</span> <span class="n">encoding</span><span class="o">=</span><span class="s">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">long_description</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c">#see http://www.niteoweb.com/blog/setuptools-run-custom-code-during-install</span>
+<span class="c">#This is so we can call &quot;make&quot; automatically during setup</span>
+<span class="k">class</span> <span class="nc">MyInstall</span><span class="p">(</span><span class="n">install</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">subprocess</span><span class="o">.</span><span class="n">call</span><span class="p">([</span><span class="s">&#39;make&#39;</span><span class="p">],</span><span class="n">cwd</span><span class="o">=</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">here</span><span class="p">,</span><span class="s">&#39;vfclust&#39;</span><span class="p">))</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">print</span> <span class="s">&quot;Error compiling t2p.c.   Try running &#39;make&#39;.&quot;</span>
+            <span class="nb">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">install</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s">&#39;VFClust&#39;</span><span class="p">,</span>
+
+    <span class="c"># Versions should comply with PEP440.  For a discussion on single-sourcing</span>
+    <span class="c"># the version across setup.py and the project code, see</span>
+    <span class="c"># http://packaging.python.org/en/latest/tutorial.html#version</span>
+    <span class="n">version</span><span class="o">=</span><span class="s">&#39;0.1.0&#39;</span><span class="p">,</span>
+
+    <span class="n">description</span><span class="o">=</span><span class="s">&#39;Clustering of Verbal Fluency responses.&#39;</span><span class="p">,</span>
+    <span class="n">long_description</span><span class="o">=</span><span class="n">long_description</span><span class="p">,</span>
+
+    <span class="c"># The project&#39;s main homepage.</span>
+    <span class="n">url</span><span class="o">=</span><span class="s">&#39;https://github.com/speechinformaticslab/vfclust&#39;</span><span class="p">,</span>
+
+    <span class="c"># Author details</span>
+    <span class="n">author</span><span class="o">=</span><span class="s">&#39;Thomas Christie, James Ryan, Kyle Marek-Spartz and Serguei Pakhomov&#39;</span><span class="p">,</span>
+    <span class="n">author_email</span><span class="o">=</span><span class="s">&#39;tchristie@umn.edu&#39;</span><span class="p">,</span>
+
+    <span class="c"># Choose your license</span>
+    <span class="n">license</span><span class="o">=</span><span class="s">&#39;Apache License, Version 2.0&#39;</span><span class="p">,</span>
+
+    <span class="c"># See https://PyPI.python.org/PyPI?%3Aaction=list_classifiers</span>
+    <span class="n">classifiers</span><span class="o">=</span><span class="p">[</span>
+        <span class="c"># How mature is this project? Common values are</span>
+        <span class="c">#   3 - Alpha</span>
+        <span class="c">#   4 - Beta</span>
+        <span class="c">#   5 - Production/Stable</span>
+        <span class="s">&#39;Development Status :: 3 - Alpha&#39;</span><span class="p">,</span>
+
+        <span class="c"># Indicate who your project is intended for</span>
+        <span class="s">&quot;Intended Audience :: Developers&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Intended Audience :: Healthcare Industry&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Intended Audience :: Science/Research&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Topic :: Multimedia :: Sound/Audio :: Speech&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Topic :: Scientific/Engineering :: Bio-Informatics&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Topic :: Scientific/Engineering :: Medical Science Apps.&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Topic :: Software Development :: Libraries&quot;</span><span class="p">,</span>
+        <span class="s">&quot;Topic :: Text Processing :: Linguistic&quot;</span><span class="p">,</span>
+
+        <span class="c"># Pick your license as you wish (should match &quot;license&quot; above)</span>
+        <span class="s">&quot;License :: OSI Approved :: Apache Software License&quot;</span><span class="p">,</span>
+
+        <span class="c"># Specify the Python versions you support here. In particular, ensure</span>
+        <span class="c"># that you indicate whether you support Python 2, Python 3 or both.</span>
+        <span class="s">&#39;Programming Language :: Python :: 2.7&#39;</span><span class="p">,</span>
+        <span class="s">&#39;Programming Language :: C&#39;</span>
+    <span class="p">],</span>
+
+    <span class="c"># What does your project relate to?</span>
+    <span class="n">keywords</span><span class="o">=</span><span class="s">&#39;bioinformatics speech linguistics&#39;</span><span class="p">,</span>
+
+    <span class="c"># You can just specify the packages manually here if your project is</span>
+    <span class="c"># simple. Or you can use find_packages().</span>
+    <span class="n">packages</span> <span class="o">=</span> <span class="n">find_packages</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;build&#39;</span><span class="p">,</span> <span class="s">&#39;_docs&#39;</span><span class="p">,</span> <span class="s">&#39;templates&#39;</span><span class="p">]),</span>
+    <span class="c">#package_dir={&#39;vfclust&#39;: &#39;vfclust&#39;},</span>
+
+    <span class="c"># List run-time dependencies here.  These will be installed by pip when your</span>
+    <span class="c"># project is installed. For an analysis of &quot;install_requires&quot; vs pip&#39;s</span>
+    <span class="c"># requirements files see:</span>
+    <span class="c"># https://packaging.python.org/en/latest/technical.html#install-requires-vs-requirements-files</span>
+    <span class="c">#install_requires=[&#39;NLTK&#39;],</span>
+
+    <span class="c"># If there are data files included in your packages that need to be</span>
+    <span class="c"># installed in site-packages, specify them here.  If using Python 2.6 or less, then these</span>
+    <span class="c"># have to be included in MANIFEST.in as well.</span>
+    <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="c"># relative to the vfclust directory</span>
+    <span class="n">package_data</span><span class="o">=</span><span class="p">{</span>
+        <span class="s">&#39;vfclust&#39;</span><span class="p">:[</span>
+             <span class="s">&#39;Makefile&#39;</span><span class="p">],</span>
+        <span class="s">&#39;data&#39;</span><span class="p">:</span>
+             <span class="p">[</span><span class="s">&#39;data/animals_lemmas.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/animals_names.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/animals_names_raw.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/cmudict.0.7a.tree&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/modified_cmudict.dat&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/animals_term_vector_dictionaries/term_vectors_dict91_cpickle.dat&#39;</span><span class="p">,</span>
+             <span class="p">],</span>
+        <span class="s">&#39;data/EOWL&#39;</span><span class="p">:</span>
+            <span class="p">[</span><span class="s">&#39;data/EOWL/english_words.txt&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/EOWL/EOWL Version Notes.txt&#39;</span><span class="p">,</span>
+             <span class="s">&#39;data/EOWL/The English Open Word List.pdf&#39;</span>
+            <span class="p">],</span>
+        <span class="s">&#39;example&#39;</span><span class="p">:</span>
+            <span class="p">[</span><span class="s">&#39;example/EXAMPLE.csv&#39;</span><span class="p">,</span>
+             <span class="s">&#39;example/EXAMPLE.TextGrid&#39;</span><span class="p">,</span>
+             <span class="s">&#39;example/EXAMPLE_sem.csv&#39;</span><span class="p">,</span>
+             <span class="s">&#39;example/EXAMPLE_sem.TextGrid&#39;</span><span class="p">],</span>
+        <span class="s">&#39;t2p&#39;</span><span class="p">:</span>
+            <span class="p">[</span><span class="s">&#39;t2p/t2p.c&#39;</span><span class="p">,</span>
+             <span class="s">&#39;t2p/t2pin.tmp&#39;</span>
+             <span class="p">],</span>
+    <span class="p">},</span>
+
+    <span class="c">#run custom code</span>
+    <span class="n">cmdclass</span><span class="o">=</span><span class="p">{</span><span class="s">&#39;install&#39;</span><span class="p">:</span> <span class="n">MyInstall</span><span class="p">},</span>
+
+    <span class="c"># Although &#39;package_data&#39; is the preferred approach, in some case you may</span>
+    <span class="c"># need to place data files outside of your packages.</span>
+    <span class="c"># see http://_docs.python.org/3.4/distutils/setupscript.html#installing-additional-files</span>
+    <span class="c"># In this case, &#39;data_file&#39; will be installed into &#39;&lt;sys.prefix&gt;/my_data&#39;</span>
+    <span class="c"># data_files=[</span>
+    <span class="c">#     (&#39;my_data&#39;,[&#39;data_file&#39;]),</span>
+    <span class="c"># ],</span>
+
+    <span class="c"># To provide executable scripts, use entry points in preference to the</span>
+    <span class="c"># &quot;scripts&quot; keyword. Entry points provide cross-platform support and allow</span>
+    <span class="c"># pip to create the appropriate form of executable for the target platform.</span>
+    <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+       <span class="s">&#39;console_scripts&#39;</span><span class="p">:</span> <span class="p">[</span>
+           <span class="s">&#39;vfclust = vfclust.vfclust:main&#39;</span><span class="p">,</span>
+       <span class="p">],</span>
+    <span class="p">}</span>
+
+<span class="p">)</span></code></pre></div>
+
+<h1 id="documentation">Documentation</h1>
+
+<p>Many sophisticated tools exist to help with code documentation. Unfortunately, their sophistication means that learning how to use them is a headache for the uninitiated. Here are some lessons I learned the hard way.</p>
+
+<h2 id="readme">Readme</h2>
+
+<p>Your package’s PyPI page will only display your README file properly if it’s formatted as <a href="http://en.wikipedia.org/wiki/ReStructuredText">reStructuredText</a>, not Markdown. I’d originally written it in Markdown so it would appear properly on Github. Bummer. Luckily, there’s a handy Python package that converts formats automatically.  Do</p>
+
+<div class="highlight"><pre><code class="bash">pip install pypandoc</code></pre></div>
+
+<p>Then navigate in the terminal to the location of your README file, launch Python, and do:</p>
+
+<div class="highlight"><pre><code class="python"><span class="kn">import</span> <span class="nn">pypandoc</span>
+
+<span class="c">#converts markdown to reStructured</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">pypandoc</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s">&#39;README&#39;</span><span class="p">,</span><span class="s">&#39;rst&#39;</span><span class="p">,</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;markdown&#39;</span><span class="p">)</span>
+
+<span class="c">#writes converted file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;README.rst&#39;</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">outfile</span><span class="p">:</span>
+    <span class="n">outfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">z</span><span class="p">)</span></code></pre></div>
+
+<p>If your document was valid Markdown, you should now have a properly formatted reStructured version of your README in the project folder.</p>
+
+<h2 id="docstrings">Docstrings</h2>
+
+<p>It’s common to write relatively verbose documentation for your functions and methods in Python code so other people can read and improve on your code. This documentation is written as “docstrings”, which are strings of one or more lines written directly after the function/method declaration:</p>
+
+<div class="highlight"><pre><code class="python"><span class="k">def</span> <span class="nf">my_function</span><span class="p">():</span>
+    <span class="sd">&#39;&#39;&#39; This is my docstring.&#39;&#39;&#39;</span></code></pre></div>
+
+<p>This is convenient for those reading the code. However, if you write your docstrings in reStructured format, you can use a tool called <a href="http://sphinx-doc.org">Sphinx</a> to automatically create HTML/PDF/epub versions of your documentation that includes both the content of the README file and the docstrings, formatted in pretty, easy-to-read format.</p>
+
+<p>It’s possible to include test code and other complexities in the docstring, but the simple version looks like this:</p>
+
+<div class="highlight"><pre><code class="python"><span class="k">def</span> <span class="nf">compute_similarity_score</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Returns the similarity score between two words.</span>
+
+<span class="sd">        :param str word1: First word to be compared.</span>
+<span class="sd">        :param str word2: Second word to be compared.</span>
+<span class="sd">        :return: Number indicating degree of similarity of the two input words.</span>
+<span class="sd">            The maximum value is 1, and a higher value indicates that the words</span>
+<span class="sd">            are more similar.</span>
+<span class="sd">        :rtype : Float</span>
+
+<span class="sd">        Longer description of the function, how it works, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span></code></pre></div>
+
+<p>This is probably more verbose than needed (PEP guidelines suggest that you don’t state the obvious in yoru docstrings), but I’m leaving it like this for demonstration purposes.  A few things to note:</p>
+
+<ul>
+  <li>
+    <p>The docstring is in triple quotes, directly following the function declaration.</p>
+  </li>
+  <li>
+    <p>The last line with “”” doesn’t have any other text on it.</p>
+  </li>
+  <li>
+    <p>the <code>:param TYPE VARIABLE:</code> syntax is a reStructured way of declaring your input/output variables. You can read more about the options <a href="http://sphinx-doc.org/domains.html#info-field-lists">here</a>.</p>
+  </li>
+</ul>
+
+<p>reStructured Text can be very complicated and can interact with your code in lots of different ways. I just stuck to the minimum knowledge necessary to make reasonable documentation for a small project.</p>
+
+<h2 id="html-documentation">HTML Documentation</h2>
+
+<p>So far, we have README and <code>*.py</code> files.  Since we wrote our README and docstrings in reStructured text, we can now create a ready-made HTML/PDF version of the documentation using software called <a href="http://sphinx-doc.org">Sphinx</a>.  I found Sphinx to be very complicated, but here are basic instructions to get you going (using OS X, at least)</p>
+
+<ol>
+  <li>Install Sphinx:</li>
+</ol>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>easy_install -U sphinx</code></pre></div>
+
+<ol>
+  <li>Make a folder for documentation, and go there:</li>
+</ol>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir docs
+    <span class="nv">$ </span><span class="nb">cd </span>docs</code></pre></div>
+
+<ol>
+  <li>
+    <p>Run Sphinx:</p>
+
+    <p><code>$ sphinx-quickstart</code></p>
+
+    <p>You’re already in docs/, so leave the first question as the default. Answer the next few questions by filling in your name, project name, etc.  I left all the rest at their default values, EXCEPT</p>
+
+    <p><code>autodoc: automatically insert docstrings from modules (y/n) [n]: y</code></p>
+
+    <p>Selecting <code>y</code> here lets Sphinx pull information from your docstrings, as promised above, and make it into a nice little easy-to-read version in HTML or whatever.</p>
+
+    <p>Sphinx made a <code>Makefile</code> in the docs/ directory that will generate your documentation for you.  You can type things like <code>make html</code> or `make latexpdf to generate documentation.  If you try that now (as I did), your documentation will be empty. Another bummer.</p>
+  </li>
+  <li>
+    <p>Tell Sphinx to generate your documentation by pulling from your docstrings.</p>
+  </li>
+</ol>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>sphinx-apidoc -o &lt;dest-directory&gt; &lt;<span class="nb">source</span>-directory&gt;</code></pre></div>
+
+<pre><code>You should already be in your "docs" directory. My "docs" directory is at the same level as my package directory with my nice docstrings, so I did:
+</code></pre>
+
+<div class="highlight"><pre><code class="bash">sphinx-apidoc -o . ../vfclust</code></pre></div>
+
+<ol>
+  <li>Finally, edit the new <code>index.rst</code> file to change from:</li>
+</ol>
+
+<div class="highlight"><pre><code class="text">Welcome to VFClust&#39;s documentation!
+    ===================================
+
+    Contents:
+
+    .. toctree::
+       :maxdepth: 2
+
+
+
+    Indices and tables
+    ==================
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`</code></pre></div>
+
+<pre><code>to
+</code></pre>
+
+<div class="highlight"><pre><code class="text">Welcome to VFClust&#39;s documentation!
+    ===================================
+
+    .. include:: ../README
+
+    Contents:
+
+    .. toctree::
+       :maxdepth: 2
+
+
+
+    Indices and tables
+    ==================
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`</code></pre></div>
+
+<pre><code>Your project name will be different, but the important part is the `.. include:: ../README` line, assuming your README is located in the root project directory (one up from "docs").  That'll put the README as the landing page of your documentation. You can click on the "Index", "Moduel Index" or "Search" links to see documentation for your functions/methods.
+</code></pre>
+
+<ol>
+  <li>Generate documentation. Finally! Type:</li>
+</ol>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>make</code></pre></div>
+
+<pre><code>to see the available options for output formatting.  Create your HTML documentation using:
+</code></pre>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>make html</code></pre></div>
+
+<pre><code>This will generate a set of html files in "docs/_build/html/", assuming you didn't change the "_build" default during questioning.  Open up "docs/_build/html/index.html" to see your nice new documentation.
+</code></pre>
+
+<h1 id="pypi">PyPI</h1>
+
+<p>Alright, the package has the correct directory structure, the documentation is formatted, and we’re ready to share it with the world so that anyone can install it using <code>pip install mypackage</code>.</p>
+
+<h2 id="make-a-test-build">Make a test-build</h2>
+
+<p>Navigate to the directory of your setup.py file.  First, make sure everything is configured properly using</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>python setup.py <span class="nb">test</span></code></pre></div>
+
+<p>Hopefully you get no errors.</p>
+
+<p>Then, create the distribution you’re going to send to PyPI using:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>python setup.py sdist</code></pre></div>
+
+<p>This creates a <code>.tar.gz</code> package of your source files. It also creates a new subfolder in your project folder called dist/, and puts the <code>.tar.gz</code> file in there.  You should extract the folder and examine its contents - this is what will be downloadable from PyPI.</p>
+
+<h2 id="register-with-pypi">Register with PyPI</h2>
+
+<p>You can do this via the command line, but you can also just go to <a href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a> and make a username and password for yourself.  While you’re at it, make an account at <a href="https://testpypi.python.org/pypi">https://testpypi.python.org/pypi</a>. We’re going to use the second site for testing purposes.  This is optional, but given the trouble I had getting pip to do what I thought it should, I personally recommend it.</p>
+
+<p>Use your favorite text editor to open up your new ~/.pypirc file, created by setup.py.  Make it look something like this:</p>
+
+<div class="highlight"><pre><code class="text">[distutils]
+index-servers =
+    pypi
+    test
+
+[pypi]
+username:yourname
+password:yourpassword
+
+[test]
+repository:https://testpypi.python.org/pypi
+username:yourname
+password:yourpassword</code></pre></div>
+
+<p>You’re going to need to add the test repository entry for testing.  Now register your package with PyPI. Make sure you’re in your root project directory (the one with the <code>setup.py</code> file), and type:</p>
+
+<div class="highlight"><pre><code class="bash">python setup.py register
+python setup.py register -r https://testpypi.python.org/pypi</code></pre></div>
+
+<p>This sends the metadata for your package to PyPI.</p>
+
+<h2 id="install-twine">Install twine</h2>
+
+<p>When you upload your package to PyPI, your login information is sent plaintext. Not great. To solve this, install the twine package.</p>
+
+<div class="highlight"><pre><code class="bash">pip install twine</code></pre></div>
+
+<h2 id="create-a-test-upload">Create a test upload</h2>
+
+<p>This has two steps: first, package the file using <code>sdist</code>. Then, upload that file to the server.</p>
+
+<div class="highlight"><pre><code class="bash">python setup.py sdist <span class="c">#creates .tar.gz, puts it in dist/ folder</span>
+twine upload -r <span class="nb">test </span>dist/PACKAGENAME-VERSION.tar.gz</code></pre></div>
+
+<p>The <code>-r test</code> uploads it to the server named in the <code>[test]</code> part of the .pypirc file.</p>
+
+<h2 id="create-a-test-install">Create a test install</h2>
+
+<p>Python has a neat way of making sandboxed environments for you to work in, called virtual environments. I’d suggest creating a new one to test your installation, thereby guaranteeing a fresh install.</p>
+
+<p>Navigate to some folder on your hard drive and type</p>
+
+<div class="highlight"><pre><code class="bash">virtualenv MY_VIRTUALENV</code></pre></div>
+
+<p>where you obviously use some other name than <code>MY_VIRTUALENV</code>. Then fire it up by typing</p>
+
+<div class="highlight"><pre><code class="bash"><span class="nb">cd </span>MY_VIRTUALENV
+<span class="nb">source </span>bin/activate</code></pre></div>
+
+<p>You’re now in a little sandboxed Python installation.  Install your package from the PyPI test servers:</p>
+
+<div class="highlight"><pre><code class="bash">pip install -i https://testpypi.python.org/pypi PACKAGENAME</code></pre></div>
+
+<p>You may need to use <code>sudo</code>, I can’t seem to figure out why.  Anyway, your package should now be installed!  Test it out:</p>
+
+<div class="highlight"><pre><code class="pycon"><span class="go">import PACKAGENAME</span></code></pre></div>
+
+<p>If you included a way to run it as a script in <code>setup.py</code>, that should work now too.</p>
+
+<h2 id="upload-for-real">Upload for real</h2>
+
+<p>If everything seems to be working (good for you if it is, it took me 2 days to get to this point), you can upload it to the PyPI servers:</p>
+
+<div class="highlight"><pre><code class="bash">twine upload dist/PACKAGENAME-VERSION.tar.gz</code></pre></div>
+
+<p>And voila, you’re live!  Now you can go to <a href="https://pypi.python.org.pypi">https://pypi.python.org.pypi</a> and search for your package.  You should also be able to install it using</p>
+
+<div class="highlight"><pre><code class="bash">pip install PACKAGENAME</code></pre></div>
+
+<p>See, nothing to it! (Haha…ha…) I hope this was helpful for someone!</p>
+
+        
+      </div><!-- /.entry-content -->
+    </div><!-- /.entry-wrapper -->
+    <nav class="pagination" role="navigation">
+      
+        <a href="//tom-christie.github.io/articles/correlation/" class="btn" title="Spurious correlations: I'm looking at you, internet.">Previous article</a>
+      
+      
+    </nav><!-- /.pagination -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Tom Christie. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/so-simple/">So Simple Theme</a>.</span>
+<div class="social-icons">
+	<a href="http://twitter.com/tom_cogsci" title="Tom Christie on Twitter" target="_blank"><i class="icon-twitter icon-2x"></i></a>
+    <a href="mailto:tom.christie@gmail.com" title="Email me"><i class="icon-envelope icon-2x"></i></a>
+    
+	
+	
+	
+	
+	
+	<a href="http://github.com/tom-christie" title="Tom Christie on Github" target="_blank"><i class="icon-github icon-2x"></i></a>
+	
+</div><!-- /.social-icons -->
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="//tom-christie.github.io/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="//tom-christie.github.io/assets/js/scripts.min.js"></script>
+
+<!-- Jekyll Simple Search option -->
+<script>
+  $(document).ready(function() {
+      $('.search-field').simpleJekyllSearch({
+          jsonFile : '//tom-christie.github.io/search.json',
+          searchResults : '.search-results',
+          template : '<li><article><a href="{url}">{title} <span class="entry-date"><time datetime="{date}">{shortdate}</time></span></a></article></li>',
+          noResults: '<p>Nothing found.</p>'
+        });
+  });
+
+  (function( $, window, undefined ) {
+    
+     var bs = {
+          close: $(".icon-remove-sign"),
+          searchform: $(".search-form"),
+          canvas: $("body"),
+          dothis: $('.dosearch')
+      };
+    
+    bs.dothis.on('click', function() {
+      $('.search-wrapper').css({ display: "block" });
+      bs.searchform.toggleClass('active');
+      bs.searchform.find('input').focus();
+      bs.canvas.toggleClass('search-overlay');
+    });
+    
+      bs.close.on('click', function() {
+        $('.search-wrapper').removeAttr( 'style' );
+        bs.searchform.toggleClass('active');
+        bs.canvas.removeClass('search-overlay');
+    });
+  })( jQuery, window );
+</script>
+
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-51289709-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+	        
+
+</body>
+</html>

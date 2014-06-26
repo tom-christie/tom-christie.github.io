@@ -6,21 +6,21 @@
 <head>
 <meta charset="utf-8">
 <title>Spurious correlations: I'm looking at you, internet. &#8211; Tom Christie</title>
-<meta name="description" content="A description goes here.">
+<meta name="description" content="">
 <meta name="keywords" content="statistics">
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="//tom-christie.github.io/images/site-logo.png">
 <meta name="twitter:title" content="Spurious correlations: I'm looking at you, internet.">
-<meta name="twitter:description" content="A description goes here.">
+<meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@tom_cogsci">
 
 <!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spurious correlations: I'm looking at you, internet.">
-<meta property="og:description" content="A description goes here.">
+<meta property="og:description" content="">
 <meta property="og:url" content="//tom-christie.github.io/articles/correlation/">
 <meta property="og:site_name" content="Tom Christie">
 
@@ -184,7 +184,7 @@ END COMMENT -->
 
 <p><img src="/assets/images/correlation/correlated_time_series.png" alt="img" title="Time series of correlated data" /></p>
 
-<p>There might be some structure there, but it looks pretty messy. It should look messy, because the original data really had nothing to do with time.  Notice that the data is centered around a given value and has a similar variance at any time point.  If you take any 100-point chunk, you probably couldn’t tell me what time it came from.  This, illustrated by the histograms above, means that the data is <em>independent and identically distributed</em> (i.i.d. or IID).  That is, at any time point, the data looks like it’s coming from the <em>same</em> distribution.  That’s why the histograms in the plot above almost exactly overlap.  Here’s the takeaway:  <strong>correlation is only meaningful when data is i.i.d.</strong>.  I’ll explain why below, but keep that in mind for this next section.</p>
+<p>There might be some structure there, but it looks pretty messy. It should look messy, because the original data really had nothing to do with time.  Notice that the data is centered around a given value and has a similar variance at any time point.  If you take any 100-point chunk, you probably couldn’t tell me what time it came from.  This, illustrated by the histograms above, means that the data is <em>independent and identically distributed</em> (i.i.d. or IID).  That is, at any time point, the data looks like it’s coming from the <em>same</em> distribution.  That’s why the histograms in the plot above almost exactly overlap.  Here’s the takeaway:  <strong>correlation is only meaningful when data is i.i.d.</strong>. <em>[edit: it’s not inflated if the data is i.i.d. It means</em> something, <em>but doesn’t accurately reflect the relationship between the two variables.]</em>  I’ll explain why below, but keep that in mind for this next section.</p>
 
 <h2 id="correlation-between-two-time-series">Correlation between two time series</h2>
 
@@ -250,7 +250,7 @@ END COMMENT -->
 
 <p><img src="/assets/images/correlation/differenced_time_series.png" alt="img" title="Differenced time series data" /></p>
 
-<p>They don’t look correlated anymore! How disappointing.  But the data was <em>not</em> correlated correlated in the first place: each variable was generated independently of the other. They just looked correlated.  That’s the problem.  The apparent correlation was entirely a mirage.  The two variables only looked correlated because they were actually <em>autocorrelated</em> in a similar way.  That’s exactly what’s going on with the spurious correlation plots on the website I mentioned at the beginning.  If we plot the non-autocorrelated versions of these data against each other, we get:</p>
+<p>They don’t look correlated anymore! How disappointing.  But the data was <em>not</em> correlated in the first place: each variable was generated independently of the other. They just looked correlated.  That’s the problem.  The apparent correlation was entirely a mirage.  The two variables only looked correlated because they were actually <em>autocorrelated</em> in a similar way.  That’s exactly what’s going on with the spurious correlation plots on the website I mentioned at the beginning.  If we plot the non-autocorrelated versions of these data against each other, we get:</p>
 
 <p><img src="/assets/images/correlation/differenced_scatter.png" alt="img" title="Scatter of differenced time series data" /></p>
 
@@ -297,6 +297,8 @@ END COMMENT -->
       
         <a href="//tom-christie.github.io/islamic-geometric-patterns/" class="btn" title="Rosettes">Previous article</a>
       
+      
+        <a href="//tom-christie.github.io/articles/pypi/" class="btn" title="Uploading to PyPI">Next article</a>
       
     </nav><!-- /.pagination -->
   </article>
