@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" afterPath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/notes.txt" afterPath="$PROJECT_DIR$/notes.txt" />
     </list>
     <ignored path="tom-christie.github.io.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,7 +32,7 @@
       <file leaf-file-name="2014-06-26-pypi.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2014-06-26-pypi.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="41" selection-start="181" selection-end="181" vertical-scroll-proportion="0.45180723" vertical-offset="0" max-vertical-offset="14445">
+            <state line="591" column="2" selection-start="27727" selection-end="27727" vertical-scroll-proportion="0.9059561" vertical-offset="10376" max-vertical-offset="14445">
               <folding />
             </state>
           </provider>
@@ -55,7 +56,7 @@
       <file leaf-file-name="notes.txt" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/notes.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="30" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+            <state line="2" column="20" selection-start="78" selection-end="78" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
               <folding />
             </state>
           </provider>
@@ -663,13 +664,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/notes.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="30" selection-start="88" selection-end="88" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2014-02-02-islamic-geometric-patterns.markdown">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.08042896" vertical-offset="30" max-vertical-offset="840">
@@ -707,9 +701,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/notes.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="20" selection-start="78" selection-end="78" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="120">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2014-06-26-pypi.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="41" selection-start="181" selection-end="181" vertical-scroll-proportion="0.45180723" vertical-offset="0" max-vertical-offset="14445">
+        <state line="591" column="2" selection-start="27727" selection-end="27727" vertical-scroll-proportion="0.9059561" vertical-offset="10376" max-vertical-offset="14445">
           <folding />
         </state>
       </provider>
