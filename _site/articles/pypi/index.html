@@ -675,7 +675,7 @@ include LICENSE.txt</code></pre></div>
 <span class="sd">        Longer description of the function, how it works, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span></code></pre></div>
 
-<p>This is probably more verbose than needed (PEP guidelines suggest that you don’t state the obvious in yoru docstrings), but I’m leaving it like this for demonstration purposes.  A few things to note:</p>
+<p>This is probably more verbose than needed (PEP guidelines suggest that you don’t state the obvious in your docstrings), but I’m leaving it like this for demonstration purposes.  A few things to note:</p>
 
 <ul>
   <li>
@@ -695,104 +695,86 @@ include LICENSE.txt</code></pre></div>
 
 <p>So far, we have README and <code>*.py</code> files.  Since we wrote our README and docstrings in reStructured text, we can now create a ready-made HTML/PDF version of the documentation using software called <a href="http://sphinx-doc.org">Sphinx</a>.  I found Sphinx to be very complicated, but here are basic instructions to get you going (using OS X, at least)</p>
 
-<ol>
-  <li>Install Sphinx:</li>
-</ol>
+<h4 id="install-sphinx">Install Sphinx:</h4>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>easy_install -U sphinx</code></pre></div>
 
-<ol>
-  <li>Make a folder for documentation, and go there:</li>
-</ol>
+<h4 id="make-a-folder-for-documentation-and-go-there">Make a folder for documentation, and go there:</h4>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>mkdir docs
-    <span class="nv">$ </span><span class="nb">cd </span>docs</code></pre></div>
+<span class="nv">$ </span><span class="nb">cd </span>docs</code></pre></div>
 
-<ol>
-  <li>
-    <p>Run Sphinx:</p>
+<h4 id="run-sphinx">Run Sphinx:</h4>
 
-    <p><code>$ sphinx-quickstart</code></p>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>sphinx-quickstart</code></pre></div>
 
-    <p>You’re already in docs/, so leave the first question as the default. Answer the next few questions by filling in your name, project name, etc.  I left all the rest at their default values, EXCEPT</p>
+<p>You’re already in docs/, so leave the first question as the default. Answer the next few questions by filling in your name, project name, etc.  I left all the rest at their default values, EXCEPT</p>
 
-    <p><code>autodoc: automatically insert docstrings from modules (y/n) [n]: y</code></p>
+<div class="highlight"><pre><code class="bash">autodoc: automatically insert docstrings from modules <span class="o">(</span>y/n<span class="o">)</span> <span class="o">[</span>n<span class="o">]</span>: y</code></pre></div>
 
-    <p>Selecting <code>y</code> here lets Sphinx pull information from your docstrings, as promised above, and make it into a nice little easy-to-read version in HTML or whatever.</p>
+<p>Selecting <code>y</code> here lets Sphinx pull information from your docstrings, as promised above, and make it into a nice little easy-to-read version in HTML or whatever.</p>
 
-    <p>Sphinx made a <code>Makefile</code> in the docs/ directory that will generate your documentation for you.  You can type things like <code>make html</code> or `make latexpdf to generate documentation.  If you try that now (as I did), your documentation will be empty. Another bummer.</p>
-  </li>
-  <li>
-    <p>Tell Sphinx to generate your documentation by pulling from your docstrings.</p>
-  </li>
-</ol>
+<p>Sphinx made a <code>Makefile</code> in the docs/ directory that will generate your documentation for you.  You can type things like <code>make html</code> or `make latexpdf to generate documentation.  If you try that now (as I did), your documentation will be empty. Another bummer.</p>
+
+<h4 id="tell-sphinx-to-generate-your-documentation-by-pulling-from-your-docstrings">Tell Sphinx to generate your documentation by pulling from your docstrings.</h4>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>sphinx-apidoc -o &lt;dest-directory&gt; &lt;<span class="nb">source</span>-directory&gt;</code></pre></div>
 
-<pre><code>You should already be in your "docs" directory. My "docs" directory is at the same level as my package directory with my nice docstrings, so I did:
-</code></pre>
+<p>You should already be in your “docs” directory. My “docs” directory is at the same level as my package directory with my nice docstrings, so I did:</p>
 
 <div class="highlight"><pre><code class="bash">sphinx-apidoc -o . ../vfclust</code></pre></div>
 
-<ol>
-  <li>Finally, edit the new <code>index.rst</code> file to change from:</li>
-</ol>
+<h4 id="finally-edit-the-new-indexrst-file-to-change-from">Finally, edit the new <code>index.rst</code> file to change from:</h4>
 
 <div class="highlight"><pre><code class="text">Welcome to VFClust&#39;s documentation!
-    ===================================
+===================================
 
-    Contents:
+Contents:
 
-    .. toctree::
-       :maxdepth: 2
+.. toctree::
+   :maxdepth: 2
 
 
 
-    Indices and tables
-    ==================
+Indices and tables
+==================
 
-    * :ref:`genindex`
-    * :ref:`modindex`
-    * :ref:`search`</code></pre></div>
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`</code></pre></div>
 
-<pre><code>to
-</code></pre>
+<p>to</p>
 
 <div class="highlight"><pre><code class="text">Welcome to VFClust&#39;s documentation!
-    ===================================
+===================================
 
-    .. include:: ../README
+.. include:: ../README
 
-    Contents:
+Contents:
 
-    .. toctree::
-       :maxdepth: 2
+.. toctree::
+   :maxdepth: 2
 
 
 
-    Indices and tables
-    ==================
+Indices and tables
+==================
 
-    * :ref:`genindex`
-    * :ref:`modindex`
-    * :ref:`search`</code></pre></div>
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`</code></pre></div>
 
-<pre><code>Your project name will be different, but the important part is the `.. include:: ../README` line, assuming your README is located in the root project directory (one up from "docs").  That'll put the README as the landing page of your documentation. You can click on the "Index", "Moduel Index" or "Search" links to see documentation for your functions/methods.
-</code></pre>
+<p>Your project name will be different, but the important part is the <code>.. include:: ../README</code> line, assuming your README is located in the root project directory (one up from “docs”).  That’ll put the README as the landing page of your documentation. You can click on the “Index”, “Moduel Index” or “Search” links to see documentation for your functions/methods.</p>
 
-<ol>
-  <li>Generate documentation. Finally! Type:</li>
-</ol>
+<h4 id="generate-documentation-finally-type">Generate documentation. Finally! Type:</h4>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>make</code></pre></div>
 
-<pre><code>to see the available options for output formatting.  Create your HTML documentation using:
-</code></pre>
+<p>to see the available options for output formatting.  Create your HTML documentation using:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="nv">$ </span>make html</code></pre></div>
 
-<pre><code>This will generate a set of html files in "docs/_build/html/", assuming you didn't change the "_build" default during questioning.  Open up "docs/_build/html/index.html" to see your nice new documentation.
-</code></pre>
+<p>This will generate a set of html files in “docs/_build/html/”, assuming you didn’t change the “_build” default during questioning.  Open up “docs/_build/html/index.html” to see your nice new documentation.</p>
 
 <h1 id="pypi">PyPI</h1>
 
