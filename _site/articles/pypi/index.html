@@ -405,7 +405,7 @@ include LICENSE.txt</code></pre></div>
              <span class="p">],</span>
     <span class="p">},</span></code></pre></div>
 
-<p>As far as I can tell, <code>package_data</code> is a dictionary where each key corresponds to a subfolder of the installed package, and each value is supposed to be a list of the files you want to go into that subfolder. In practice, however, I couldn’t get everything situated properly in the final installation until I made all my data files subfolders of the package folder. If you know a better and more flexible way to do this, please enlighten me.  With this setup, the following gets installed in <code>site-packages</code> when I do <code>pip install vfclust</code>:</p>
+<p>As far as I can tell, <code>package_data</code> is a dictionary where each key corresponds to a subfolder of the installed package, and each value is supposed to be a list of the files you want to go into that subfolder. In practice, however, I couldn’t get everything situated properly in the final installation until I made all my data files subfolders of the package folder. If you know a better and more flexible way to do this, please enlighten me (not being sarcastic here, really do e-mail me! I want to know!).  With this setup, the following gets installed in <code>site-packages</code> when I do <code>pip install vfclust</code>:</p>
 
 <div class="highlight"><pre><code class="bash">vfclust
 ├── Makefile
@@ -722,7 +722,7 @@ include LICENSE.txt</code></pre></div>
 
 <p>You should already be in your “docs” directory. My “docs” directory is at the same level as my package directory with my nice docstrings, so I did:</p>
 
-<div class="highlight"><pre><code class="bash">sphinx-apidoc -o . ../vfclust</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>sphinx-apidoc -o . ../vfclust</code></pre></div>
 
 <h4 id="finally-edit-the-new-indexrst-file-to-change-from">Finally, edit the new <code>index.rst</code> file to change from:</h4>
 
@@ -816,8 +816,8 @@ password:yourpassword</code></pre></div>
 
 <p>You’re going to need to add the test repository entry for testing.  Now register your package with PyPI. Make sure you’re in your root project directory (the one with the <code>setup.py</code> file), and type:</p>
 
-<div class="highlight"><pre><code class="bash">python setup.py register
-python setup.py register -r https://testpypi.python.org/pypi</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>python setup.py register
+<span class="nv">$ </span>python setup.py register -r https://testpypi.python.org/pypi</code></pre></div>
 
 <p>This sends the metadata for your package to PyPI.</p>
 
@@ -825,14 +825,14 @@ python setup.py register -r https://testpypi.python.org/pypi</code></pre></div>
 
 <p>When you upload your package to PyPI, your login information is sent plaintext. Not great. To solve this, install the twine package.</p>
 
-<div class="highlight"><pre><code class="bash">pip install twine</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>pip install twine</code></pre></div>
 
 <h2 id="create-a-test-upload">Create a test upload</h2>
 
 <p>This has two steps: first, package the file using <code>sdist</code>. Then, upload that file to the server.</p>
 
-<div class="highlight"><pre><code class="bash">python setup.py sdist <span class="c">#creates .tar.gz, puts it in dist/ folder</span>
-twine upload -r <span class="nb">test </span>dist/PACKAGENAME-VERSION.tar.gz</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>python setup.py sdist <span class="c">#creates .tar.gz, puts it in dist/ folder</span>
+<span class="nv">$ </span>twine upload -r <span class="nb">test </span>dist/PACKAGENAME-VERSION.tar.gz</code></pre></div>
 
 <p>The <code>-r test</code> uploads it to the server named in the <code>[test]</code> part of the .pypirc file.</p>
 
@@ -842,20 +842,20 @@ twine upload -r <span class="nb">test </span>dist/PACKAGENAME-VERSION.tar.gz</co
 
 <p>Navigate to some folder on your hard drive and type</p>
 
-<div class="highlight"><pre><code class="bash">virtualenv MY_VIRTUALENV</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>virtualenv MY_VIRTUALENV</code></pre></div>
 
 <p>where you obviously use some other name than <code>MY_VIRTUALENV</code>. Then fire it up by typing</p>
 
-<div class="highlight"><pre><code class="bash"><span class="nb">cd </span>MY_VIRTUALENV
-<span class="nb">source </span>bin/activate</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span><span class="nb">cd </span>MY_VIRTUALENV
+<span class="nv">$ </span><span class="nb">source </span>bin/activate</code></pre></div>
 
 <p>You’re now in a little sandboxed Python installation.  Install your package from the PyPI test servers:</p>
 
-<div class="highlight"><pre><code class="bash">pip install -i https://testpypi.python.org/pypi PACKAGENAME</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>pip install -i https://testpypi.python.org/pypi PACKAGENAME</code></pre></div>
 
 <p>You may need to use <code>sudo</code>, I can’t seem to figure out why.  Anyway, your package should now be installed!  Test it out:</p>
 
-<div class="highlight"><pre><code class="pycon"><span class="go">import PACKAGENAME</span></code></pre></div>
+<div class="highlight"><pre><code class="pycon"><span class="go">&gt;&gt; import PACKAGENAME</span></code></pre></div>
 
 <p>If you included a way to run it as a script in <code>setup.py</code>, that should work now too.</p>
 
@@ -863,11 +863,11 @@ twine upload -r <span class="nb">test </span>dist/PACKAGENAME-VERSION.tar.gz</co
 
 <p>If everything seems to be working (good for you if it is, it took me 2 days to get to this point), you can upload it to the PyPI servers:</p>
 
-<div class="highlight"><pre><code class="bash">twine upload dist/PACKAGENAME-VERSION.tar.gz</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>twine upload dist/PACKAGENAME-VERSION.tar.gz</code></pre></div>
 
 <p>And voila, you’re live!  Now you can go to <a href="https://pypi.python.org.pypi">https://pypi.python.org.pypi</a> and search for your package.  You should also be able to install it using</p>
 
-<div class="highlight"><pre><code class="bash">pip install PACKAGENAME</code></pre></div>
+<div class="highlight"><pre><code class="bash"><span class="nv">$ </span>pip install PACKAGENAME</code></pre></div>
 
 <p>See, nothing to it! (Haha…ha…) I hope this was helpful for someone!</p>
 

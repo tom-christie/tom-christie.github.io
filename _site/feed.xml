@@ -10,7 +10,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://tom-christie.github.io/feed.xml" />
 <link rel="alternate" type="text/html" href="http://tom-christie.github.io/" />
-<updated>2014-06-26T19:04:10-05:00</updated>
+<updated>2014-06-26T19:07:29-05:00</updated>
 <id>http://tom-christie.github.io/</id>
 <author>
   <name>Tom Christie</name>
@@ -306,7 +306,7 @@ include LICENSE.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
              &lt;span class=&quot;p&quot;&gt;],&lt;/span&gt;
     &lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;As far as I can tell, &lt;code&gt;package_data&lt;/code&gt; is a dictionary where each key corresponds to a subfolder of the installed package, and each value is supposed to be a list of the files you want to go into that subfolder. In practice, however, I couldn’t get everything situated properly in the final installation until I made all my data files subfolders of the package folder. If you know a better and more flexible way to do this, please enlighten me.  With this setup, the following gets installed in &lt;code&gt;site-packages&lt;/code&gt; when I do &lt;code&gt;pip install vfclust&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;As far as I can tell, &lt;code&gt;package_data&lt;/code&gt; is a dictionary where each key corresponds to a subfolder of the installed package, and each value is supposed to be a list of the files you want to go into that subfolder. In practice, however, I couldn’t get everything situated properly in the final installation until I made all my data files subfolders of the package folder. If you know a better and more flexible way to do this, please enlighten me (not being sarcastic here, really do e-mail me! I want to know!).  With this setup, the following gets installed in &lt;code&gt;site-packages&lt;/code&gt; when I do &lt;code&gt;pip install vfclust&lt;/code&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;vfclust
 ├── Makefile
@@ -623,7 +623,7 @@ include LICENSE.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You should already be in your “docs” directory. My “docs” directory is at the same level as my package directory with my nice docstrings, so I did:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;sphinx-apidoc -o . ../vfclust&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sphinx-apidoc -o . ../vfclust&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h4 id=&quot;finally-edit-the-new-indexrst-file-to-change-from&quot;&gt;Finally, edit the new &lt;code&gt;index.rst&lt;/code&gt; file to change from:&lt;/h4&gt;
 
@@ -717,8 +717,8 @@ password:yourpassword&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You’re going to need to add the test repository entry for testing.  Now register your package with PyPI. Make sure you’re in your root project directory (the one with the &lt;code&gt;setup.py&lt;/code&gt; file), and type:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;python setup.py register
-python setup.py register -r https://testpypi.python.org/pypi&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python setup.py register
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python setup.py register -r https://testpypi.python.org/pypi&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This sends the metadata for your package to PyPI.&lt;/p&gt;
 
@@ -726,14 +726,14 @@ python setup.py register -r https://testpypi.python.org/pypi&lt;/code&gt;&lt;/pr
 
 &lt;p&gt;When you upload your package to PyPI, your login information is sent plaintext. Not great. To solve this, install the twine package.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;pip install twine&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install twine&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;create-a-test-upload&quot;&gt;Create a test upload&lt;/h2&gt;
 
 &lt;p&gt;This has two steps: first, package the file using &lt;code&gt;sdist&lt;/code&gt;. Then, upload that file to the server.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;python setup.py sdist &lt;span class=&quot;c&quot;&gt;#creates .tar.gz, puts it in dist/ folder&lt;/span&gt;
-twine upload -r &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;dist/PACKAGENAME-VERSION.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;python setup.py sdist &lt;span class=&quot;c&quot;&gt;#creates .tar.gz, puts it in dist/ folder&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;twine upload -r &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;dist/PACKAGENAME-VERSION.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The &lt;code&gt;-r test&lt;/code&gt; uploads it to the server named in the &lt;code&gt;[test]&lt;/code&gt; part of the .pypirc file.&lt;/p&gt;
 
@@ -743,20 +743,20 @@ twine upload -r &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;dist/PACKAGEN
 
 &lt;p&gt;Navigate to some folder on your hard drive and type&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;virtualenv MY_VIRTUALENV&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;virtualenv MY_VIRTUALENV&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;where you obviously use some other name than &lt;code&gt;MY_VIRTUALENV&lt;/code&gt;. Then fire it up by typing&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;MY_VIRTUALENV
-&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;bin/activate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;MY_VIRTUALENV
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;source &lt;/span&gt;bin/activate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You’re now in a little sandboxed Python installation.  Install your package from the PyPI test servers:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;pip install -i https://testpypi.python.org/pypi PACKAGENAME&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install -i https://testpypi.python.org/pypi PACKAGENAME&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You may need to use &lt;code&gt;sudo&lt;/code&gt;, I can’t seem to figure out why.  Anyway, your package should now be installed!  Test it out:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;pycon&quot;&gt;&lt;span class=&quot;go&quot;&gt;import PACKAGENAME&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;pycon&quot;&gt;&lt;span class=&quot;go&quot;&gt;&amp;gt;&amp;gt; import PACKAGENAME&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If you included a way to run it as a script in &lt;code&gt;setup.py&lt;/code&gt;, that should work now too.&lt;/p&gt;
 
@@ -764,11 +764,11 @@ twine upload -r &lt;span class=&quot;nb&quot;&gt;test &lt;/span&gt;dist/PACKAGEN
 
 &lt;p&gt;If everything seems to be working (good for you if it is, it took me 2 days to get to this point), you can upload it to the PyPI servers:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;twine upload dist/PACKAGENAME-VERSION.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;twine upload dist/PACKAGENAME-VERSION.tar.gz&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And voila, you’re live!  Now you can go to &lt;a href=&quot;https://pypi.python.org.pypi&quot;&gt;https://pypi.python.org.pypi&lt;/a&gt; and search for your package.  You should also be able to install it using&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;pip install PACKAGENAME&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;bash&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;pip install PACKAGENAME&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;See, nothing to it! (Haha…ha…) I hope this was helpful for someone!&lt;/p&gt;
 
