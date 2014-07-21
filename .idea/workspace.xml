@@ -5,9 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae10de6d-9460-47f0-b5ad-e49c2679eb9e" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" afterPath="$PROJECT_DIR$/_posts/2014-06-26-pypi.md" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/feed.xml" afterPath="$PROJECT_DIR$/_site/feed.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_site/articles/pypi/index.html" afterPath="$PROJECT_DIR$/_site/articles/pypi/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="tom-christie.github.io.iws" />
@@ -34,7 +32,7 @@
       <file leaf-file-name="2014-06-26-pypi.md" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_posts/2014-06-26-pypi.md">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="179" selection-start="412" selection-end="412" vertical-scroll-proportion="0.5619597" vertical-offset="15" max-vertical-offset="14565">
+            <state line="13" column="179" selection-start="412" selection-end="412" vertical-scroll-proportion="0.5652174" vertical-offset="15" max-vertical-offset="14565">
               <folding />
             </state>
           </provider>
@@ -301,7 +299,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32978722" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3307927" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.35980937" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -712,7 +710,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_posts/2014-06-26-pypi.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="179" selection-start="412" selection-end="412" vertical-scroll-proportion="0.5619597" vertical-offset="15" max-vertical-offset="14565">
+        <state line="13" column="179" selection-start="412" selection-end="412" vertical-scroll-proportion="0.5652174" vertical-offset="15" max-vertical-offset="14565">
           <folding />
         </state>
       </provider>
