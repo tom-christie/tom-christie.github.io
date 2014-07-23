@@ -541,7 +541,7 @@
             var ticksElapsed = createjs.Ticker.getTicks() - this.startTime;
             //TODO - make this based on evidence
 
-            if (ticksElapsed > 1 && ticksElapsed % 60 == 0) { //20 seconds at this piont
+            if (ticksElapsed > 1 && ticksElapsed % 600 == 0) { //20 seconds at this piont
                 this.alertButton("add", "supply_other_base");
             }
         }
