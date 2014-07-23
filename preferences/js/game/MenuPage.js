@@ -6,16 +6,6 @@
 
 (function (scope) {
 
-//    function MenuPage() {
-//        //GAME.Page.call(this);
-//        createjs.Container.call(this);
-//        this.setup();
-//    }
-//
-//
-////    inheritPrototype(MenuPage, GAME.Page);
-//    inheritPrototype(MenuPage,createjs.Container);
-//
 
     var MenuPage = function () {
         this.setup();
@@ -35,75 +25,53 @@
 
         //background
         this.background = new createjs.Bitmap(GAME.assets.getResult("MENU_background"));
-        this.background.x = GAME.GameCanvas.width/2-this.background.image.width/2
-        this.background.y = GAME.GameCanvas.height/2-this.background.image.height/2;
+        this.background.x = GAME.GameCanvas.width / 2 - this.background.image.width / 2;
+        this.background.y = GAME.GameCanvas.height / 2 - this.background.image.height / 2;
         this.addChild(this.background);
 
         createjs.Tween.get(this.background)
             .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
             .wait(300)
-            .to({x:this.background.x, scaleX: 1}, 70)
+            .to({x: this.background.x, scaleX: 1}, 70)
             .wait(50)
             .to({y: this.background.y, scaleY: 1}, 100);
 
-//
-//        //menu
-        this.menu = new createjs.Bitmap(GAME.assets.getResult("MENU_select_screen"));
-        this.menu.x = GAME.GameCanvas.width / 2 - this.menu.image.width / 2;
-        this.menu.y = GAME.GameCanvas.height / 2 - this.menu.image.height / 2;
-        createjs.Tween.get(this.menu)
+
+        //playbutton
+        this.playbutton = new createjs.Bitmap(GAME.assets.getResult("play_button"));
+        this.playbutton.x = GAME.GameCanvas.width / 2 - this.playbutton.image.width / 2;
+        this.playbutton.y = GAME.GameCanvas.height / 2 - this.playbutton.image.height / 2;
+        createjs.Tween.get(this.playbutton)
             .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
             .wait(300) //change this if you want it to zoom in after
-            .to({x: this.menu.x, scaleX: 1}, 70)
+            .to({x: this.playbutton.x, scaleX: 1}, 70)
             .wait(50)
-            .to({y: this.menu.y, scaleY: 1}, 100);
+            .to({y: this.playbutton.y, scaleY: 1}, 100);
         createjs.Tween.tick(1);
 
 
         //hitarea has to be added last so it's on top
         var hitArea = new createjs.Shape();
         hitArea.graphics.beginFill("#FFF")
-            .drawRoundRect(GAME.GameCanvas.width / 2 - this.menu.image.width / 2,
-                GAME.GameCanvas.height / 2 - this.menu.image.height / 2,
-                this.menu.image.width,
-                this.menu.image.height,5);// this.menu.image.width, this.menu.image.height, this.radius); //with respect to the shape bounds
+            .drawRoundRect(GAME.GameCanvas.width / 2 - this.playbutton.image.width / 2,
+                GAME.GameCanvas.height / 2 - this.playbutton.image.height / 2,
+                this.playbutton.image.width,
+                this.playbutton.image.height, 5);// this.playbutton.image.width, this.playbutton.image.height, this.radius); //with respect to the shape bounds
         hitArea.alpha = 0.01;
         this.addChild(hitArea);
-        this.addChild(this.menu);
+        this.addChild(this.playbutton);
+
 
         //handle click
-//        this.cellHolder.on("click",this.handleClick.bind(this));
-//        hitArea.on("mouseover", this.handleMouseOver.bind(this));
-        //hitArea.on("mouseout", this.handleMouseOut.bind(this));
         hitArea.on("click", this.handleMenuClick.bind(this));
-        //hitArea.on("mousedown", this.handleMouseDown.bind(this));
 
 
-
-        //this.menu.on("click", this.handleMenuClick.bind(this));
-//
-//        // used only for the particle decorations
-//        var titleframecount = 0;
-//
-//        // if the game is running in a web page, we may want the loading screen to be invisible
-//        // CSS display:none, and the game will only appear when ready to play: harmless if unhidden/app.
-//        GAME.canvas.style.display = 'block';
-//
-////        game_paused = 3; // special paused setting: MENU MODE
-////        soundIntroHasBeenPlayed = false; // so that next game we start, we hear it again
-//
-//        var keyCombos = [
-////            {
-////                "keys": "s",
-////                "prevent_repeat": true,
-////                "on_keydown": function (e) {
-////                    GLOBAL.lastKeyPressed = 's';
-////                    GLOBAL.currentView.keyPressed();
-////                }
-////            },
-//        ];
-//        GAME.keyboardListener.register_many(keyCombos);
-//
+        //try out font
+//        this.fontTest = new createjs.BitmapText('@!"$,.%0123456789:\nABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz',
+//            GAME.settings.fontSpriteSheetRed);
+//        this.fontTest.scaleX = 1.5;
+//        this.fontTest.scaleY = 1.5;
+//        this.addChild(this.fontTest);
 
 
     };
@@ -111,23 +79,26 @@
     p.handleMenuClick = function (evt) {
         console.log(evt);
 
-        //todo make this so you don't have to click on the exact letters!!!
-        var pt = this.menu.globalToLocal(evt.stageX, evt.stageY);
-        if (pt.x < this.menu.image.width / 2 && pt.y < this.menu.image.height / 2) {
-            //1 selected
-            //tween out, and have the TWEEN end call the select_weapons()
-            this.tweenOutSelf(GAME.state.CALLselect_weapons);
-        } else if (pt.x >= this.menu.image.width / 2 && pt.y < this.menu.image.height / 2) {
-            //2 selected
-            //GAME.state.select_playback();
-        } else if (pt.x < this.menu.image.width / 2 && pt.y >= this.menu.image.height / 2) {
-            //3 selected
-            GAME.state.show_playback();
-        } else if (pt.x >= this.menu.image.width / 2 && pt.y >= this.menu.image.height / 2) {
-            //4 selected
-        }
-    };
+//        var pt = this.playbutton.globalToLocal(evt.stageX, evt.stageY);
+        this.tweenOutSelf(GAME.flowController.MENU_to_LIVE);
+//        if (pt.x < this.playbutton.image.width / 2 && pt.y < this.playbutton.image.height / 2) {
+//            //1 selected
+//            //tween out, and have the TWEEN end call the select_weapons()
+//            //this one is just for testing at this point - we won't go from playbutton to weapons
+//            GAME.flowController.nextPage = "weapons";
+//            this.tweenOutSelf(GAME.flowController.MENU_to_WEAPONS);
+//        } else if (pt.x >= this.playbutton.image.width / 2 && pt.y < this.playbutton.image.height / 2) {
+//            //2 selected
 //
+//        } else if (pt.x < this.playbutton.image.width / 2 && pt.y >= this.playbutton.image.height / 2) {
+//            //3 selected
+//            this.tweenOutSelf(GAME.flowController.MENU_to_LIVE);
+//        } else if (pt.x >= this.playbutton.image.width / 2 && pt.y >= this.playbutton.image.height / 2) {
+//            //4 selected
+//        }
+
+    };
+
     p.tweenOutSelf = function (fnToCall) {
         createjs.Tween.get(this.background)
             .wait(100)
@@ -136,8 +107,8 @@
             .to({x: GAME.GameCanvas.width / 2, scaleX: .001}, 100);
 
 
-        //menu
-        createjs.Tween.get(this.menu)
+        //playbutton
+        createjs.Tween.get(this.playbutton)
             .wait(100)
             .to({y: GAME.GameCanvas.height / 2, scaleY: .01}, 70)
             .wait(50)
@@ -147,17 +118,17 @@
         createjs.Tween.tick(1);
 
     };
-//
+
     p.doneTweening = function (fnToCall) {
         //helper function to get around scope stuff
         fnToCall();
     };
-//
+
     p.update = function () {
         //nothing changes
 
     };
-//
+
     p.render = function () {
         //nothing changes
 

@@ -4,15 +4,23 @@
 
 /**
  * Created by Tom on 4/7/14.
+ *
+ *  * What data to log?
+ *  - how many crystals are available, and what color
+ *  - what the base to send TO is
+ *  - what proportions are selected
+ *
  */
 
 
 
 (function (scope) {
 
-    function WeaponSelectPage() {
+    function WeaponSelectPage(weaponsToChooseFrom, contextToSendTo) {
+        // weaponsToChoose is an array of strings, namely the colors of the weapons to be selected
+
         createjs.Container.call(this);
-        this.setup();
+        this.setup(weaponsToChooseFrom, contextToSendTo);
     }
 
     inheritPrototype(WeaponSelectPage, createjs.Container);
@@ -23,52 +31,103 @@
     var p = WeaponSelectPage.prototype;
 
 
-    p.setup = function () {
+    p.setup = function (weaponsToChoose, contextToSendTo) {
 
-        if (GAME.debugmode)
+        this.availableWeapons = weaponsToChoose;
+        this.contextToSendTo = contextToSendTo;
+
+        console.log("DEBUGweapon",  this.availableWeapons, this.contextToSendTo)
             log('WeaponSelectPage.setup');
 
-
-
-
+        this.availableWeapons = weaponsToChoose;
+        console.log("DEBUG", this.availableWeapons);
         //background
-        this.background = new createjs.Bitmap(GAME.assets.getResult("WEAPON_SELECT_background"));
+        if(contextToSendTo === 1){
+            this.background = new createjs.Bitmap(GAME.assets.getResult("base1_weapon_select"));
+        }else if(contextToSendTo === 2){
+            this.background = new createjs.Bitmap(GAME.assets.getResult("base2_weapon_select"));
 
-        //TODO trying to center the background image - isn't working!
+        }else if(contextToSendTo === 3){
+            this.background = new createjs.Bitmap(GAME.assets.getResult("base3_weapon_select")); //TODO - create this
+
+        }
         this.background.x = GAME.GameCanvas.width/2 - this.background.image.width/2;
         this.background.y = GAME.GameCanvas.height/2 - this.background.image.height/2;
         this.addChild(this.background);
 
-        createjs.Tween.get(this.background)
-            .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
-            .wait(300)
-            .to({x: this.background.x, scaleX: 1}, 70)
-            .wait(50)
-            .to({y: this.background.y, scaleY: 1}, 100)
-            .call(this.drawWeaponMeters, null, this);
+//        createjs.Tween.get(this.background)
+//            .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
+//            .wait(300)
+//            .to({x: this.background.x, scaleX: 1}, 70)
+//            .wait(50)
+//            .to({y: this.background.y, scaleY: 1}, 100)
+//            .call(this.drawWeaponMeters, null, this);
+        this.drawWeaponMeters();
+
+        //TODO - CONTEXT/MESSAGE GOES HERE
 
 
         //play button - how to align to the right of the rightmost weapon meter thing?
-        this.playButton = new createjs.Bitmap(GAME.assets.getResult("play_button"));
+        this.playButton = new createjs.Bitmap(GAME.assets.getResult("send_button"));
         this.addChild(this.playButton);
         this.playButton.x = GAME.GameCanvas.width/2 - this.playButton.image.width/2;
-        this.playButton.y = GAME.GameCanvas.height/4 + this.playButton.image.height/2;
         createjs.Tween.get(this.playButton)
-            .to({scaleY:0, y:GAME.GameCanvas.height/4 })
+            .to({scaleY:0, y:0.15 * GAME.GameCanvas.height })
             .wait(1000)
-            .to({scaleY:1,  y:GAME.GameCanvas.height/4 - this.playButton.image.height/2}, 300);
+            .to({scaleY:1,  y:0.15 * GAME.GameCanvas.height - this.playButton.image.height/2}, 300);
         buttonClickArea = new createjs.Shape();
         buttonClickArea.graphics
             .beginFill("#FFF")
-                .drawRect(this.playButton.x, GAME.GameCanvas.height/4 - this.playButton.image.height/2, this.playButton.image.width, this.playButton.image.height);
+                .drawRect(this.playButton.x, 0.15*GAME.GameCanvas.height - this.playButton.image.height/2, this.playButton.image.width, this.playButton.image.height);
         buttonClickArea.alpha = 0.01;
         this.addChild(buttonClickArea);
-        buttonClickArea.on("click", this.tweenOut.bind(this));
+        buttonClickArea.on("click", this.handleSendButtonClick.bind(this));
+//        buttonClickArea.on("click", this.tweenOut.bind(this));
         createjs.Tween.tick(1);
 
         this.changeMeterListener = this.on("increased_meter", this.handleMeterChange.bind(this)); //listen for finished tweening
 
+    };
 
+    p.handleSendButtonClick = function(evt,data){
+
+        //add proportions to queue
+        //this.contextToSendTo
+
+        //take first proportion, multiply by the set number of crystals, and round
+        var proportions =[]; //might be 2 or 3 proportions
+        var total = 0;
+        for(var i=0; i<this.weaponMeters.length; i++){
+            proportions.push(this.weaponMeters[i].percentFull);
+            total += this.weaponMeters[i].percentFull;
+        }
+        //make sure they add to 1
+        for(var i=0; i<this; i++){
+            proportions[i] = proportions[i] / total;
+        }
+        //multiply by the total number of crystals a base gets
+        var weaponCounts = [];
+        for(var i=0; i<proportions.length; i++){
+            weaponCounts[i] = proportions[i]*GAME.settings.basicCrystalNumber;
+        }
+
+        //push onto queue
+        var color1 = this.weaponMeters[0].color;
+        var color2 = this.weaponMeters[1].color;
+        var temp = {};
+        temp["baseType"] = this.contextToSendTo;
+        temp["startingCrystalCounts"] = {}
+        temp["startingCrystalCounts"][color1] = weaponCounts[0];
+        temp["startingCrystalCounts"][color2] = weaponCounts[1];
+        GAME.weaponsSuppliedToLevels.push(temp);
+//        {baseType:this.contextToSendTo,
+//            startingCrystalCounts:{
+//            color1:weaponCounts[0],
+//                color2:weaponCounts[1]
+//        }
+//        }
+
+        GAME.flowController.WEAPONS_to_LIVE();
     };
 
     p.handleMeterChange = function (evt, data) {
@@ -78,13 +137,13 @@
 
         //count
         var num_to_decrease_from = 0;
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < this.availableWeapons.length; i++) {
             if (i + 1 != index_remains_the_same && this.weaponMeters[i].percentFull > 0.01) {
                 num_to_decrease_from += 1;
             }
         }
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < this.availableWeapons.length; i++) {
             if (i + 1 != index_remains_the_same && this.weaponMeters[i].percentFull > 0.01) {
                 this.weaponMeters[i].percentFull -= amount_to_decrease / num_to_decrease_from;
                 if (this.weaponMeters[i].percentFull < 0){
@@ -99,24 +158,28 @@
     };
 
     p.drawWeaponMeters = function () {
-
         var i;
-        this.weaponMeters = new Array();
-        for (i = 0; i < 7; i++) {
-            this.weaponMeters.push(new WeaponMeter(i + 1, 7));
+
+        console.log("WEAPONS", this.availableWeapons)
+
+        this.weaponMeters = [];
+        for (i = 0; i < this.availableWeapons.length; i++) {
+            this.weaponMeters.push(new WeaponMeter(i + 1, this.availableWeapons.length, this.availableWeapons[i]));
         }
-        for (i = 0; i < 7; i++) {
+
+        for (i = 0; i < this.availableWeapons.length; i++) {
             this.addChild(this.weaponMeters[i]);
         }
     };
 
 
-    p.tweenOut = function(){
-        createjs.Tween.get(this)
-            .to({y: GAME.GameCanvas.height / 2, scaleY: .01}, 100)
-            .wait(100)
-            .to({x: GAME.GameCanvas.width / 2, scaleX: .001}, 70)
-            .call(GAME.state.show_playback());
+    p.tweenOutSelf = function(fn){
+//        createjs.Tween.get(this)
+//            .to({y: GAME.GameCanvas.height / 2, scaleY: .01}, 100)
+//            .wait(100)
+//            .to({x: GAME.GameCanvas.width / 2, scaleX: .001}, 70)
+//            .call(fn);
+         fn();
 //            .wait(50)
 //            .to({y: 0, scaleY: 1}, 100)
 //            .to({y: GAME.GameCanvas.height / 2, scaleY: .01, x: GAME.GameCanvas.width / 2, scaleX: .001})
@@ -144,23 +207,28 @@
     scope.WeaponSelectPage = WeaponSelectPage;
 
 
-    function WeaponMeter(index, totalCount) {//x,y,height,width) {
+
+
+
+
+
+
+    function WeaponMeter(index, totalCount, color) {
         createjs.Container.call(this);
         this.index = index;
         this.totalCount = totalCount;
+        this.color = color;
 
-        this.colors = new Array();
-        this.colors.push(createjs.Graphics.getRGB(253, 0, 7));
-        this.colors.push(createjs.Graphics.getRGB(255, 255, 0));
-        this.colors.push(createjs.Graphics.getRGB(40, 255, 0));
-        this.colors.push(createjs.Graphics.getRGB(18, 255, 255));
-        this.colors.push(createjs.Graphics.getRGB(0, 0, 255));
-        this.colors.push(createjs.Graphics.getRGB(250, 0, 255));
-        this.colors.push(createjs.Graphics.getRGB(255, 255, 255));
+
+        console.log("WEAPONMETER", this.index, this.totalCount, this.color)
 
         this.setup();
 
-        this.percentFull = 1 / this.totalCount;
+        if(this.status != 0){
+            this.percentFull = 1 / this.totalCount;
+        }else{
+            this.percentFull = 0;
+        }
     }
 
     inheritPrototype(WeaponMeter, createjs.Container);
@@ -171,12 +239,18 @@
         this.width = 100;
         this.height = GAME.GameCanvas.height / 2;
         this.x = GAME.GameCanvas.width / 2 - this.width / 2 + (this.index - 0.5 * this.totalCount - 0.5) * (this.width + interWidth);
-        this.y = 2 * GAME.GameCanvas.height / 5;
+        this.y = 1.5/5 * GAME.GameCanvas.height;
         this.radius = 5;
         this.cellBuffer = this.height / (12 * 6);
         this.cellHeight = this.height / 12;
         this.strokeWidth = 4;
 
+
+        //tower images beneath
+        var tower_x = this.width/2 - 10;
+        var tower_y = this.height + 30;
+        this.tower = new GAME.Tower(tower_x, tower_y, this.color);
+        this.addChild(this.tower);
 
         //holders
         this.cellHolder = new createjs.Shape();
@@ -187,7 +261,7 @@
 
         this.cell = new createjs.Shape();
         this.cell.graphics
-            .beginFill(this.colors[this.index - 1])
+            .beginFill(GAME.settings[this.color])
             .drawRoundRect(2 * this.cellBuffer, this.cellBuffer, this.width - 4 * this.cellBuffer, this.cellHeight - this.cellBuffer, 2);
         this.cell.cache(0, 0, this.width, this.cellHeight);
         this.progressBmp = this.cell.cacheCanvas;
@@ -245,14 +319,16 @@
 
     wp.update = function () {
 
-        if (this.mouseDown) {
+        if(this.status != 0){
+            if (this.mouseDown) {
             //console.log('hi, mouse is down');
-            if (this.percentFull < .99) {
-                this.percentFull += .02;
-                var evt2 = new createjs.Event("increased_meter");
-                evt2.data = this.index;
-                evt2.decrease = 0.02;
-                GAME.currentPage.dispatchEvent(evt2); //send event to parent
+                if (this.percentFull < .99) {
+                    this.percentFull += .02;
+                    var evt2 = new createjs.Event("increased_meter");
+                    evt2.data = this.index;
+                    evt2.decrease = 0.02;
+                    GAME.currentPage.dispatchEvent(evt2); //send event to parent
+                }
             }
         }
 

@@ -1,5 +1,6 @@
 /**
  * Created by Tom on 4/7/14.
+ * font is from http://doryen.eptalys.net/forum/index.php?topic=1468.0
  */
 
 (function (scope) {
@@ -41,7 +42,7 @@
 
             //game parameters
             {"id": "manifest", "src": "assets/data/GameData.json", "type": "manifest" },
-            {"id": "level01_data", "src": "assets/data/level01.json"},
+            {"id": "level01_data", "src": "assets/data/base01.json"},
 
             //source code
             {"src": "js/game/UI.js"},
@@ -53,60 +54,84 @@
             {"src": "js/game/WeaponSelectPage.js"},
             {"src": "js/game/Goon.js"},
             {"src": "js/game/Tower.js"},
+            {"src": "js/game/Button.js"},
             {"src": "js/game/Projectile.js"},
+            {"src": "js/game/PlaybackSelectPage.js"},
 
 
             //multimedia assets
-            {"id": "background_level1", "src": "assets/images/level1.png"},
-            {"id": "MENU_background", "src": "assets/images/weapon-select-screen.png"},
-            {"id": "MENU_select_screen", "src":"assets/images/level-select-screen_modern.png"},
-            {"id": "WEAPON_SELECT_background", "src":"assets/images/weapon-select-screen.png"},
+            //use jpg or png for large files, whichever is smallest
+            {"id": "control_room_transition", "src": "assets/images/control_room_transition.jpg"},
+            {"id": "base_transition", "src": "assets/images/base_transition.jpg"},
+            {"id": "weapon_select_tutorial", "src": "assets/images/weapon_select_tutorial.png"},
+            {"id": "base1", "src": "assets/images/base01.png"},
+            {"id": "base2", "src": "assets/images/base02.png"},
+            //{"id": "base3", "src": "assets/images/base03.png"},
+            {"id": "base1_weapon_select", "src": "assets/images/base01_weapon_select.png"},
+            {"id": "base2_weapon_select", "src": "assets/images/base02_weapon_select.png"},
+            //{"id": "base3_weapon_select", "src": "assets/images/base03_weapon_select.jpg"},
+
+            {"id": "tutorial1", "src": "assets/images/tutorial01.png"},
+            {"id": "tutorial2", "src": "assets/images/tutorial02.png"},
+            {"id": "tutorial3", "src": "assets/images/tutorial03.png"},
+            {"id": "tutorial4", "src": "assets/images/tutorial04.png"},
+            {"id": "tutorial5", "src": "assets/images/tutorial05.png"},
+
+
+            {"id": "MENU_background", "src": "assets/images/menu.jpg"},
             {"id": "play_button", "src":"assets/images/play.png"},
-            {"id": "static", "src":"assets/images/static_20_opacity.png"},
+            //{"id": "MENU_select_screen", "src":"assets/images/level-select-screen_modern.png"},
+            //{"id": "WEAPON_SELECT_background", "src":"assets/images/weapon-select-screen.png"},
+            {"id": "send_button", "src":"assets/images/send_button.png"},
+            //{"id": "static", "src":"assets/images/static_20_opacity.png"},
             {"id":"goon1", "src": "assets/images/unit1.png"},
-            {"id":"tower", "src": "assets/images/tower.png"},
+
             {"id":"laser_red", "src": "assets/images/projectile_red.png"},
-            {"id":"laser_yellow", "src": "assets/images/projectile_yellow.png"},
-            {"id":"laser_green", "src": "assets/images/projectile_green.png"},
-            {"id":"laser_cyan", "src": "assets/images/projectile_cyan.png"},
-            {"id":"laser_blue", "src": "assets/images/projectile_blue.png"},
-            {"id":"laser_purple", "src": "assets/images/projectile_purple.png"},
+            //{"id":"laser_yellow", "src": "assets/images/projectile_yellow.png"},
             {"id":"laser_white", "src": "assets/images/projectile_white.png"},
+            //{"id":"laser_cyan", "src": "assets/images/projectile_cyan.png"},
+            {"id":"laser_blue", "src": "assets/images/projectile_blue.png"},
+            //{"id":"laser_purple", "src": "assets/images/projectile_purple.png"},
+            //{"id":"laser_white", "src": "assets/images/projectile_white.png"},
             {"id":"explosion", "src": "assets/images/explosion.png"},
+            {"id":"mine", "src": "assets/images/mine.png"},
 
             {"id":"crystal_blue_16", "src": "assets/images/crystal_blue_16.png"},
             {"id":"crystal_blue_32", "src": "assets/images/crystal_blue_32.png"},
-            {"id":"crystal_cyan_16", "src": "assets/images/crystal_cyan_16.png"},
-            {"id":"crystal_cyan_32", "src": "assets/images/crystal_cyan_32.png"},
-            {"id":"crystal_green_16", "src": "assets/images/crystal_green_16.png"},
-            {"id":"crystal_green_32", "src": "assets/images/crystal_green_32.png"},
-            {"id":"crystal_purple_16", "src": "assets/images/crystal_purple_16.png"},
-            {"id":"crystal_purple_32", "src": "assets/images/crystal_purple_32.png"},
-            {"id":"crystal_red_16", "src": "assets/images/crystal_red_16.png"},
-            {"id":"crystal_red_32", "src": "assets/images/crystal_red_32.png"},
-            {"id":"crystal_yellow_16", "src": "assets/images/crystal_yellow_16.png"},
-            {"id":"crystal_yellow_32", "src": "assets/images/crystal_yellow_32.png"},
+            //{"id":"crystal_cyan_16", "src": "assets/images/crystal_cyan_16.png"},
+            //{"id":"crystal_cyan_32", "src": "assets/images/crystal_cyan_32.png"},
             {"id":"crystal_white_16", "src": "assets/images/crystal_white_16.png"},
             {"id":"crystal_white_32", "src": "assets/images/crystal_white_32.png"},
+            //{"id":"crystal_purple_16", "src": "assets/images/crystal_purple_16.png"},
+            //{"id":"crystal_purple_32", "src": "assets/images/crystal_purple_32.png"},
+            {"id":"crystal_red_16", "src": "assets/images/crystal_red_16.png"},
+            {"id":"crystal_red_32", "src": "assets/images/crystal_red_32.png"},
+            //{"id":"crystal_yellow_16", "src": "assets/images/crystal_yellow_16.png"},
+            //{"id":"crystal_yellow_32", "src": "assets/images/crystal_yellow_32.png"},
+            //{"id":"crystal_white_16", "src": "assets/images/crystal_white_16.png"},
+            //{"id":"crystal_white_32", "src": "assets/images/crystal_white_32.png"},
 
             {"id":"tower_blue", "src": "assets/images/tower_blue.png"},
-            {"id":"tower_cyan", "src": "assets/images/tower_cyan.png"},
-            {"id":"tower_green", "src": "assets/images/tower_green.png"},
-            {"id":"tower_purple", "src": "assets/images/tower_purple.png"},
-            {"id":"tower_red", "src": "assets/images/tower_red.png"},
+            //{"id":"tower_cyan", "src": "assets/images/tower_cyan.png"},
             {"id":"tower_white", "src": "assets/images/tower_white.png"},
-            {"id":"tower_yellow", "src": "assets/images/tower_yellow.png"},
+            //{"id":"tower_purple", "src": "assets/images/tower_purple.png"},
+            {"id":"tower_red", "src": "assets/images/tower_red.png"},
+            //{"id":"tower_white", "src": "assets/images/tower_white.png"},
+            //{"id":"tower_yellow", "src": "assets/images/tower_yellow.png"},
             {"id":"tower_dead", "src": "assets/images/tower_dead.png"},
 
-            {"id":"play_button", "src": "assets/images/play_button.png"},
-            {"id":"stop_button", "src": "assets/images/stop_button.png"},
-            {"id":"FF_button", "src": "assets/images/FF_button.png"},
-            {"id":"pause_button", "src": "assets/images/pause_button.png"},
-            {"id":"play_button_active", "src": "assets/images/play_button_active.png"},
-            {"id":"stop_button_active", "src": "assets/images/stop_button_active.png"},
-            {"id":"FF_button_active", "src": "assets/images/FF_button_active.png"},
-            {"id":"pause_button_active", "src": "assets/images/pause_button_active.png"}
+            //{"id":"play_button", "src": "assets/images/play_button.png"},
+            //{"id":"stop_button", "src": "assets/images/stop_button.png"},
+            //{"id":"FF_button", "src": "assets/images/FF_button.png"},
+            //{"id":"pause_button", "src": "assets/images/pause_button.png"},
+            //{"id":"play_button_active", "src": "assets/images/play_button_active.png"},
+            //{"id":"stop_button_active", "src": "assets/images/stop_button_active.png"},
+            //{"id":"FF_button_active", "src": "assets/images/FF_button_active.png"},
+            //{"id":"pause_button_active", "src": "assets/images/pause_button_active.png"},
 
+            {"id":"font_white", "src": "assets/fonts/font_white.png"},
+            {"id":"font_red", "src": "assets/fonts/font_red.png"},
+            {"id":"font_black", "src": "assets/fonts/font_black.png"}
 
         ],
 

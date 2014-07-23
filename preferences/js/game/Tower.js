@@ -33,22 +33,33 @@
 
         this.energyUsage = GAME.settings.projectileEnergyUsage;
 
+        //add black spaces
+        this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower_" + this.color));
+        this.addChild(this.tower_image);
 
     };
 
     p.make_tower = function(){
+        this.removeChild(this.tower_image); //if it exists
         this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower_" + this.color));
         this.addChild(this.tower_image);
         this.width = this.tower_image.image.width;
         this.height = this.tower_image.image.height;
+        //tween in
+        if(this.color != "dead") {
+            createjs.Tween.get(this.tower_image)
+                .to({y: this.tower_image.image.height, scaleY: .01})
+                .to({y: 0, scaleY: 1}, 100);
+            createjs.Tween.tick(1);
+        }
+
+
     };
 
     p.update = function (){
         //this tracks the nearest goons
         //the laser finds the closest goon and follows him till he's out of signt
         //then it finds the closest goon that's still in sight (NOT furthest along - change this?)
-
-
 
         var x = this.x;
         var y = this.y;
@@ -78,14 +89,27 @@
 
     p.changeColor = function(newColor, strength){
         this.strength = strength;
-        this.removeChild(this.tower_image);
         this.color = newColor;
-        this.tower_image = new createjs.Bitmap(GAME.assets.getResult("tower_" + this.color));
-        this.addChild(this.tower_image);
+
+        //tween out
+        createjs.Tween.get(this.tower_image)
+            .to({y: this.tower_image.image.height, scaleY: .01}, 100)
+            .call(this.make_tower,null, this);
+        createjs.Tween.tick(1);
+
+
     };
+
 
     p.fire = function(){
         if( (createjs.Ticker.getTicks() - this.lastFiredTime)  > this.firePeriod){
+
+            if(GAME.currentPage.options.weapon1_color === this.color){
+                GAME.currentPage.shotsFired1 += 1;
+            }else if(GAME.currentPage.options.weapon2_color === this.color){
+                GAME.currentPage.shotsFired2 += 1;
+            }
+            GAME.currentPage.updateCrystalCounts();
             var from_x = this.x + this.width/4;
             var from_y = this.y + this.height/4;
             var to_x = GAME.currentPage.goons[this.goon_to_shoot_index].x + GAME.currentPage.goons[this.goon_to_shoot_index].width/2;

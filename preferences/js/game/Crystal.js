@@ -22,7 +22,7 @@
     Crystal.prototype.setup = function (x, y, color, type, active) {
         this.Container_initialize();
 
-
+        this.color = color;
         /* possible types are:
             weapon_select - size is 32, sometimes rotating
             dropped - size is 16, always rotating
@@ -30,20 +30,23 @@
 
         if(type === "weapon_select"){
             var size = 32;
-            var rotating = true;
         }else if(type === "dropped"){
             var size = 16;
-            var rotating = true;
+        }else if(type === "recovered"){
+            var size = 32;
+        }else if(type === "available"){
+            var size = 32;
         }
-
+        //console.log("Debug_crystal", color, size)
         var rate = .25;
 
 
          this.crystal = new createjs.SpriteSheet({
+
             "animations": {
-                "sparkle": [0, 7, "sparkle",rate]
+                "sparkle": [0, 7, "sparkle", rate]
             },
-            "images": [GAME.assets.getResult("crystal_" + color + "_" + size)],
+            "images": [GAME.assets.getResult("crystal_" + this.color + "_" + size)],
             "frames": {
                 "height": size,
                 "width": size,
@@ -54,6 +57,7 @@
         });
 
         this.crystalSprite = new createjs.Sprite(this.crystal, "sparkle");
+
         this.crystalSprite.x = x;
         this.crystalSprite.y = y;
         this.addChild(this.crystalSprite);
@@ -63,13 +67,15 @@
         this.crystal.y = -size / 2;
 
         this.addChild(this.crystalSprite);
-        console.log('new crystal active?',active);
+        //console.log('new crystal active?',active);
 //        if(!active){
 //            this.crystalSprite.stop();
 //        }
 
         //this.on("click",this.handle_click.bind(this));
-
+        if( type === "recovered" || type === "available"){
+            this.crystalSprite.stop();
+        }
     };
 
     p.handle_click = function(){

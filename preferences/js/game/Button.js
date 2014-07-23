@@ -3,7 +3,7 @@
  */
 /**
  * Created by Tom on 3/20/14.
- * Handles the CreateJS part of the menu
+ * Handles the CreateJS part of the playbutton
  */
 
 
@@ -14,7 +14,8 @@
     }
 
     Button.prototype = new createjs.Container(); //inherits from container
-    inheritPrototype(Button,createjs.Container);
+    Button.prototype.Container_initialize = Button.prototype.initialize;
+    createjs.EventDispatcher.initialize(Button.prototype);
     var p = Button.prototype;
 
     p.initialize = function (x, y, w, h) {
@@ -25,16 +26,17 @@
         this.iWasClicked = null;
         this.shouldCallFn = null;
         this.isButton = true;
-        this.shouldTweenOut = true;
+        this.shouldTweenOut = false;
 
         this.finishedTweenOut = null;
 
         this.horizontalAlign = "center";
+
         this.x = x - w / 2; //describes center
         this.y = y - h / 2; //center
         this.width = w;
         this.height = h;
-        this.color = createjs.Graphics.getRGB(0, 0, 0,0);//transparent if color is not set
+        this.color = createjs.Graphics.getRGB(0, 0, 0, 0);//transparent if color is not set
         this.mouseoverColor = null; //unless specified otherwise
         this.text = "default";
         this.radius = 0; //default
@@ -58,7 +60,7 @@
         this.t.x = this.width / 2; //wrt shape bounds
         this.t.y = this.height / 2; //wrt shape bounds
         this.t.lineWidth = this.width - 2*this.textMargin;
-        this.addChild(this.t);
+        //this.addChild(this.t);
 
 
         //mouseover
@@ -76,13 +78,39 @@
 
         this.shape.graphics.clear()
             .beginFill(this.color)
-            .drawRoundRect(0, 0, this.width, this.height, this.radius); //with respect to the shape bounds
+            .drawRoundRect(ti, 0, this.width, this.height, this.radius); //with respect to the shape bounds
 
     };
 
     p.setText = function (text) {
+        //text
+        this.t = new createjs.Text(text, "40px Helvetica", "#000");
+        //('happy');
+        this.t.textAlign = "center";
+        this.t.textBaseline = "middle";
+        this.t.x = this.width / 2; //wrt shape bounds
+        this.t.y = this.height / 2; //wrt shape bounds
+        this.t.lineWidth = this.width - 2*this.textMargin;
         this.text = text.toString();
         this.t.text = this.text;
+        this.addChild(this.t);
+        return this;
+    };
+
+    p.setBitmapText = function(text,spritesheet, scale){
+
+        this.t = new createjs.BitmapText(text,spritesheet);
+        if(!scale){
+            scale=1;
+        }
+        this.t.scaleX = scale;
+        this.t.scaleY = scale;
+        var letterWidth = spritesheet._frameWidth * scale;
+        var letterHeight = spritesheet._frameHeight * scale;
+        this.t.x = this.width / 2 - letterWidth*text.length/2; //wrt shape bounds - ASSUMES ITS ONE LINE
+        this.t.y = this.height / 2 - letterHeight/2; //wrt shape bounds
+
+        this.addChild(this.t);
         return this;
     };
 
@@ -93,8 +121,8 @@
         return this;
     };
 
-    p.setColor = function (color) {
-        this.color = color;
+    p.setColor = function (color, alpha) {
+        this.color = createjs.Graphics.getRGB(color,alpha);
         this.shape.graphics.clear()
             .beginFill(this.color)
             .drawRoundRect(0, 0, this.width, this.height, this.radius); //with respect to the shape bounds
@@ -102,8 +130,7 @@
     };
 
     p.setAlpha = function(alpha){
-        this.alpha = alpha;
-        this.shape.graphics.alpha = this.alpha;
+        this.shape.graphics.alpha = alpha;
         return this;
     };
 
@@ -123,6 +150,14 @@
         this.shape.graphics.clear()
             .beginFill(this.color)
             .drawRoundRect(0, 0, this.width, this.height, this.radius); //with respect to the shape bounds
+        return this;
+    };
+
+    p.setBlinkFrequency = function (freq) {
+        this.blinkFrequency = freq;
+        createjs.Tween.get(this.t,{loop:true})
+            .to({ alpha:.2}, this.blinkFrequency)
+            .to({ alpha:1}, this.blinkFrequency);
         return this;
     };
 
@@ -152,17 +187,9 @@
         this.shape.graphics.clear()
             .beginFill(this.color)
             .drawRoundRect(0, 0, this.width, this.height, this.radius);
-
         return this;
     };
 
-//    p.setWidth = function(width){
-//        this.shape.graphics.clear()
-//            .beginFill(this.color)
-//            .drawRoundRect(0, 0, this.width, this.height, this.radius);
-//return this;
-//
-//    };
 
     //tweening
     p.tweenIn = function (property, fromLoc, toLoc, timeTaken, easingFn) {
@@ -181,16 +208,22 @@
 
     //mouse click
     p.handleMouseClick = function (evt) {
-        //this.tweenOutSelf();
-        if(this.shouldCallFn){
+
         this.iWasClicked = true;
-        this.parent.tweenOut();
-        }
+        this.callFunction();
+//        if(this.shouldCallFn){
+//        this.iWasClicked = true;
+//            if(this.shouldTweenOut){
+//                this.parent.tweenOut();
+//            }
+//        }
     };
 
 
 
     p.tweenOut = function (property, toLoc, timeTaken, easingFn) {
+
+        this.shouldTweenOut = true;
 
         this.tweenOutArgs = {
             property: property,
@@ -214,50 +247,34 @@
 
     };
 
-
-//    p.tweenOutParent = function () {
-//
-//        this.parent.tweenOut();
-//
-////        //tweening should be controlled by the parent...IF everything's goign to tween out at the same time
-////        try {
-////        } catch (err) {
-////
-////        }
-//
-//    };
-
-    p.call = function (fn) {
+    p.call = function (fn,arg, scope) {
         //what to do when clicked
         this.shouldCallFn = true;
         this.functionToCall = fn;
+        this.functionArgs = arg;
+        this.functionScope = scope;
         return this;
     };
 
     p.callFunction = function () {
-
+        console.log("FROM BUTTON PERSPECTIVE, current page is ", GAME.currentPage)
+        console.log("calling...", this.functionToCall,this.functionArgs)
         this.finishedTweenOut = true;
-        var evt = new createjs.Event("done_tweening");
-        evt.myEventData = "foo";
-        this.parent.dispatchEvent(evt); //send event to parent
-
         if(this.iWasClicked && this.shouldCallFn){
-        //console.log("trying to call...", this.functionToCall);
+        console.log("trying to call...", this.functionToCall, this.text);
 
-        this.functionToCall();
-
+            if(this.shouldCallFn){
+        this.functionToCall.call(this.functionArgs);
+        this.shouldCallFn = false;
+            }
             //console.log('state is now ',GLOBAL.state.current);
 
         }
 
         if(this.triggerStateChange){
-            //console.log("trying to trigger state change");
+            console.log("trying to trigger state change");
             this.triggerStateChange();
         }
-
-
-        //remove self!
-//        this.parent.removeChild.bind(this);
 
     };
 
@@ -269,7 +286,7 @@
     };
 
     p.sendChangeStateEvent = function(){
-
+        console.log('button sending done_tweening_out');
         var evt = new createjs.Event("done_tweening_out");
         GLOBAL.stage.dispatchEvent(evt);
 

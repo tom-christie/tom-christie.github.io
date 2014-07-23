@@ -451,7 +451,7 @@ jaws.setupInput = function() {
   window.addEventListener("touchend", handleTouchEnd, false);
   window.addEventListener("blur", resetPressedKeys, false);
 
-  // this turns off the right click context menu which screws up the mouseup event for button 2
+  // this turns off the right click context playbutton which screws up the mouseup event for button 2
   document.oncontextmenu = function() {return false};
 }
 

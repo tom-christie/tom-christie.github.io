@@ -1,0 +1,112 @@
+ -- get tweening out to work - base it on splash page
+ -- make another level for YZ
+
+ -- when should message come up?  i.e. how often, what sequence, specifically?
+    - switch between all the thigns we want to train on on a regular basis to make a mixed experience in several contexts
+    - have two pairs (X,Z and Y,Z), switch back and forth between these
+    - poisson process kill rate, function of time (rate only), exponential waiting time between events, event counts: poisson distribution
+    - proportions become gaussian distributed, with mean = sd
+    - statistical evidence (samples) in a certain number of minutes
+    - laser has rate lambda1, laser2 has rate lambda2 (kill rate, not fire rate)
+    - use probability for each laser, controlled by the user
+    - evidence=kill1/(kill1+kill2) = use1lambda1/T/(use1lambda1 + (1-use1)lambda2/T) = u*lambda1/(u*lambda1 + (1-u)lambda2)
+    this is logistic = 1/(1+[1-u]/u*lambda2/lambda1), this is the odds
+    - there's a distribution on this statistic, chi square distributed,
+    - more kills gives more evidence
+    - P(P1-hat) ~ X^2
+    - as a function of time, we need E[P1-hat] as a function of the amount of time in the game, i.e. lambda1, lambda2, u,
+    - be between 0 and 1
+    - paul estimates 400 events or so
+ -- show an example from the other BEFORE elicitation
+
+ -- what should the context look like on the weapon select page?  ->> have creeps and colonies in the background
+ -- what happens when goons hit the mine? -->  (points?)
+ -- how much ore is there to use? --> lots at first, but eventually based on hwo much you send
+ -- what do we do with the crystals that we collect? --> get money (global points)
+
+
+
+ -- could have sealed-price option, sealed-bid auction mechanism
+   want more supplies, bid to higher up. best bid gets the available supplies.
+
+ xx A BA A A A B B B occurs separately
+ xx clean up chooser background
+ xx fluctuation --> probability matching, deterministic -> all or none, because they have higher confidence
+    how many exposures do they need to always pick the better option in a determistic context?
+ xx when "resources required" comes up, make the screen grey and make it so that you can't do anything except click
+ xx make new icon for new tower
+ xx RED can have different rates in both context - we want RELATIVE comparisons, NOT absolutes
+
+ -- timing on when the red thing appears
+ xx last in first out cue (last thing they chose is the first thing they restocked)
+    keep popping in restock
+ xx have a total to send, then multiply by proportional bar height (doing but not showing)
+ xx connect crystal choices to amt of crystals available
+ -- strength ratios - linear in log likelihood ratio, ONLY for calibration phase, how sensitive people are to the information
+ -- change strengths to depend on contexts, but be relatively the same
+
+ xx make crystals blink when they run out
+ xx put message about whether the base will have YOUR supplies or not
+
+
+
+Base / Collection / Sending / Usage connections
+
+- not all restocking can matter
+- when they do matter, it should be strictly the previous one
+
+
+Distribution of Crystals
+1. Binomial draw - from a total of, say, 6
+2. Based on previous choices
+Random draw to determine which one we do
+
+Have a queue of bases that we've stocked (sent to)
+Go to the most recent one of THAT base (LIFO queue),
+then do a 50/50 chance of either using that proportion, OR random from binomial
+Tell subject whether they're resources you sent vs what the base has leftover
+
+Step by Step
+
+Playing - Base A - Binomial - collect G & R
+Sending - Send to B - Random colors - Proportions oly
+Base A -
+
+
+
+
+
+
+DATA
+- Check goonNum (why so high?)
+- add XY coordinates
+- add % along path
+- fix this :{"label":"crystalCollected","crystalColor":"green","crystals1CollectedCount":0,"crystals2CollectedCount":0}},
+- make sure you write out each level - include level number
+
+
+[{"currentTime":1802,"timeSinceLevelStart":91,"data":{"label":"goonSpawn","goonNum":0}},
+{"currentTime":1840,"timeSinceLevelStart":129,"data":{"label":"weaponCrystalClicked","number":1,"color":"red","countBeforeClick":2,"countAfterClick":1}},
+{"currentTime":1846,"timeSinceLevelStart":135,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":5614}},
+{"currentTime":1875,"timeSinceLevelStart":164,"data":{"label":"goonShot","hitby":"red","oldHealth":80,"newHealth":60,"damage":20,"goonNum":5614}},
+{"currentTime":1893,"timeSinceLevelStart":182,"data":{"label":"goonSpawn","goonNum":1}},
+{"currentTime":1905,"timeSinceLevelStart":194,"data":{"label":"goonShot","hitby":"red","oldHealth":60,"newHealth":40,"damage":20,"goonNum":5614}},
+{"currentTime":1936,"timeSinceLevelStart":225,"data":{"label":"goonShot","hitby":"red","oldHealth":40,"newHealth":20,"damage":20,"goonNum":5614}},
+{"currentTime":1968,"timeSinceLevelStart":257,"data":{"label":"goonShot","hitby":"red","oldHealth":20,"newHealth":0,"damage":20,"goonNum":5614}},
+{"currentTime":1968,"timeSinceLevelStart":257,"data":{"label":"goonDeath","hitby":"red","goonNum":5614,"crystalColor":"red"}},
+{"currentTime":1998,"timeSinceLevelStart":287,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":6015}},
+{"currentTime":2029,"timeSinceLevelStart":318,"data":{"label":"goonShot","hitby":"red","oldHealth":80,"newHealth":60,"damage":20,"goonNum":6015}},
+{"currentTime":2061,"timeSinceLevelStart":350,"data":{"label":"goonShot","hitby":"red","oldHealth":60,"newHealth":40,"damage":20,"goonNum":6015}},
+{"currentTime":2075,"timeSinceLevelStart":364,"data":{"label":"goonSpawn","goonNum":2}},
+{"currentTime":2093,"timeSinceLevelStart":382,"data":{"label":"goonShot","hitby":"red","oldHealth":40,"newHealth":20,"damage":20,"goonNum":6015}},
+{"currentTime":2125,"timeSinceLevelStart":414,"data":{"label":"goonShot","hitby":"red","oldHealth":20,"newHealth":0,"damage":20,"goonNum":6015}},
+{"currentTime":2125,"timeSinceLevelStart":414,"data":{"label":"goonDeath","hitby":"red","goonNum":6015,"crystalColor":"red"}},
+{"currentTime":2154,"timeSinceLevelStart":443,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":6058}},
+{"currentTime":2166,"timeSinceLevelStart":455,"data":{"label":"goonSpawn","goonNum":3}},
+{"currentTime":2184,"timeSinceLevelStart":473,"data":{"label":"goonShot","hitby":"red","oldHealth":80,"newHealth":60,"damage":20,"goonNum":6058}},
+{"currentTime":2216,"timeSinceLevelStart":505,"data":{"label":"goonShot","hitby":"red","oldHealth":60,"newHealth":40,"damage":20,"goonNum":6058}},
+{"currentTime":2247,"timeSinceLevelStart":536,"data":{"label":"goonShot","hitby":"red","oldHealth":40,"newHealth":20,"damage":20,"goonNum":6058}},
+{"currentTime":2257,"timeSinceLevelStart":546,"data":{"label":"goonSpawn","goonNum":4}},
+{"currentTime":2279,"timeSinceLevelStart":568,"data":{"label":"goonShot","hitby":"red","oldHealth":20,"newHealth":0,"damage":20,"goonNum":6058}},
+{"currentTime":2279,"timeSinceLevelStart":568,"data":{"label":"goonDeath","hitby":"red","goonNum":6058,"crystalColor":"red"}},
+{"currentTime":2309,"timeSinceLevelStart":598,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":6083}}]

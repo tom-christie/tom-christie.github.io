@@ -18,6 +18,28 @@ function distanceBetween(obj1, obj2){
     }
 }
 
+
+function logData(data){
+    //the input data is always a dict of label/value pairs. One of the labels is always "label".
+
+    var currentTime =   createjs.Ticker.getTicks();
+    var timeSinceLevelStart = createjs.Ticker.getTicks() - GAME.currentPage.startTime;
+
+
+
+    var newData = {
+        currentTime: currentTime,
+        timeSinceLevelStart: timeSinceLevelStart,
+        data:data
+    };
+
+
+    //-1 for indexing
+    GAME.levels[GAME.currentLevelNumber-1].collectedData.push(newData);
+}
+
+
+
 /*
  * inheritance helper function
  * Use it like this --

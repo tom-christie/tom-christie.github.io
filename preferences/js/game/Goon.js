@@ -11,7 +11,8 @@
     Goon.prototype.Container_initialize = p.initialize;
 
 
-    Goon.prototype.setup = function (label) {
+    Goon.prototype.setup = function (id, type) {
+        this.id = id;
         this.Container_initialize();
         // add custom setup logic here.
 
@@ -76,6 +77,15 @@
         this.addChild(this.healthbar_red);
         this.addChild(this.healthbar_green);
 
+        this.damage = {
+            "red":0,
+            "yellow":0,
+            "green":0,
+            "cyan":0,
+            "blue":0,
+            "purple":0,
+            "white":0};
+
 
         //these are referenced by the pathfinding algorithm
         this.speed = null;
@@ -91,14 +101,6 @@
 
     };
 
-    p.handleCrystalClick = function(){
-        if(!this.alive){
-            this.collected = true;
-            var coords = GAME.currentPage.getCrystalStorageCoords();
-            createjs.Tween.get(this).to({x:coords.x, y:coords.y}, 500);
-            this.droppedCrystal.crystalSprite.stop();
-        }
-    };
 
     p.spawn = function (x, y) {
         //this.visible = true;
@@ -182,17 +184,40 @@
     };
 
     p.hitBy = function(color, strength){
+        logData({label:"goonShot",hitby:color,oldHealth:this.health,newHealth:this.health-strength,damage:strength,goonNum:this.id});
+        //keep track of damage from each color
+        this.damage[color] += strength;
+
         this.lastHitByColor = color;
         this.health -= strength;
         if(this.health <= 0){
-            this.die();
+            this.die(color);
         }
         this.healthbar_green.graphics.clear()
             .beginFill("#0F0")
             .drawRoundRect(0, 0, 32*(this.health/100), 5, 2);
     };
 
-    p.die = function(){
+    p.die = function(color){
+
+
+        var damage = this.damage;
+        //figured out what crystal to send up
+        var totalDamage = 0;
+        for(var c in damage) totalDamage += damage[c];
+        var r = Math.random();
+        var cumsum = 0;
+        for(c in damage){
+            cumsum += damage[c]/totalDamage;
+            if(r < cumsum){
+                this.crystalColor = c;
+                break;
+            }
+        }
+
+        logData({label:"goonDeath", hitby:color,goonNum:this.id,crystalColor:this.crystalColor });
+
+
         this.alive = false;
         this.removeChild(this.sprite);
         this.removeChild(this.healthbar_green);
@@ -208,20 +233,51 @@
         }
 
         //make crystal
-        this.droppedCrystal = new GAME.Crystal(0, 0, this.lastHitByColor, "weapon_select", true);
+        this.droppedCrystal = new GAME.Crystal(0, 0, this.crystalColor, "weapon_select", true);
         this.addChild(this.droppedCrystal);
         //auto-pickup crystal if state is playack
         if(GAME.state.is("PLAYBACK")){
-            this.handleCrystalClick();
+             this.handleCrystalClick();
         }
         //pick a random angle, and send it to that location
         var random_angle = 2*Math.PI*Math.random();
         var distance = 50;
         //todo - make sure the target coords are on the screen
-        createjs.Tween.get(this).to({y:this.y + distance*Math.sin(random_angle)}, 500, createjs.Ease.quadIn)
+        createjs.Tween.get(this).to({y:this.y + distance*Math.sin(random_angle)}, 500, createjs.Ease.quadIn);
         createjs.Tween.get(this).to({x:this.x + distance*Math.cos(random_angle)}, 500)
 
 
+    };
+
+    p.handleCrystalClick = function(){
+        if(!this.alive && !this.collected){
+            this.collected = true;
+            var coords = GAME.currentPage.getCrystalStorageCoords(this.crystalColor);
+            createjs.Tween.get(this).to({x:coords.x, y:coords.y}, 500).to({alpha:0},0).call(this.updateRecoveredCrystalCount);
+            this.droppedCrystal.crystalSprite.stop();
+            logData({
+                label:"crystalCollected",
+                crystalColor:this.crystalColor,
+                crystals1CollectedCount:GAME.currentPage.recoveredCrystals1Count,
+                crystals2CollectedCount:GAME.currentPage.recoveredCrystals2Count
+            });
+        }
+    };
+
+    p.updateRecoveredCrystalCount = function(){
+        GAME.currentPage.updateRecoveredCrystalCount(this.crystalColor);
+
+
+    };
+
+    p.hitMine = function(){
+        logData({label:"goonHitTarget",goonNum:this.id,health:this.health });
+
+
+        this.alive = false;
+            this.removeChild(this.sprite);
+            this.removeChild(this.healthbar_green);
+            this.removeChild(this.healthbar_red);
     };
 
     scope.Goon = Goon;
