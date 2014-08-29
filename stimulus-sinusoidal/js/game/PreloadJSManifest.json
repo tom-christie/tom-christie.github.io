@@ -1,0 +1,15 @@
+{
+    "manifest": [
+
+        //game code
+        {"src": "js/game/Menu.js"},
+        {"src": "js/game/MenuView.js"},
+
+        //multimedia assets
+        {"id": "background_image", "src": "assets/images/background.png"},
+        {"id": "tree", "src": "assets/images/tr1ee.png"},
+
+        //game parameters
+        {"id": "manifest", "src": "assets/manifest.json", "type": "manifest" }
+    ]
+}
