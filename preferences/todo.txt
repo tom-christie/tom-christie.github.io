@@ -73,40 +73,17 @@ Sending - Send to B - Random colors - Proportions oly
 Base A -
 
 
+Questions -
+When to make "send resources" thing pop up?
+How many crystals to have for each level?
+What to do with gathered crystals?
 
 
 
 
 DATA
-- Check goonNum (why so high?)
-- add XY coordinates
-- add % along path
-- fix this :{"label":"crystalCollected","crystalColor":"green","crystals1CollectedCount":0,"crystals2CollectedCount":0}},
-- make sure you write out each level - include level number
-
-
-[{"currentTime":1802,"timeSinceLevelStart":91,"data":{"label":"goonSpawn","goonNum":0}},
-{"currentTime":1840,"timeSinceLevelStart":129,"data":{"label":"weaponCrystalClicked","number":1,"color":"red","countBeforeClick":2,"countAfterClick":1}},
-{"currentTime":1846,"timeSinceLevelStart":135,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":5614}},
-{"currentTime":1875,"timeSinceLevelStart":164,"data":{"label":"goonShot","hitby":"red","oldHealth":80,"newHealth":60,"damage":20,"goonNum":5614}},
-{"currentTime":1893,"timeSinceLevelStart":182,"data":{"label":"goonSpawn","goonNum":1}},
-{"currentTime":1905,"timeSinceLevelStart":194,"data":{"label":"goonShot","hitby":"red","oldHealth":60,"newHealth":40,"damage":20,"goonNum":5614}},
-{"currentTime":1936,"timeSinceLevelStart":225,"data":{"label":"goonShot","hitby":"red","oldHealth":40,"newHealth":20,"damage":20,"goonNum":5614}},
-{"currentTime":1968,"timeSinceLevelStart":257,"data":{"label":"goonShot","hitby":"red","oldHealth":20,"newHealth":0,"damage":20,"goonNum":5614}},
-{"currentTime":1968,"timeSinceLevelStart":257,"data":{"label":"goonDeath","hitby":"red","goonNum":5614,"crystalColor":"red"}},
-{"currentTime":1998,"timeSinceLevelStart":287,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":6015}},
-{"currentTime":2029,"timeSinceLevelStart":318,"data":{"label":"goonShot","hitby":"red","oldHealth":80,"newHealth":60,"damage":20,"goonNum":6015}},
-{"currentTime":2061,"timeSinceLevelStart":350,"data":{"label":"goonShot","hitby":"red","oldHealth":60,"newHealth":40,"damage":20,"goonNum":6015}},
-{"currentTime":2075,"timeSinceLevelStart":364,"data":{"label":"goonSpawn","goonNum":2}},
-{"currentTime":2093,"timeSinceLevelStart":382,"data":{"label":"goonShot","hitby":"red","oldHealth":40,"newHealth":20,"damage":20,"goonNum":6015}},
-{"currentTime":2125,"timeSinceLevelStart":414,"data":{"label":"goonShot","hitby":"red","oldHealth":20,"newHealth":0,"damage":20,"goonNum":6015}},
-{"currentTime":2125,"timeSinceLevelStart":414,"data":{"label":"goonDeath","hitby":"red","goonNum":6015,"crystalColor":"red"}},
-{"currentTime":2154,"timeSinceLevelStart":443,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":6058}},
-{"currentTime":2166,"timeSinceLevelStart":455,"data":{"label":"goonSpawn","goonNum":3}},
-{"currentTime":2184,"timeSinceLevelStart":473,"data":{"label":"goonShot","hitby":"red","oldHealth":80,"newHealth":60,"damage":20,"goonNum":6058}},
-{"currentTime":2216,"timeSinceLevelStart":505,"data":{"label":"goonShot","hitby":"red","oldHealth":60,"newHealth":40,"damage":20,"goonNum":6058}},
-{"currentTime":2247,"timeSinceLevelStart":536,"data":{"label":"goonShot","hitby":"red","oldHealth":40,"newHealth":20,"damage":20,"goonNum":6058}},
-{"currentTime":2257,"timeSinceLevelStart":546,"data":{"label":"goonSpawn","goonNum":4}},
-{"currentTime":2279,"timeSinceLevelStart":568,"data":{"label":"goonShot","hitby":"red","oldHealth":20,"newHealth":0,"damage":20,"goonNum":6058}},
-{"currentTime":2279,"timeSinceLevelStart":568,"data":{"label":"goonDeath","hitby":"red","goonNum":6058,"crystalColor":"red"}},
-{"currentTime":2309,"timeSinceLevelStart":598,"data":{"label":"goonShot","hitby":"red","oldHealth":100,"newHealth":80,"damage":20,"goonNum":6083}}]
+xx Check goonNum (why so high?)
+xx add XY coordinates
+xx add % along path
+xx fix this :{"label":"crystalCollected","crystalColor":"green","crystals1CollectedCount":0,"crystals2CollectedCount":0}},
+xx make sure you write out each level - include level number

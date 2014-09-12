@@ -99,18 +99,23 @@
 
     p.setBitmapText = function(text,spritesheet, scale){
 
-        this.t = new createjs.BitmapText(text,spritesheet);
         if(!scale){
             scale=1;
         }
-        this.t.scaleX = scale;
-        this.t.scaleY = scale;
-        var letterWidth = spritesheet._frameWidth * scale;
-        var letterHeight = spritesheet._frameHeight * scale;
-        this.t.x = this.width / 2 - letterWidth*text.length/2; //wrt shape bounds - ASSUMES ITS ONE LINE
-        this.t.y = this.height / 2 - letterHeight/2; //wrt shape bounds
+        var textArray = text.split("\n"); //split by newline??
 
-        this.addChild(this.t);
+        for(var part in textArray){
+            var textLine = textArray[part];
+            this.t = new createjs.BitmapText(textLine,spritesheet);
+            this.t.scaleX = scale;
+            this.t.scaleY = scale;
+            var letterWidth = spritesheet._frameWidth * scale;
+            var letterHeight = spritesheet._frameHeight * scale;
+            this.t.x = this.width / 2 - letterWidth*textLine.length/2; //wrt shape bounds - ASSUMES ITS ONE LINE
+            this.t.y = this.height / 2 - letterHeight/2 + letterHeight*part; //wrt shape bounds
+            this.addChild(this.t);
+
+        }
         return this;
     };
 
@@ -135,7 +140,7 @@
     };
 
     p.setTextSize = function(size){
-        this.t.font = size.toString() + "px  Helvetica"
+        this.t.font = size.toString() + "px  Helvetica";
         return this;
 
     };

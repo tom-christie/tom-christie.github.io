@@ -2,7 +2,9 @@
  * Created by Tom on 4/6/14.
  */
 
-//TODO: make the "select power source" be translucent over the page
+//TODO - Goon number doesn't appear to be correct
+//TODO - make sure it's posting properly
+//TODO - why isn't the intro tutorial showing up?
 
 
 (function (scope) {
@@ -37,7 +39,7 @@
             // liquid layout: stretch to fill
             GAME.GameCanvas.width = 1040;//Math.max(window.innerWidth, 1200); //so the canvas doesn't get too small, and so you can resize without it being retarded
             GAME.GameCanvas.height = 640;//Math.max(window.innerHeight, 700);
-            GAME.GameCanvas.marginTop = 100;
+            GAME.GameCanvas.marginTop = 500;
             // the id the game engine looks for
             GAME.GameCanvas.id = 'gameCanvas';
             // add the canvas element to the html document
@@ -170,6 +172,13 @@
 
         }
 
+        //TODO - INSERT PSYTURK CALL HERE
+
+
+
+
+
+
     };
     scope.TowerDefense = TowerDefense;
 
@@ -182,7 +191,6 @@
     This object does two things
     1) Keeps track of level details to display to the user (number of crystals, which base, etc)
     2) Keeps track of data COLLECTED from the user and data displayed on the screen
-
     - use the logData function to add data
      */
 
@@ -425,6 +433,10 @@
         WEAPONS_to_LIVE: function (event, from, to, msg) {
             GAME.flowController.nextPage = "live";
             GAME.currentPage.tweenOutSelf(GAME.flowController.to_live_transition);
+
+            //save at the end of the level-feedback unit
+            GAME.recordResults(JSON.stringify(GAME.levels[GAME.currentLevelNumber-1].collectedData));
+
         },
 
         LIVE_to_WEAPONS: function (event, from, to, msg) {
@@ -432,7 +444,7 @@
             GAME.currentPage.tweenOutSelf(GAME.flowController.to_weapons_transition); //tween out then change
 
             //try to save data
-            GAME.recordResults(JSON.stringify(GAME.levels[GAME.currentLevelNumber-1].collectedData));
+            //GAME.recordResults(JSON.stringify(GAME.levels[GAME.currentLevelNumber-1].collectedData));
         },
 
         to_live_transition: function (event, from, to, msg) {
@@ -498,20 +510,24 @@
 
         if(GAME.currentLevelNumber === 0){//level hasn't started yet
             if(GAME.flowController.nextPage === "live") {
-                this.pages = ["tutorial1", "tutorial2", "tutorial3", "tutorial4", "tutorial5"];
-                this.numPages = 5;
+                this.pages = ["intro1","intro1","intro1","intro1",
+                            "intro2",
+                            "intro3","intro3",
+                            "intro4","intro4", "intro4","intro4","intro4",
+                            "intro5"];
+//                this.numPages = this.pages.length;
             }
         }else if(GAME.currentLevelNumber === 1 && GAME.flowController.nextPage === "weapons") {
-            this.pages = ["weapon_select_tutorial"];
-            this.numPages = 1;
+            this.pages = ["control_room_transition","weapon_select_tutorial"];
+//            this.numPages = this.pages.length;
         }else{
             if(GAME.flowController.nextPage === "live") {
                 this.pages = ["base_transition"];
-                this.numPages = 1;
+//                this.numPages = this.pages.length;
             }
             if(GAME.flowController.nextPage === "weapons"){
                 this.pages = ["control_room_transition"];
-                this.numPages = 1;
+//                this.numPages = this.pages.length;
             }
         }
 //        this.text = options.text;
@@ -527,10 +543,50 @@
     p.displayCurrentPage = function(){
         this.removeAllChildren();
         this.currentPage = new createjs.Bitmap(GAME.assets.getResult(this.pages[this.currentPageNumber]));
+
         this.addChild(this.currentPage);
         this.currentPage.on("click",this.displayNextPage.bind(this));
         //don't make a button if there's no text - this is true in the opening tutorial
+
+        var tutorial_text = [
+            "Pilot: Almost to the\nplanet, Captain.", //intro 1
+            "Captain: What's the deal\nwith this one, again?",// intro 1
+            "Tech advisor: Research colony.\nCompletely wiped by the Grog.",//intro 1
+            "Captain: Great, another one.",//intro 1
+            "",//intro 2
+            "Pilot: Here we are.",//intro 3
+            "Captain: Well, let's get\nthis over with then.",//intro 3
+            "Captain: Boarding. Jim,\nscan the decks.", //intro 4
+            "Captain: See if you can\nfind me the control room",//intro 4
+            "Jim: Got it. Down the\ncorridor to the right.",//intro 4
+            "Jim: Looks like there's\nstill some juice left, too.",//intro 4
+            "Jim: I'll see if I can\nactivate it from here.",//intro 4
+            "Captain: Hmm, let's see\nwhat this does..."//intro 5
+        ];
+
+        if(GAME.currentLevelNumber == 0 && GAME.flowController.nextPage === "live") {
+
+            this.currentPage.x = 120; //to center it, since the image is 800 and the screen is 1040
+            var text = tutorial_text[this.currentPageNumber];
+            this.currentTextButton = new GAME.Button((GAME.GameCanvas.width) / 2, 500, 600, 100);
+            this.currentTextButton.setBitmapText(text, GAME.settings.fontSpriteSheetWhite, 1.3);
+            this.addChild(this.currentTextButton);
+        }
+        if(GAME.currentLevelNumber == 1 && GAME.flowController.nextPage === "weapons") {
+
+            if(this.currentPageNumber == 0) {
+
+                var text = "Captain, another base needs resources!\nWhat do you want to send them?\nRemember that we may have to lead\nthat base in the future.";
+                this.currentTextButton = new GAME.Button((GAME.GameCanvas.width) / 2, 500, 600, 100);
+                this.currentTextButton.setBitmapText(text, GAME.settings.fontSpriteSheetWhite, 1.3);
+                this.addChild(this.currentTextButton);
+
+            }
+
+        }
+
         if(GAME.currentLevelNumber > 0 && GAME.flowController.nextPage === "live"){
+            this.currentPage.x = 0;
             if(GAME.levels[GAME.currentLevelNumber - 1 + 1].startingCountIsRandom){ //look one ahead b/c the level number hasn't been incremented yet
                 var text = "This base was stocked by someone else."
             }else{

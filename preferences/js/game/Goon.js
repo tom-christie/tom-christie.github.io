@@ -2,8 +2,8 @@
 
 (function (scope) {
 
-    var Goon = function () {
-        this.setup();
+    var Goon = function (id, type) {
+        this.setup(id, type);
     };
 
     Goon.prototype = new createjs.Container();
@@ -12,10 +12,10 @@
 
 
     Goon.prototype.setup = function (id, type) {
-        this.id = id;
+        this.idNumber = id;
+        this.ticksToTarget = 1569; //with current settings, how many ticks it takes to reach the target
         this.Container_initialize();
         // add custom setup logic here.
-
         this.spriteSheet = new createjs.SpriteSheet({
             "animations": {
                 "move_up": [0, 7, "move_up", .5],
@@ -111,6 +111,8 @@
         this.y = y;
         this.speed = 1;
         this.health = 100;
+        this.spawnTime = createjs.Ticker.getTicks();
+
     };
 
     p.update = function () {
@@ -184,7 +186,16 @@
     };
 
     p.hitBy = function(color, strength){
-        logData({label:"goonShot",hitby:color,oldHealth:this.health,newHealth:this.health-strength,damage:strength,goonNum:this.id});
+        logData({label:"goonShot",
+            hitby:color,
+            oldHealth:this.health,
+            newHealth:this.health-strength,
+            damage:strength,
+            goonNum:this.idNumber,
+            xCoord:this.x,
+            yCoord: this.y,
+            percentAlong:(createjs.Ticker.getTicks() - this.spawnTime)*100/this.ticksToTarget
+        });
         //keep track of damage from each color
         this.damage[color] += strength;
 
@@ -215,7 +226,14 @@
             }
         }
 
-        logData({label:"goonDeath", hitby:color,goonNum:this.id,crystalColor:this.crystalColor });
+        logData({label:"goonDeath",
+            hitby:color,
+            goonNum:this.idNumber,
+            crystalColor:this.crystalColor,
+            xCoord:this.x,
+            yCoord: this.y,
+            percentAlong:(createjs.Ticker.getTicks() - this.spawnTime)*100/this.ticksToTarget
+        });
 
 
         this.alive = false;
@@ -249,29 +267,31 @@
 
     };
 
-    p.handleCrystalClick = function(){
+    p.handleCrystalClick = function(evt){
         if(!this.alive && !this.collected){
             this.collected = true;
             var coords = GAME.currentPage.getCrystalStorageCoords(this.crystalColor);
-            createjs.Tween.get(this).to({x:coords.x, y:coords.y}, 500).to({alpha:0},0).call(this.updateRecoveredCrystalCount);
+            createjs.Tween.get(this).to({x:coords.x, y:coords.y}, 500).to({alpha:0},0).call(this.updateRecoveredCrystalCount,[evt.rawX, evt.rawY]);
             this.droppedCrystal.crystalSprite.stop();
-            logData({
-                label:"crystalCollected",
-                crystalColor:this.crystalColor,
-                crystals1CollectedCount:GAME.currentPage.recoveredCrystals1Count,
-                crystals2CollectedCount:GAME.currentPage.recoveredCrystals2Count
-            });
         }
     };
 
-    p.updateRecoveredCrystalCount = function(){
-        GAME.currentPage.updateRecoveredCrystalCount(this.crystalColor);
+    p.updateRecoveredCrystalCount = function(x,y){
 
+        GAME.currentPage.updateRecoveredCrystalCount(this.crystalColor);
+        logData({
+            label:"crystalCollected",
+            crystalColor:this.crystalColor,
+            crystals1CollectedCount:GAME.currentPage.recoveredCrystals1Count,
+            crystals2CollectedCount:GAME.currentPage.recoveredCrystals2Count,
+            xCoord: x,
+            yCoord: y
+        });
 
     };
 
     p.hitMine = function(){
-        logData({label:"goonHitTarget",goonNum:this.id,health:this.health });
+        logData({label:"goonHitTarget",goonNum:this.idNumber,health:this.health });
 
 
         this.alive = false;

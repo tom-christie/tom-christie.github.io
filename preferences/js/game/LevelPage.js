@@ -541,7 +541,7 @@
             var ticksElapsed = createjs.Ticker.getTicks() - this.startTime;
             //TODO - make this based on evidence
 
-            if (ticksElapsed > 1 && ticksElapsed % 600 == 0) { //20 seconds at this piont
+            if (ticksElapsed > 1 && ticksElapsed % 1800 == 0) { //seconds * 30
                 this.alertButton("add", "supply_other_base");
             }
         }
@@ -619,7 +619,13 @@
             if (GAME.currentPage.goons[i].alive) {
                 GAME.currentPage.goons[i].sprite.stop();
             }else{
-                GAME.currentPage.goons[i].droppedCrystal.crystalSprite.stop();
+                try{
+                    GAME.currentPage.goons[i].droppedCrystal.crystalSprite.stop();
+                }catch(err){
+                    //this will happen when the goon's hit the mine and there's no dropped crystal...//
+
+                    //todo - fix this
+                }
             }
 
         }
@@ -748,8 +754,8 @@
                 logData({label: "weaponCrystalClicked",
                     number: 1,
                     color: GAME.currentPage.options.weapon1_color,
-                    countBeforeClick: GAME.currentPage.options.weapon1_available_count,
-                    countAfterClick: GAME.currentPage.options.weapon1_available_count - 1
+                    countRemainingBeforeClick: GAME.currentPage.options.weapon1_available_count,
+                    countRemainingAfterClick: GAME.currentPage.options.weapon1_available_count - 1
                 });
                 GAME.currentPage.initiateNewCrystal(this.position);
                 this.active = true;
@@ -780,12 +786,12 @@
     p.update = function () {
         if (this.active) {
             this.energy_bar.graphics.clear()
-                .beginFill(GAME.settings[this.color]) //todo put these colors in JSON file
+                .beginFill(GAME.settings[this.color])
                 .drawRoundRect(60, 50 + (this.position - 1) * 50, 100 * GAME.currentPage.currentEnergy, 32, 3);
         } else {
             //not strictly necessary
             this.energy_bar.graphics.clear()
-                .beginFill(GAME.settings[this.color]) //todo put these colors in JSON file
+                .beginFill(GAME.settings[this.color])
                 .drawRoundRect(60, 50 + (this.position - 1) * 50, 0, 32, 3);
 
         }

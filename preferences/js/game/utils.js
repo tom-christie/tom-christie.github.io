@@ -30,6 +30,7 @@ function logData(data){
     var newData = {
         currentTime: currentTime,
         timeSinceLevelStart: timeSinceLevelStart,
+        levelNumber: GAME.currentLevelNumber,
         data:data
     };
 

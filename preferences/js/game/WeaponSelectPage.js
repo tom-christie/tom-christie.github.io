@@ -10,6 +10,13 @@
  *  - what the base to send TO is
  *  - what proportions are selected
  *
+ *    logData({label: "weaponCrystalClicked",
+ *            number: 1,
+ *            color: GAME.currentPage.options.weapon1_color,
+ *            countRemainingBeforeClick: GAME.currentPage.options.weapon1_available_count,
+ *            countRemainingAfterClick: GAME.currentPage.options.weapon1_available_count - 1
+ *    });
+ *
  */
 
 
@@ -35,6 +42,12 @@
 
         this.availableWeapons = weaponsToChoose;
         this.contextToSendTo = contextToSendTo;
+
+        logData({label:"weaponSelectPageShown",
+            availableWeapons:this.availableWeapons,
+            contextToSendTo:this.contextToSendTo
+        });
+
 
         console.log("DEBUGweapon",  this.availableWeapons, this.contextToSendTo)
             log('WeaponSelectPage.setup');
@@ -64,8 +77,6 @@
 //            .call(this.drawWeaponMeters, null, this);
         this.drawWeaponMeters();
 
-        //TODO - CONTEXT/MESSAGE GOES HERE
-
 
         //play button - how to align to the right of the rightmost weapon meter thing?
         this.playButton = new createjs.Bitmap(GAME.assets.getResult("send_button"));
@@ -94,6 +105,7 @@
         //add proportions to queue
         //this.contextToSendTo
 
+
         //take first proportion, multiply by the set number of crystals, and round
         var proportions =[]; //might be 2 or 3 proportions
         var total = 0;
@@ -105,6 +117,16 @@
         for(var i=0; i<this; i++){
             proportions[i] = proportions[i] / total;
         }
+
+
+        logData({label:"weaponSelectSendButtonClicked",
+            availableWeapons:this.availableWeapons,
+            contextToSendTo:this.contextToSendTo,
+            proportionsChosen:proportions
+        });
+
+
+
         //multiply by the total number of crystals a base gets
         var weaponCounts = [];
         for(var i=0; i<proportions.length; i++){
