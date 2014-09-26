@@ -105,7 +105,12 @@
         if(!yOffset){
             yOffset = 0
         }
-        var textArray = text.split("\n"); //split by newline??
+
+        try{
+            var textArray = text.split("\n"); //split by newline??
+        }catch(err){
+            //dont do anything b/c there's just no text to split
+        }
 
         for(var part in textArray){
             var textLine = textArray[part];

@@ -462,12 +462,18 @@
 
 
             //TODO - ADD OCCASIONAL 3-choices
-            if(GAME.settings.levelsFor3Query.indexOf(GAME.currentLevelNumber) > -1){
-                GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
-                var levelsToSendTo = [3, 4, 5];
-                GAME.flowController.baseToSendTo = levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
-                console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo);
-            }
+
+            GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
+            GAME.flowController.baseToSendTo = GAME.currentLevelNumber + 2;//levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
+            console.log("hello1", GAME.flowController.baseToSendTo, GAME.currentLevelNumber)
+//
+//            if(GAME.settings.levelsFor3Query.indexOf(GAME.currentLevelNumber) > -1){
+//                GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
+//                var levelsToSendTo = [3, 4, 5];
+//
+//                GAME.flowController.baseToSendTo = 3;//levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
+//                console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo); //TODO
+//            }
 
 
             GAME.state.to_transition();

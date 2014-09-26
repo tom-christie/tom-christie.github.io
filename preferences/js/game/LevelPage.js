@@ -562,9 +562,9 @@
                 }
             }
 
-            if(allTermsEnded){
-                createjs.Ticker.setFPS(30);
-
+            //if(allTermsEnded){
+            if(true){
+                createjs.Ticker.setFPS(30);//TODO
                 this.alertButton("add","supply_other_base");
             }
 
