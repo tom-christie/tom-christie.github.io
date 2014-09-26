@@ -626,7 +626,7 @@
             weapon1Color:this.options.weapon1_color,
             weapon2Color:this.options.weapon2_color,
             weapon1Strength:this.options.weapon1_strength,
-            weapon2Strength:this.options.weapon1_strength,
+            weapon2Strength:this.options.weapon2_strength,
             weapon1ShotsToKillGoon:100.0/this.options.weapon1_strength,
             weapon2ShotsToKillGoon:100.0/this.options.weapon2_strength,
             weapon1QueryResponse: this.weapon1EfficacyQueryResponse,

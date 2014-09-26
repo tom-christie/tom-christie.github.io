@@ -61,9 +61,13 @@
             this.background = new createjs.Bitmap(GAME.assets.getResult("base2_weapon_select"));
 
         }else if(contextToSendTo === 3){
-            this.background = new createjs.Bitmap(GAME.assets.getResult("base3_weapon_select")); //TODO - create this
-
+            this.background = new createjs.Bitmap(GAME.assets.getResult("base3_weapon_select"));
+        }else if(contextToSendTo === 4){
+            this.background = new createjs.Bitmap(GAME.assets.getResult("base4_weapon_select"));
+        }else if(contextToSendTo === 5){
+            this.background = new createjs.Bitmap(GAME.assets.getResult("base5_weapon_select"));
         }
+
         this.background.x = GAME.GameCanvas.width/2 - this.background.image.width/2;
         this.background.y = GAME.GameCanvas.height/2 - this.background.image.height/2;
         this.addChild(this.background);

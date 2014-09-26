@@ -30,10 +30,11 @@
 
     "base1Colors": ["red","white"],
     "base2Colors": ["red","blue"],
-    "base1Strengths": [16.67, 8.84],
-    "base2Strengths": [14.29, 5.89],
+    "allColors": ["red","blue","white"],
+    "base1Strengths": [16.67, 7.7],
+    "base2Strengths": [10, 14.3],
 
-    "levelsFor3Query":[1, 3, 5],
+    "levelsFor3Query":[1, 3, 10, 20],
 
     "levelCount": 20
 

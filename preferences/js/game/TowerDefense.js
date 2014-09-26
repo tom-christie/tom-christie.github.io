@@ -460,9 +460,15 @@
                 GAME.flowController.baseToSendTo = 1;
             }
 
-            //TODO - ADD OCCASIONAL 3-choices
 
-            console.log("DEBUG weapons GOT HEREEEE");
+            //TODO - ADD OCCASIONAL 3-choices
+            if(GAME.settings.levelsFor3Query.indexOf(GAME.currentLevelNumber) > -1){
+                GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
+                var levelsToSendTo = [3, 4, 5];
+                GAME.flowController.baseToSendTo = levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
+                console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo);
+            }
+
 
             GAME.state.to_transition();
 
@@ -566,6 +572,8 @@
             "Captain: Hmm, let's see\nwhat this does..."//intro 5
         ];
 
+        //"Alright, now we have to send\nresources to another base. \n\nThe background on the next screen will tell you which one.
+
         if(GAME.currentLevelNumber == 0 && GAME.flowController.nextPage === "live") {
             if(this.pages[this.currentPageNumber].slice(0,5) === "intro"){
                 this.currentPage.x = 120; //to center it, since the image is 800 and the screen is 1040
@@ -591,11 +599,11 @@
         if(GAME.currentLevelNumber > 0 && GAME.flowController.nextPage === "live"){
             this.currentPage.x = 0;
             if(GAME.levels[GAME.currentLevelNumber - 1 + 1].startingCountIsRandom){ //look one ahead b/c the level number hasn't been incremented yet
-                var text = "This base was stocked by someone else."
+                var text = "Now we're headed to a base that was\nstocked by someone else.\n\nKeep in mind that laser strengths\nmight be different on this world."
             }else{
-                var text = "This base was stocked by you!"
+                var text = "Now we're headed to a base that was\nstocked by you!\n\nKeep in mind that laser strengths\nmight be different on this world."
             }
-            this.currentTextButton = new GAME.Button((GAME.GameCanvas.width) / 2, 500, 600, 100);
+            this.currentTextButton = new GAME.Button((GAME.GameCanvas.width) / 2, 350, 600, 100);
             this.currentTextButton.setBitmapText(text, GAME.settings.fontSpriteSheetWhite, 1.3);
             this.addChild(this.currentTextButton);
         }

@@ -69,6 +69,10 @@
             //{"id": "base3", "src": "assets/images/base03.png"},
             {"id": "base1_weapon_select", "src": "assets/images/base01_weapon_select.png"},
             {"id": "base2_weapon_select", "src": "assets/images/base02_weapon_select.png"},
+            {"id": "base3_weapon_select", "src": "assets/images/base03_weapon_select.png"},
+            {"id": "base4_weapon_select", "src": "assets/images/base04_weapon_select.png"},
+            {"id": "base5_weapon_select", "src": "assets/images/base05_weapon_select.png"},
+
             //{"id": "base3_weapon_select", "src": "assets/images/base03_weapon_select.jpg"},
 
             {"id": "intro1", "src": "assets/images/intro01.png"},
