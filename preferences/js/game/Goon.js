@@ -13,6 +13,7 @@
 
     Goon.prototype.setup = function (id, type) {
         this.idNumber = id;
+        this.termEnded = false;
         this.ticksToTarget = 1569; //with current settings, how many ticks it takes to reach the target
         this.Container_initialize();
         // add custom setup logic here.
@@ -215,6 +216,7 @@
         var damage = this.damage;
         //figured out what crystal to send up
         var totalDamage = 0;
+
         for(var c in damage) totalDamage += damage[c];
         var r = Math.random();
         var cumsum = 0;
@@ -237,6 +239,7 @@
 
 
         this.alive = false;
+        this.termEnded = true;
         this.removeChild(this.sprite);
         this.removeChild(this.healthbar_green);
         this.removeChild(this.healthbar_red);
@@ -293,7 +296,7 @@
     p.hitMine = function(){
         logData({label:"goonHitTarget",goonNum:this.idNumber,health:this.health });
 
-
+        this.termEnded = true;
         this.alive = false;
             this.removeChild(this.sprite);
             this.removeChild(this.healthbar_green);

@@ -8,10 +8,10 @@
     "TILE_INDEX_BUILTUPON": 6,
     "TILESIZE": 25,
 
-    "level01_goons":[1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0],
+    "level01_goons":[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     "goon_spawn_ticks":90,
 
-    "basicCrystalNumber":6,
+    "basicCrystalNumber":8,
     "numGoons":50,
     "numProjectiles":200,
     "numTowers":20,
@@ -30,8 +30,10 @@
 
     "base1Colors": ["red","white"],
     "base2Colors": ["red","blue"],
-    "base1Strengths": [10, 12],
-    "base2Strengths": [20, 10],
+    "base1Strengths": [16.67, 8.84],
+    "base2Strengths": [14.29, 5.89],
+
+    "levelsFor3Query":[1, 3, 5];
 
     "levelCount": 20
 

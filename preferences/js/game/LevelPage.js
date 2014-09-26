@@ -145,7 +145,7 @@
         this.startY = GAME.AI.spawnY * this.levelData.tileheight;
 
         this.goons = [];
-        this.num_goons = 0;
+        this.numGoonsSpawned = 0;
 
         this.y_separation = 20;
         //add weapon select - but don't add it to the page unless state = LIVE
@@ -168,8 +168,6 @@
         this.currentEnergy = 0;
         this.weapon1 = new GAME.WeaponSelect(this.options.weapon1_color, 1, false);
         this.weapon2 = new GAME.WeaponSelect(this.options.weapon2_color, 2, false);
-
-
 
 
         //add weapon select - but don't add it to the page unless state = LIVE
@@ -289,6 +287,9 @@
         this.startTime = createjs.Ticker.getTicks();
         this.spawnTime = createjs.Ticker.getTicks();
 
+        this.options["label"] = "newLevel";
+        logData(this.options);
+
         if (GAME.debugmode)
             log('initLevel complete.');
 
@@ -338,23 +339,23 @@
             this.spawnTime = createjs.Ticker.getTicks();
             //if the interval has a goon associated with it in the game settings
             if (goon_type_to_spawn == 1) {
-                logData({label:"goonSpawn",goonNum:this.num_goons});
+                logData({label:"goonSpawn",goonNum:this.numGoonsSpawned});
                 //can't use spawn intervals as index as some intervals don't have an associated goon
                 //so we need to use the ACTUAL goon number as the interval
-                this.goons.push(new GAME.Goon(this.num_goons, goon_type_to_spawn));
-                this.goons[this.num_goons].spawn(this.startX, this.startY);
-                this.gameLayer.addChildAt(this.goons[this.num_goons], this.gameLayer.getNumChildren());//-1);
+                this.goons.push(new GAME.Goon(this.numGoonsSpawned, goon_type_to_spawn));
+                this.goons[this.numGoonsSpawned].spawn(this.startX, this.startY);
+                this.gameLayer.addChildAt(this.goons[this.numGoonsSpawned], this.gameLayer.getNumChildren());//-1);
                 this.spawnTime = createjs.Ticker.getTicks();
-                this.num_goons += 1;
+                this.numGoonsSpawned += 1;
             }
         }
         GAME.AI.update();
-        for (i = 0; i < this.num_goons; i++) {
+        for (i = 0; i < this.numGoonsSpawned; i++) {
             this.goons[i].update();
         }
 
         //CHECK FOR GOON REACHING DESTINATION
-        for (i = 0; i < this.num_goons; i++) {
+        for (i = 0; i < this.numGoonsSpawned; i++) {
             if (ndgmr.checkRectCollision(this.goons[i].sprite, this.mine)) {
                 this.goons[i].hitMine();
             }
@@ -369,6 +370,7 @@
             return {x:this.crystalStorageCrystal2.crystalSprite.x, y:this.crystalStorageCrystal2.crystalSprite.y};
         }
     };
+
 
     p.handleCrystals = function () {
         var i;
@@ -387,26 +389,26 @@
             this.weapon2.update();
         }
 
-        //only shoot if one of the crystals is active
+        //if no crystals are active
         if (this.crystalActive === 0) {
 
-            if (GAME.state.is("LIVE")) {
-                //this.alertButton("add", "supply_other_base");
-                this.alertButton("add", "weapon_select");
-            }
+            if(this.weaponsRemaining > 0) {
+                if (GAME.state.is("LIVE")) {
+                    this.alertButton("add", "weapon_select");
+                }
 
-            this.weapon2.active = false;
-            this.weapon2.weapon_select_crystal.crystalSprite.stop();
-            this.weapon1.active = false;
-            this.weapon1.weapon_select_crystal.crystalSprite.stop();
+                this.weapon2.active = false;
+                this.weapon2.weapon_select_crystal.crystalSprite.stop();
+                this.weapon1.active = false;
+                this.weapon1.weapon_select_crystal.crystalSprite.stop();
 
-            //TODO - make crystals blink!!!
-
-
-            //make towers grey
-            //change tower colors
-            for (i = 0; i < this.towers.length; i++) {
-                this.towers[i].changeColor("dead");
+                //make towers grey
+                //change tower colors
+                for (i = 0; i < this.towers.length; i++) {
+                    this.towers[i].changeColor("dead");
+                }
+            }else{
+                //don't do anything if no weapons are left
             }
 
         } else {
@@ -528,6 +530,7 @@
         //update goons if game is live OR playing back OR fastforwarding
         //if (GAME.state.is("LIVE") || (GAME.state.is("PLAYBACK") && (this.remoteControl.playButton.active || this.remoteControl.FFButton.active) )) {
 
+        this.weaponsRemaining = GAME.currentPage.options.weapon1_available_count + GAME.currentPage.options.weapon2_available_count;
 
 
         if(!this.supply_button_showing) {
@@ -539,14 +542,98 @@
             this.handleCrystals(); //towers and crystals and shooting
 
             var ticksElapsed = createjs.Ticker.getTicks() - this.startTime;
-            //TODO - make this based on evidence
 
-            if (ticksElapsed > 1 && ticksElapsed % 1800 == 0) { //seconds * 30
-                this.alertButton("add", "supply_other_base");
+
+            //END OF LEVEL STUFF
+            //speed things up if no weapons left
+            if (this.weaponsRemaining === 0 && this.crystalActive === 0){
+                createjs.Ticker.setFPS(60);
             }
+
+            //end level if eveyrone is dead or reached the mine
+            var allTermsEnded = true;
+            if(this.numGoonsSpawned < GAME.settings.level01_goons.length){
+                allTermsEnded = false; //if not all goons have spawned
+            }else if(this.numGoonsSpawned === GAME.settings.level01_goons.length){
+                for (i = 0; i < this.numGoonsSpawned; i++) {
+                    if(this.goons[i].termEnded === false){
+                        allTermsEnded = false; //if at least one goon hasn't had his term ended
+                    }
+                }
+            }
+
+            if(allTermsEnded){
+                createjs.Ticker.setFPS(30);
+
+                this.alertButton("add","supply_other_base");
+            }
+
         }
 
 
+    };
+
+    //number clicked from the post-level efficacy query
+    p.numberClicked = function(evt){
+        var properties = evt.currentTarget.properties;
+        console.log(properties
+        )
+        if(properties.weapon === 1){
+            this.weapon1NumberClicked = true;
+            //set all of your type inactive
+            for(var i=0; i<this.numbersWeapon1.length; i++){
+                this.numbersWeapon1[i].properties.selected = false;
+                this.numbersWeapon1[i].setBlinkFrequency(0);
+
+            }
+
+            //set yourself active
+            this.numbersWeapon1[properties.number-1].properties.selected = true;
+            this.numbersWeapon1[properties.number-1].setBlinkFrequency(500);
+            this.weapon1EfficacyQueryResponse = properties.number;
+        }else if(properties.weapon === 2){
+            this.weapon2NumberClicked = true;
+            for(var i=0; i<this.numbersWeapon2.length; i++){
+                this.numbersWeapon2[i].properties.selected = false;
+                this.numbersWeapon2[i].setBlinkFrequency(0);
+            }
+
+            //set yourself active
+            this.numbersWeapon2[properties.number-1].properties.selected = true;
+            this.numbersWeapon2[properties.number-1].setBlinkFrequency(500);
+            this.weapon2EfficacyQueryResponse = properties.number;
+        }
+
+        if(this.weapon1NumberClicked && this.weapon2NumberClicked){
+
+
+            this.supply_button = new GAME.Button((GAME.GameCanvas.width - this.x_offset)/2 + this.x_offset, 500, 600, 100);
+            this.supply_button.setBitmapText("Send resources!!",GAME.settings.fontSpriteSheetRed, 1.5)
+                .setColor("#000", 0.5) //background color
+                .setRadius(10)
+                .setBlinkFrequency(500);
+            this.supply_button.on("click", this.finishLevel.bind(this));
+            this.alertLayer.addChild(this.supply_button);
+
+        }
+
+
+
+    };
+
+    p.finishLevel  = function(){
+        logData({label: "efficacyQueryResponse",
+            weapon1Color:this.options.weapon1_color,
+            weapon2Color:this.options.weapon2_color,
+            weapon1Strength:this.options.weapon1_strength,
+            weapon2Strength:this.options.weapon1_strength,
+            weapon1ShotsToKillGoon:100.0/this.options.weapon1_strength,
+            weapon2ShotsToKillGoon:100.0/this.options.weapon2_strength,
+            weapon1QueryResponse: this.weapon1EfficacyQueryResponse,
+            weapon2QueryResponse: this.weapon2EfficacyQueryResponse
+
+        });
+        GAME.flowController.LIVE_to_WEAPONS();
     };
 
     p.alertButton = function (action, type) {
@@ -561,10 +648,6 @@
                 this.weapon_select_button.setBitmapText("Select Energy Source!",GAME.settings.fontSpriteSheetWhite,1.3)
                     .setColor("#000",.5)
                     .setRadius(10);
-//                this.weapon_select_button.setText("Select Energy Source!")
-//                     .setColor("#000", 0.5) //background color
-//                     .setRadius(10)
-//                     .setTextColor("#FFF");
                 this.alertLayer.addChild(this.weapon_select_button);
                 //console.log("ADDED WEAPON SELECT BUTTON")
 
@@ -582,7 +665,6 @@
             } else if (action === "remove" && this.weapon_select_button_showing) {
                 this.crystal1Pulse.pause();
                 this.crystal2Pulse.pause();
-                //console.log("REMOVED WEAPON SELECT BUTTON")
                 this.alertLayer.removeChild(this.weapon_select_button);
                 this.weapon_select_button_showing = false;
             }
@@ -593,17 +675,55 @@
                 this.stopEverything();
                 this.updateCrystalsToSend();
 
-                this.supply_button_showing = true;
-                this.supply_button = new GAME.Button((GAME.GameCanvas.width - this.x_offset)/2 + this.x_offset, 500, 600, 100);
-
-                this.supply_button.setBitmapText("Send resources!!",GAME.settings.fontSpriteSheetRed, 1.3)
-                    .setColor("#000", 0.5) //background color
+//
+                this.hitGuessButton = new GAME.Button((GAME.GameCanvas.width - this.x_offset)/2 + this.x_offset, 200, 600, 200);
+                this.hitGuessButton.setColor("#000",0.5)
                     .setRadius(10)
-                    .setBlinkFrequency(500);
-                this.supply_button.on("click", GAME.flowController.LIVE_to_WEAPONS.bind(this));
-                this.alertLayer.addChild(this.supply_button);
+                    .setBitmapText("How many shots did it\n take for each crystal\ntype to kill a goon?",GAME.settings.fontSpriteSheetWhite,1.3, -70);
+                this.alertLayer.addChild(this.hitGuessButton);
+
+
+
+                //add crystal images relative to the button container
+                this.hitGuessButton.addChild(new GAME.Crystal(20,100,
+                    this.options.weapon1_color, "available",true));
+                this.hitGuessButton.addChild(new GAME.Crystal(20,140,
+                    this.options.weapon2_color, "available",true));
+
+                //add numbers
+                this.numbersWeapon1 = [];
+                this.numbersWeapon2 = [];
+                for(var i=1; i<=15; i++){
+                    this.numbersWeapon1.push(new GAME.Button(40 + i*32, 118, 25, 16)
+                        .setBitmapText(i.toString(),GAME.settings.fontSpriteSheetRed, 1)
+                        .setColor("#000",0.01)
+                        .setRadius(0)
+                        .setProperties({weapon:1, number:i, selected:false}));
+
+                    this.numbersWeapon2.push(new GAME.Button(40 + i*32, 159, 20, 10)
+                        .setBitmapText(i.toString(),GAME.settings.fontSpriteSheetRed, 1)
+                        .setColor("#000",0.01)
+                        .setRadius(0)
+                        .setProperties({weapon:2, number:i, selected:false}));
+                }
+
+                for(var i=0; i<this.numbersWeapon1.length; i++){
+                    this.numbersWeapon1[i].on("click",this.numberClicked.bind(this));
+                    this.numbersWeapon2[i].on("click",this.numberClicked.bind(this));
+                    this.hitGuessButton.addChild(this.numbersWeapon1[i]);
+                    this.hitGuessButton.addChild(this.numbersWeapon2[i]);
+                }
+
+
                 //console.log("REMOVED WEAPON SELECT BUTTON222")
                 this.alertLayer.removeChild(this.weapon_select_button); //remove weapon select button if it's showing
+                this.supply_button_showing = true;
+
+
+
+
+
+
 
             } else if (action === "remove" && this.supply_button_showing) {
                 this.alertLayer.removeChild(this.supply_button);
@@ -615,7 +735,7 @@
     p.stopEverything = function(){
         var i;
 
-        for (i = 0; i < GAME.currentPage.num_goons; i++) {
+        for (i = 0; i < GAME.currentPage.numGoonsSpawned; i++) {
             if (GAME.currentPage.goons[i].alive) {
                 GAME.currentPage.goons[i].sprite.stop();
             }else{
@@ -725,11 +845,11 @@
         this.energy_bar = new createjs.Shape();
         if (active) {
             this.energy_bar.graphics
-                .beginFill(GAME.settings[this.color]) //todo put these colors in JSON file
+                .beginFill(GAME.settings[this.color])
                 .drawRoundRect(60, 50 + (this.position - 1) * 50, 100 * GAME.currentPage.currentEnergy, 32, 3);
         } else {
             this.energy_bar.graphics
-                .beginFill(GAME.settings[this.color]) //todo put these colors in JSON file
+                .beginFill(GAME.settings[this.color])
                 .drawRoundRect(60, 50 + (this.position - 1) * 50, 0, 32, 3);
         }
         this.addChild(this.energy_bar);
@@ -979,7 +1099,7 @@
 
         //stop goons from wiggling
 
-        for (i = 0; i < GAME.currentPage.num_goons; i++) {
+        for (i = 0; i < GAME.currentPage.numGoonsSpawned; i++) {
             if (GAME.currentPage.goons[i].alive) {
                 GAME.currentPage.goons[i].sprite.stop();
             }

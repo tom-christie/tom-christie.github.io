@@ -1,10 +1,8 @@
 /**
  * Created by Tom on 4/6/14.
- */
+*/
 
-//TODO - Goon number doesn't appear to be correct
-//TODO - make sure it's posting properly
-//TODO - why isn't the intro tutorial showing up?
+//TODO - change back this.pages
 
 
 (function (scope) {
@@ -510,12 +508,18 @@
 
         if(GAME.currentLevelNumber === 0){//level hasn't started yet
             if(GAME.flowController.nextPage === "live") {
-                this.pages = ["intro1","intro1","intro1","intro1",
+                this.pages = ["intro1",
+                            "intro1","intro1","intro1",
                             "intro2",
                             "intro3","intro3",
                             "intro4","intro4", "intro4","intro4","intro4",
-                            "intro5"];
-//                this.numPages = this.pages.length;
+                            "intro5",
+                            "tutorial1",
+                            "tutorial2",
+                            "tutorial3",
+                            "tutorial4",
+                            "tutorial5"];
+                this.numPages = this.pages.length;
             }
         }else if(GAME.currentLevelNumber === 1 && GAME.flowController.nextPage === "weapons") {
             this.pages = ["control_room_transition","weapon_select_tutorial"];
@@ -565,9 +569,10 @@
         ];
 
         if(GAME.currentLevelNumber == 0 && GAME.flowController.nextPage === "live") {
-
-            this.currentPage.x = 120; //to center it, since the image is 800 and the screen is 1040
-            var text = tutorial_text[this.currentPageNumber];
+            if(this.pages[this.currentPageNumber].slice(0,5) === "intro"){
+                this.currentPage.x = 120; //to center it, since the image is 800 and the screen is 1040
+                var text = tutorial_text[this.currentPageNumber];
+            }
             this.currentTextButton = new GAME.Button((GAME.GameCanvas.width) / 2, 500, 600, 100);
             this.currentTextButton.setBitmapText(text, GAME.settings.fontSpriteSheetWhite, 1.3);
             this.addChild(this.currentTextButton);

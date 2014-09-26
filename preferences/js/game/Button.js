@@ -97,10 +97,13 @@
         return this;
     };
 
-    p.setBitmapText = function(text,spritesheet, scale){
+    p.setBitmapText = function(text,spritesheet, scale,yOffset){
 
         if(!scale){
             scale=1;
+        }
+        if(!yOffset){
+            yOffset = 0
         }
         var textArray = text.split("\n"); //split by newline??
 
@@ -112,7 +115,7 @@
             var letterWidth = spritesheet._frameWidth * scale;
             var letterHeight = spritesheet._frameHeight * scale;
             this.t.x = this.width / 2 - letterWidth*textLine.length/2; //wrt shape bounds - ASSUMES ITS ONE LINE
-            this.t.y = this.height / 2 - letterHeight/2 + letterHeight*part; //wrt shape bounds
+            this.t.y = this.height / 2 - letterHeight/2 + letterHeight*part + yOffset; //wrt shape bounds
             this.addChild(this.t);
 
         }
@@ -133,6 +136,12 @@
             .drawRoundRect(0, 0, this.width, this.height, this.radius); //with respect to the shape bounds
         return this;
     };
+
+    p.setProperties = function (properties) {
+        this.properties = properties; //custom properites
+        return this;
+    };
+
 
     p.setAlpha = function(alpha){
         this.shape.graphics.alpha = alpha;
@@ -160,9 +169,15 @@
 
     p.setBlinkFrequency = function (freq) {
         this.blinkFrequency = freq;
-        createjs.Tween.get(this.t,{loop:true})
-            .to({ alpha:.2}, this.blinkFrequency)
-            .to({ alpha:1}, this.blinkFrequency);
+        if(freq > 0) {
+            createjs.Tween.get(this.t, {loop: true})
+                .to({ alpha: .2}, this.blinkFrequency)
+                .to({ alpha: 1}, this.blinkFrequency);
+        }
+        else if(freq === 0){
+            createjs.Tween.removeTweens(this.t);
+            this.t.alpha = 1;
+        }
         return this;
     };
 
