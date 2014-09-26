@@ -2,8 +2,6 @@
  * Created by Tom on 4/6/14.
 */
 
-//TODO - change back this.pages
-
 
 (function (scope) {
 
