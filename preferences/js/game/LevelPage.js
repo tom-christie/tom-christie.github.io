@@ -562,9 +562,8 @@
                 }
             }
 
-            //if(allTermsEnded){
-            if(true){
-                createjs.Ticker.setFPS(30);//TODO
+            if(allTermsEnded){
+                createjs.Ticker.setFPS(30);
                 this.alertButton("add","supply_other_base");
             }
 
@@ -604,7 +603,7 @@
             this.weapon2EfficacyQueryResponse = properties.number;
         }
 
-        if(this.weapon1NumberClicked && this.weapon2NumberClicked){
+        if(this.weapon1NumberClicked && this.weapon2NumberClicked && !this.supply_button){
 
 
             this.supply_button = new GAME.Button((GAME.GameCanvas.width - this.x_offset)/2 + this.x_offset, 500, 600, 100);

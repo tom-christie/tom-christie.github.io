@@ -461,19 +461,13 @@
             }
 
 
-            //TODO - ADD OCCASIONAL 3-choices
+            if(GAME.settings.levelsFor3Query.indexOf(GAME.currentLevelNumber) > -1){
+                GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
+                var levelsToSendTo = [3, 4, 5];
 
-            GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
-            GAME.flowController.baseToSendTo = GAME.currentLevelNumber + 2;//levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
-            console.log("hello1", GAME.flowController.baseToSendTo, GAME.currentLevelNumber)
-//
-//            if(GAME.settings.levelsFor3Query.indexOf(GAME.currentLevelNumber) > -1){
-//                GAME.flowController.weaponsToPickFrom = GAME.settings.allColors;
-//                var levelsToSendTo = [3, 4, 5];
-//
-//                GAME.flowController.baseToSendTo = 3;//levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
-//                console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo); //TODO
-//            }
+                GAME.flowController.baseToSendTo = levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
+                console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo);
+            }
 
 
             GAME.state.to_transition();
@@ -589,7 +583,7 @@
             this.currentTextButton.setBitmapText(text, GAME.settings.fontSpriteSheetWhite, 1.3);
             this.addChild(this.currentTextButton);
         }
-        if(GAME.currentLevelNumber == 1 && GAME.flowController.nextPage === "weapons") {
+        if(GAME.flowController.nextPage === "weapons") {
 
             if(this.currentPageNumber == 0) {
 
