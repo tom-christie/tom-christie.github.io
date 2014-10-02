@@ -322,8 +322,9 @@
 
                         GAME.currentLevelNumber += 1;
                         GAME.flowController.checkNewLevelForCrystalSupply();
-                        console.log("NOW AT LEVEL", GAME.currentLevelNumber);
+                        console.log("MAKING LEVEL", GAME.currentLevelNumber);
                         GAME.currentPage = new GAME.LevelPage();
+                        console.log("NOW AT LEVEL", GAME.currentLevelNumber);
                         GAME.stage.addChild(GAME.currentPage);
                     },
                     onMENU: function (event, from, to, msg) {

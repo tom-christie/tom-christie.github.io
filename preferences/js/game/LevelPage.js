@@ -147,22 +147,19 @@
         this.goons = [];
         this.numGoonsSpawned = 0;
 
+
+        //add box for weapon select
         this.y_separation = 20;
         //add weapon select - but don't add it to the page unless state = LIVE
+        //this is the bounding box
         this.weaponSelectRectangle = new createjs.Shape();
-        this.weaponSelectRectangle.height = 160;
+        this.weaponSelectRectangle.height = 300;
         this.weaponSelectRectangle.y = 0;
         this.weaponSelectRectangle.graphics
             .beginFill("#858B8E") //todo put this in GameData.json
             .drawRoundRect(0, this.weaponSelectRectangle.y, this.x_offset - 20, this.weaponSelectRectangle.height, 0);
         this.gameLayer.addChild(this.weaponSelectRectangle);
-        this.weaponSelectText = new createjs.BitmapText("Energy Source",GAME.settings.fontSpriteSheetBlack);
-        //this.weaponSelectText = new createjs.Text("Energy Source");
-        this.weaponSelectText.scaleX = 0.7;
-        this.weaponSelectText.scaleY = 0.7;
-        this.weaponSelectText.x = 20;
-        this.weaponSelectText.y = this.weaponSelectRectangle.y + 23;
-        this.weaponSelectText.textBaseline = "alphabetic";
+
 
         //contents of weaponSelect box
         this.currentEnergy = 0;
@@ -170,31 +167,6 @@
         this.weapon2 = new GAME.WeaponSelect(this.options.weapon2_color, 2, false);
 
 
-        //add weapon select - but don't add it to the page unless state = LIVE
-        this.availableEnergyRectangle = new createjs.Shape();
-        this.availableEnergyRectangle.height = 160;
-        this.availableEnergyRectangle.y = this.weaponSelectRectangle.y + this.weaponSelectRectangle.height + this.y_separation;
-        this.availableEnergyRectangle.graphics
-            .beginFill("#858B8E") //todo put this in GameData.json
-            .drawRoundRect(0, 0,// the .y parameter sets the y value already
-                this.x_offset - 20, this.availableEnergyRectangle.height, 0);
-        this.gameLayer.addChild(this.availableEnergyRectangle);
-        this.availableEnergyText = new createjs.BitmapText("Available\nCrystals",GAME.settings.fontSpriteSheetBlack);
-        //this.availableEnergyText = new createjs.Text("Energy Source");
-        this.availableEnergyText.scaleX = 0.7;
-        this.availableEnergyText.scaleY = 0.7;
-        this.availableEnergyText.x = 20;
-        this.availableEnergyText.y = this.availableEnergyRectangle.y + 23;
-        this.availableEnergyText.textBaseline = "alphabetic";
-
-        //contents of availableEnergy Box
-        //crystals with a "X 8" or whatever next to them
-        this.availableEnergyCrystal1 = new GAME.Crystal(20,this.availableEnergyRectangle.y + 60,
-            this.options.weapon1_color, "available",true);
-        this.availableEnergyCrystal2 = new GAME.Crystal(20,this.availableEnergyRectangle.y + 100,
-            this.options.weapon2_color, "available",true);
-        this.gameLayer.addChild(this.availableEnergyCrystal1);
-        this.gameLayer.addChild(this.availableEnergyCrystal2);
 
 
         //add crystal storage
@@ -204,7 +176,7 @@
         this.shotsFired2 = 0;
 
         this.crystalStorageRectangle = new createjs.Shape();
-        this.crystalStorageRectangle.y = this.availableEnergyRectangle.y + this.availableEnergyRectangle.height + this.y_separation;
+        this.crystalStorageRectangle.y = this.weaponSelectRectangle.y + this.weaponSelectRectangle.height + this.y_separation;
         this.crystalStorageRectangle.height = 240;
         this.crystalStorageRectangle.graphics
             .beginFill("#858B8E") //todo put this in GameData.json
@@ -239,14 +211,14 @@
 
 
 
-        this.updateCrystalCounts();
+        //this.updateCrystalCounts();
 
 
         if (GAME.state.is("LIVE")) {
 
             this.gameLayer.addChild(this.weaponSelectText);
             this.gameLayer.addChild(this.crystalStorageText);
-            this.gameLayer.addChild(this.availableEnergyText);
+            //this.gameLayer.addChild(this.availableEnergyText);
             this.gameLayer.addChild(this.weapon1);
             this.gameLayer.addChild(this.weapon2);
 
@@ -374,16 +346,9 @@
 
     p.handleCrystals = function () {
         var i;
-
+        this.updateCrystalCounts();
         if (this.currentEnergy <= 0) {
             this.crystalActive = 0;
-
-            if (GAME.state.is("PLAYBACK")) {
-                //select new crystal at random
-                this.crystalActive = Math.floor(Math.random() * 2 + 1);
-                this.initiateNewCrystal(this.crystalActive);
-            }
-
         } else {
             this.weapon1.update();
             this.weapon2.update();
@@ -454,27 +419,9 @@
 
     p.updateCrystalCounts = function(){
 
-        //update available crystal counts
-        //text to say how many are available
-        this.gameLayer.removeChild(this.availableEnergyCrystal1Text);
-        this.availableEnergyCrystal1Text = new createjs.BitmapText("X "+this.options.weapon1_available_count,
-            GAME.settings.fontSpriteSheetBlack);
-        this.availableEnergyCrystal1Text.scaleX = 1;
-        this.availableEnergyCrystal1Text.scaleY = 1;
-        this.availableEnergyCrystal1Text.x = 70;
-        this.availableEnergyCrystal1Text.y = this.availableEnergyRectangle.y + 67;
-        this.availableEnergyCrystal1Text.textBaseLine = "alphabetic";
-        this.gameLayer.addChild(this.availableEnergyCrystal1Text);
-
-        this.gameLayer.removeChild(this.availableEnergyCrystal2Text);
-        this.availableEnergyCrystal2Text = new createjs.BitmapText("X "+this.options.weapon2_available_count,
-            GAME.settings.fontSpriteSheetBlack);
-        this.availableEnergyCrystal2Text.scaleX = 1;
-        this.availableEnergyCrystal2Text.scaleY = 1;
-        this.availableEnergyCrystal2Text.x = 70;
-        this.availableEnergyCrystal2Text.y = this.availableEnergyRectangle.y + 107;
-        this.availableEnergyCrystal2Text.textBaseLine = "alphabetic";
-        this.gameLayer.addChild(this.availableEnergyCrystal2Text);
+        //tell WeaponSelect
+        this.weapon1.update();
+        this.weapon2.update();
 
         //recovered crystals
         this.gameLayer.removeChild(this.crystalStorageCrystal1Text);
@@ -829,40 +776,84 @@
         this.active = active;
         this.color = color;
         this.position = position;
-        this.weapon_select_crystal = new GAME.Crystal(20, 50 + (this.position - 1) * 50, color, "weapon_select", active);
+        this.weapon_select_crystal = new GAME.Crystal(41 + (this.position - 1) * 68, 210, color, "weapon_select", active);
         this.addChild(this.weapon_select_crystal);
 
+        //text
+        this.weaponSelectText = new createjs.BitmapText("Energy Source",GAME.settings.fontSpriteSheetBlack);
+        //this.weaponSelectText = new createjs.Text("Energy Source");
+        this.weaponSelectText.scaleX = 0.7;
+        this.weaponSelectText.scaleY = 0.7;
+        this.weaponSelectText.x = 20;
+        this.weaponSelectText.y = 23;
+        this.weaponSelectText.textBaseline = "alphabetic";
+        this.addChild(this.weaponSelectText)
 
         //add energy bars
         this.energy_bar_background = new createjs.Shape();
         this.energy_bar_background.graphics
             .beginFill("white")
-            .drawRoundRect(60, 50 + (this.position - 1) * 50, 100, 32, 3);
+            .drawRoundRect(31 + (this.position - 1) * 68,50, 50, 150, 3);
         this.energy_bar_background.alpha = 0.2;
         this.addChild(this.energy_bar_background);
 
+
+
+
         this.energy_bar = new createjs.Shape();
-        if (active) {
+
+        this.addChild(this.energy_bar);
+
+        if (this.active) {
             this.energy_bar.graphics
                 .beginFill(GAME.settings[this.color])
-                .drawRoundRect(60, 50 + (this.position - 1) * 50, 100 * GAME.currentPage.currentEnergy, 32, 3);
+                .drawRoundRect(31 + (this.position - 1) * 68,50, 50, 150 * GAME.currentPage.currentEnergy, 3);
         } else {
             this.energy_bar.graphics
                 .beginFill(GAME.settings[this.color])
-                .drawRoundRect(60, 50 + (this.position - 1) * 50, 0, 32, 3);
+                .drawRoundRect(31 + (this.position - 1) * 68,50, 50, 0, 3);
         }
-        this.addChild(this.energy_bar);
 
 
         //add click region
         this.clickRegion = new createjs.Shape();
         this.clickRegion.graphics
             .beginFill("white")
-            .drawRoundRect(0, 50 + (this.position - 1) * 50, 180, 32, 3);
+            .drawRoundRect(31 + (this.position - 1) * 68,50, 50, 190, 3);//extra height so it'll cover the crystal as well
         this.clickRegion.alpha = 0.01;
         this.addChild(this.clickRegion);
 
         this.clickRegion.on("click", this.handleClick.bind(this));
+
+
+
+//        //add weapon select - but don't add it to the page unless state = LIVE
+//        this.availableEnergyRectangle = new createjs.Shape();
+//        this.availableEnergyRectangle.height = 160;
+//        this.availableEnergyRectangle.y = this.weaponSelectRectangle.y + this.weaponSelectRectangle.height + this.y_separation;
+//        this.availableEnergyRectangle.graphics
+//            .beginFill("#858B8E") //todo put this in GameData.json
+//            .drawRoundRect(0, 0,// the .y parameter sets the y value already
+//                this.x_offset - 20, this.availableEnergyRectangle.height, 0);
+//        this.addChild(this.availableEnergyRectangle);
+//        this.availableEnergyText = new createjs.BitmapText("Available\nCrystals",GAME.settings.fontSpriteSheetBlack);
+//        //this.availableEnergyText = new createjs.Text("Energy Source");
+//        this.availableEnergyText.scaleX = 0.7;
+//        this.availableEnergyText.scaleY = 0.7;
+//        this.availableEnergyText.x = 20;
+//        this.availableEnergyText.y = this.availableEnergyRectangle.y + 23;
+//        this.availableEnergyText.textBaseline = "alphabetic";
+
+        //contents of availableEnergy Box
+        //crystals with a "X 8" or whatever next to them
+//        this.availableEnergyCrystal1 = new GAME.Crystal(20,this.weaponSelectRectangle.y + 60,
+//            this.options.weapon1_color, "available",true);
+//        this.availableEnergyCrystal2 = new GAME.Crystal(20,this.weaponSelectRectangle.y + 100,
+//            this.options.weapon2_color, "available",true);
+//        this.addChild(this.availableEnergyCrystal1);
+//        this.addChild(this.availableEnergyCrystal2);
+
+
 
     };
 
@@ -903,16 +894,45 @@
     };
 
     p.update = function () {
-        if (this.active) {
-            this.energy_bar.graphics.clear()
-                .beginFill(GAME.settings[this.color])
-                .drawRoundRect(60, 50 + (this.position - 1) * 50, 100 * GAME.currentPage.currentEnergy, 32, 3);
-        } else {
-            //not strictly necessary
-            this.energy_bar.graphics.clear()
-                .beginFill(GAME.settings[this.color])
-                .drawRoundRect(60, 50 + (this.position - 1) * 50, 0, 32, 3);
 
+
+
+        ///AVAILABLE CRYSTALS
+        //update available crystal counts
+        //text to say how many are available
+        this.removeChild(this.availableEnergyCrystalText);
+        if(this.position === 1){
+            this.availableEnergyCrystalText = new createjs.BitmapText(GAME.currentPage.options.weapon1_available_count.toString(),
+                GAME.settings.fontSpriteSheetBlack);
+        }else if(this.position === 2){
+            this.availableEnergyCrystalText = new createjs.BitmapText(GAME.currentPage.options.weapon2_available_count.toString(),
+                GAME.settings.fontSpriteSheetBlack);
+        }
+        this.availableEnergyCrystalText.scaleX = 1.5;
+        this.availableEnergyCrystalText.scaleY = 1.5;
+        this.availableEnergyCrystalText.x = 45 + (this.position - 1) * 68;
+        this.availableEnergyCrystalText.y = 250;
+        this.availableEnergyCrystalText.textBaseLine = "alphabetic";
+        this.addChild(this.availableEnergyCrystalText);
+
+//        this.removeChild(this.availableEnergyCrystal2Text);
+//        this.availableEnergyCrystal2Text = new createjs.BitmapText(GAME.currentPage.options.weapon2_available_count.toString(),
+//            GAME.settings.fontSpriteSheetBlack);
+//        this.availableEnergyCrystal2Text.scaleX = 1;
+//        this.availableEnergyCrystal2Text.scaleY = 1;
+//        this.availableEnergyCrystal2Text.x = 31 + (this.position - 1) * 68;
+//        this.availableEnergyCrystal2Text.y = 240;
+//        this.availableEnergyCrystal2Text.textBaseLine = "alphabetic";
+//        this.addChild(this.availableEnergyCrystal2Text);
+
+        if (this.active && GAME.currentPage.currentEnergy > 0) {
+            this.energy_bar.graphics.clear()
+                .beginFill(GAME.settings[this.color])
+                .drawRoundRect(31 + (this.position - 1) * 68,200 - 150 * GAME.currentPage.currentEnergy, 50, 150 * GAME.currentPage.currentEnergy, 3);
+        } else {
+            this.energy_bar.graphics.clear()
+                .beginFill(GAME.settings[this.color])
+                .drawRoundRect(31 + (this.position - 1) * 68,50, 50, 0, 3);
         }
     };
 
