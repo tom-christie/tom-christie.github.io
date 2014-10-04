@@ -335,7 +335,7 @@
     };
 
     p.getCrystalStorageCoords = function(color){
-        console.log(color, this.crystalStorageCrystal1.color, this.crystalStorageCrystal2.color)
+        //console.log(color, this.crystalStorageCrystal1.color, this.crystalStorageCrystal2.color)
         if(color === this.crystalStorageCrystal1.color){
             return {x:this.crystalStorageCrystal1.crystalSprite.x, y:this.crystalStorageCrystal1.crystalSprite.y};
         }else if(color === this.crystalStorageCrystal2.color){
@@ -522,8 +522,8 @@
     //number clicked from the post-level efficacy query
     p.numberClicked = function(evt){
         var properties = evt.currentTarget.properties;
-        console.log(properties
-        )
+//        console.log(properties
+//        )
         if(properties.weapon === 1){
             this.weapon1NumberClicked = true;
             //set all of your type inactive
@@ -690,7 +690,6 @@
                 }catch(err){
                     //this will happen when the goon's hit the mine and there's no dropped crystal...//
 
-                    //todo - fix this
                 }
             }
 
@@ -824,35 +823,6 @@
         this.addChild(this.clickRegion);
 
         this.clickRegion.on("click", this.handleClick.bind(this));
-
-
-
-//        //add weapon select - but don't add it to the page unless state = LIVE
-//        this.availableEnergyRectangle = new createjs.Shape();
-//        this.availableEnergyRectangle.height = 160;
-//        this.availableEnergyRectangle.y = this.weaponSelectRectangle.y + this.weaponSelectRectangle.height + this.y_separation;
-//        this.availableEnergyRectangle.graphics
-//            .beginFill("#858B8E") //todo put this in GameData.json
-//            .drawRoundRect(0, 0,// the .y parameter sets the y value already
-//                this.x_offset - 20, this.availableEnergyRectangle.height, 0);
-//        this.addChild(this.availableEnergyRectangle);
-//        this.availableEnergyText = new createjs.BitmapText("Available\nCrystals",GAME.settings.fontSpriteSheetBlack);
-//        //this.availableEnergyText = new createjs.Text("Energy Source");
-//        this.availableEnergyText.scaleX = 0.7;
-//        this.availableEnergyText.scaleY = 0.7;
-//        this.availableEnergyText.x = 20;
-//        this.availableEnergyText.y = this.availableEnergyRectangle.y + 23;
-//        this.availableEnergyText.textBaseline = "alphabetic";
-
-        //contents of availableEnergy Box
-        //crystals with a "X 8" or whatever next to them
-//        this.availableEnergyCrystal1 = new GAME.Crystal(20,this.weaponSelectRectangle.y + 60,
-//            this.options.weapon1_color, "available",true);
-//        this.availableEnergyCrystal2 = new GAME.Crystal(20,this.weaponSelectRectangle.y + 100,
-//            this.options.weapon2_color, "available",true);
-//        this.addChild(this.availableEnergyCrystal1);
-//        this.addChild(this.availableEnergyCrystal2);
-
 
 
     };

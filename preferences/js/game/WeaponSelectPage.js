@@ -49,11 +49,11 @@
         });
 
 
-        console.log("DEBUGweapon",  this.availableWeapons, this.contextToSendTo)
-            log('WeaponSelectPage.setup');
+        //console.log("DEBUGweapon",  this.availableWeapons, this.contextToSendTo)
+            //log('WeaponSelectPage.setup');
 
         this.availableWeapons = weaponsToChoose;
-        console.log("DEBUG", this.availableWeapons);
+        //console.log("DEBUG", this.availableWeapons);
         //background
         if(contextToSendTo === 1){
             this.background = new createjs.Bitmap(GAME.assets.getResult("base1_weapon_select"));
@@ -186,7 +186,7 @@
     p.drawWeaponMeters = function () {
         var i;
 
-        console.log("WEAPONS", this.availableWeapons)
+        //console.log("WEAPONS", this.availableWeapons)
 
         this.weaponMeters = [];
         for (i = 0; i < this.availableWeapons.length; i++) {
@@ -246,7 +246,7 @@
         this.color = color;
 
 
-        console.log("WEAPONMETER", this.index, this.totalCount, this.color)
+        //console.log("WEAPONMETER", this.index, this.totalCount, this.color)
 
         this.setup();
 

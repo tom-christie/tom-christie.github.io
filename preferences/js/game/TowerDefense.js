@@ -142,7 +142,7 @@
     };
 
     GAME.recordResults = function (results) {
-        console.log(results);
+//        console.log("RESULTS",results);
         //the error you get here is just from the RESPONSE - the data seems to be posting fine.
         try {
             $.ajax({
@@ -251,7 +251,7 @@
             // SET UP LEVEL SEQUENCE
             GAME.currentLevelNumber = 0;
             GAME.levels = [];
-            for(var levelNumber=1; levelNumber < GAME.settings.levelCount; levelNumber++){
+            for(var levelNumber=1; levelNumber <= GAME.settings.levelCount; levelNumber++){
 
                 // settings based on which base it is
                 var baseType = Math.floor(Math.random()*2+1);
@@ -304,28 +304,57 @@
                     {name: 'startup', from: 'none', to: 'MENU'},
                     {name: 'to_live', from: ['MENU','SELECT_WEAPONS','TRANSITION'], to: 'LIVE'},
                     {name: 'to_weapons', from: ['MENU','LIVE','TRANSITION'], to: 'SELECT_WEAPONS'},
-                    {name: 'to_transition', from: ['MENU','LIVE','SELECT_WEAPONS'], to: 'TRANSITION'}
+                    {name: 'to_transition', from: ['MENU','LIVE','SELECT_WEAPONS'], to: 'TRANSITION'},
+                    {name: 'to_finish', from: ['SELECT_WEAPONS'], to: 'FINISH'}
                 ],
 
                 callbacks: {
+
+                    onFINISH: function(event, from, to, msg){
+                        GAME.stage.removeAllChildren();
+
+
+                        this.gameOverButton = new GAME.Button((GAME.GameCanvas.width)/2, GAME.GameCanvas.height/2, 600, 100);
+                        this.gameOverButton.setBitmapText("Game over!\n\nClick here to continue...",GAME.settings.fontSpriteSheetWhite, 2)
+                            .setColor("#000", 1) //background color
+                            .setRadius(10);
+
+//                        this.finishPage = new createjs.Container();
+//                        this.finishPage.addChild(this.gameOverButton);
+                        GAME.stage.addChild(this.gameOverButton);
+//                            .setBlinkFrequency(500);
+
+
+                        //TODO - ADD BINDING FOR END GAME
+                        this.supply_button.on("click", this.finishLevel.bind(this));
+//                        this.addChild(this.supply_button);
+
+                    },
+
                     // these handle when new pages load
                     onSELECT_WEAPONS: function (event, from, to, msg) {
                         GAME.stage.removeAllChildren();
-                        console.log("DEBUG weapnSelect init", GAME.currentPage)
+                        //console.log("DEBUG weapnSelect init", GAME.currentPage)
                         GAME.currentPage = new GAME.WeaponSelectPage(GAME.flowController.weaponsToPickFrom,GAME.flowController.baseToSendTo);
                         GAME.stage.addChild(GAME.currentPage);
                     },
                     onLIVE: function (event, from, to, msg) {
 
-                        console.log("DEBUG queue", GAME.weaponsSuppliedToLevels);
+                        //console.log("DEBUG queue", GAME.weaponsSuppliedToLevels);
                         GAME.stage.removeAllChildren();
 
                         GAME.currentLevelNumber += 1;
-                        GAME.flowController.checkNewLevelForCrystalSupply();
-                        console.log("MAKING LEVEL", GAME.currentLevelNumber);
-                        GAME.currentPage = new GAME.LevelPage();
-                        console.log("NOW AT LEVEL", GAME.currentLevelNumber);
-                        GAME.stage.addChild(GAME.currentPage);
+
+                        if(GAME.currentLevelNumber > GAME.settings.levelCount){
+                            GAME.state.to_finish();
+                        }else {
+
+                            GAME.flowController.checkNewLevelForCrystalSupply();
+                            //console.log("MAKING LEVEL", GAME.currentLevelNumber);
+                            GAME.currentPage = new GAME.LevelPage();
+                            //console.log("NOW AT LEVEL", GAME.currentLevelNumber);
+                            GAME.stage.addChild(GAME.currentPage);
+                        }
                     },
                     onMENU: function (event, from, to, msg) {
                         GAME.currentPage = new GAME.MenuPage();
@@ -334,7 +363,6 @@
                     onTRANSITION: function (event, from, to, msg) {
                         //msg is options to send when creating the page
                         GAME.stage.removeAllChildren();
-                        //TODO - choose (in principle) which go here!)
                         GAME.currentPage = new GAME.TransitionPage();
                         GAME.stage.addChild(GAME.currentPage);
                     }
@@ -417,22 +445,28 @@
 
         MENU_to_LIVE: function (event, from, to, msg) {
             GAME.flowController.nextPage = "live";
-            console.log("MENU_to_LIVE called", this.nextPage);
+            //console.log("MENU_to_LIVE called", this.nextPage);
             GAME.currentPage.tweenOutSelf(GAME.flowController.to_live_transition);
         },
 
         MENU_to_WEAPONS: function (event, from, to, msg) {
             GAME.flowController.nextPage = "weapons";
-            console.log("MENU_to_WEAPONS called", this.nextPage);
+            //console.log("MENU_to_WEAPONS called", this.nextPage);
             GAME.currentPage.tweenOutSelf(GAME.flowController.to_weapons_transition);
         },
 
         WEAPONS_to_LIVE: function (event, from, to, msg) {
-            GAME.flowController.nextPage = "live";
-            GAME.currentPage.tweenOutSelf(GAME.flowController.to_live_transition);
 
-            //save at the end of the level-feedback unit
-            GAME.recordResults(JSON.stringify(GAME.levels[GAME.currentLevelNumber-1].collectedData));
+            if(GAME.currentLevelNumber >= GAME.settings.levelCount){
+                GAME.state.to_finish();
+            }else {
+                GAME.flowController.nextPage = "live";
+                GAME.currentPage.tweenOutSelf(GAME.flowController.to_live_transition);
+
+                //save at the end of the level-feedback unit
+                GAME.recordResults(JSON.stringify(GAME.levels[GAME.currentLevelNumber - 1].collectedData));
+            }
+
 
         },
 
@@ -467,7 +501,7 @@
                 var levelsToSendTo = [3, 4, 5];
 
                 GAME.flowController.baseToSendTo = levelsToSendTo[Math.floor(Math.random() * levelsToSendTo.length)];
-                console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo);
+                //console.log("THIS WILL BE A 3 CHOICE", GAME.flowController.weaponsToPickFrom, GAME.flowController.baseToSendTo);
             }
 
 

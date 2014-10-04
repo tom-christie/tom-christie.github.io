@@ -26,10 +26,10 @@ function logData(data){
     var timeSinceLevelStart = createjs.Ticker.getTicks() - GAME.currentPage.startTime;
 
 
-
+    //converting time into milliseconds
     var newData = {
-        currentTime: currentTime,
-        timeSinceLevelStart: timeSinceLevelStart,
+        currentTime: currentTime*GAME.settings.msPerTick,
+        timeSinceLevelStart: timeSinceLevelStart*GAME.settings.msPerTick,
         levelNumber: GAME.currentLevelNumber,
         data:data
     };

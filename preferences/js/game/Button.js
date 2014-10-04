@@ -282,11 +282,11 @@
     };
 
     p.callFunction = function () {
-        console.log("FROM BUTTON PERSPECTIVE, current page is ", GAME.currentPage)
-        console.log("calling...", this.functionToCall,this.functionArgs)
+        //console.log("FROM BUTTON PERSPECTIVE, current page is ", GAME.currentPage)
+        //console.log("calling...", this.functionToCall,this.functionArgs)
         this.finishedTweenOut = true;
         if(this.iWasClicked && this.shouldCallFn){
-        console.log("trying to call...", this.functionToCall, this.text);
+        //console.log("trying to call...", this.functionToCall, this.text);
 
             if(this.shouldCallFn){
         this.functionToCall.call(this.functionArgs);
@@ -297,7 +297,7 @@
         }
 
         if(this.triggerStateChange){
-            console.log("trying to trigger state change");
+            //console.log("trying to trigger state change");
             this.triggerStateChange();
         }
 
@@ -311,7 +311,7 @@
     };
 
     p.sendChangeStateEvent = function(){
-        console.log('button sending done_tweening_out');
+        //console.log('button sending done_tweening_out');
         var evt = new createjs.Event("done_tweening_out");
         GLOBAL.stage.dispatchEvent(evt);
 

@@ -34,8 +34,10 @@
     "base1Strengths": [16.67, 7.7],
     "base2Strengths": [10, 14.3],
 
-    "levelsFor3Query":[1, 3, 10, 20],
+    "levelsFor3Query":[1, 3, 10, 20, 30],
 
-    "levelCount": 20
+    "levelCount": 30,
+
+    "msPerTick": 33.3333
 
 }

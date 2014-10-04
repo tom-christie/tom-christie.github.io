@@ -77,7 +77,7 @@
     };
 
     p.handleMenuClick = function (evt) {
-        console.log(evt);
+        //console.log(evt);
 
 //        var pt = this.playbutton.globalToLocal(evt.stageX, evt.stageY);
         this.tweenOutSelf(GAME.flowController.MENU_to_LIVE);
