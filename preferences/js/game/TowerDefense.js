@@ -319,15 +319,12 @@
                             .setColor("#000", 1) //background color
                             .setRadius(10);
 
-//                        this.finishPage = new createjs.Container();
-//                        this.finishPage.addChild(this.gameOverButton);
                         GAME.stage.addChild(this.gameOverButton);
 //                            .setBlinkFrequency(500);
 
 
                         //TODO - ADD BINDING FOR END GAME
-                        this.supply_button.on("click", this.finishLevel.bind(this));
-//                        this.addChild(this.supply_button);
+//                        this.gameOverButton.on("click", //PUT METHOD HEREEEEE);
 
                     },
 
